@@ -3,5 +3,7 @@ Repo for CBTP
 This its database design - we can talk and make changes
 
 Updated database design
-![Screenshot from 2022-12-30 13-07-08](https://user-images.githubusercontent.com/104440794/210063921-fc3a8e85-43ee-4609-9627-631be6d13e12.png)
+
+![updated](https://user-images.githubusercontent.com/104440794/210152697-27a6b8ff-5057-4f8f-97c6-633d8eb49a6d.png)
+
 
