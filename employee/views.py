@@ -5,13 +5,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from.forms import UserCreationForm
 # Create your views here.
-
+ 
 
 
 def index(request):
     
     return render(request, 'employee/index.html')
-
+ 
 
 
 def loginEmployee(request):
@@ -32,7 +32,7 @@ def loginEmployee(request):
         
         if user is not None:
             login(request, user)
-            return redirect(request.GET['next'] if 'next' in request.GET else 'index')   #later send them to account
+            return redirect(request.GET['next'] if 'next' in request.GET else 'index') 
         else:
             messages.error(request, 'Username or password does not exist')
             
@@ -45,18 +45,19 @@ def logoutEmployee(request):
     messages.error(request, 'User was logged out!')
     return redirect('login')
 
-def registerEmployee(request):
-    
+
+def registerEmployee(request):   
     page = 'register'
     if request.user.is_authenticated:
-        return redirect('index')
-    
+        return redirect('index') 
     form= UserCreationForm()
     
     if request.method=='POST':
         form=UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
             
             messages.success(request, "Account created!")
             
