@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h4>manage resident</h4>
+<a href="{% url 'add-resident' %}">Jiraataa galmeessi</a>
+
+<table>
+    <thead>
+        <th>Firs name</th>
+        <th>Middle name</th>
+        <th>Last name</th>
+        <th>age</th>
+        <th>sex</th>
+    </thead>
+    <tbody>
+        {% for resident in residents %}
+        <tr>
+        <td>{{resident.first_name}}</td>
+        <td>{{resident.middle_name}}</td>
+        <td>{{resident.last_name}}</td>
+        <td>{{resident.age_name}}</td>
+        <td>{{resident.sex}}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content%}

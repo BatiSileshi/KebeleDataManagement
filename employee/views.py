@@ -67,3 +67,11 @@ def registerEmployee(request):
             messages.error(request, "Error occurred during registration")
     context={'page':page, 'form':form}
     return render(request, 'employee/login_register.html', context)
+
+
+def manage_employee(request):
+    context={}
+    return render(request, 'employee/manage_employee.html', context)
+
+def send_notification(request):
+    pass
