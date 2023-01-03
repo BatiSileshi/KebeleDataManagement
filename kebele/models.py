@@ -3,13 +3,18 @@ from django.db import models
 # Create your models here.
 
 class Resident(models.Model):
+    SAALA=(
+        ('Dhiira', 'Dhiira'),
+        ('Dhalaa', 'Dhalaa'),    
+    )
+    
     first_name=models.CharField(max_length=100, null=True, blank=True)
     middle_name=models.CharField(max_length=100, null=True, blank=True)
     last_name=models.CharField(max_length=100, null=True, blank=True)
     photo=models.ImageField(null=True)
     birth_date = models.DateField(null=True)
     age = models.IntegerField(null=True)
-    sex = models.CharField(max_length=20, null=True, blank=True)
+    sex = models.CharField(max_length=20, null=True, blank=True, choices=SAALA)
     edu_level = models.CharField(max_length=200, null=True, blank=True)
     nationality = models.CharField(max_length=100, null=True, blank=True)
     religion = models.CharField(max_length=100, null=True, blank=True)
@@ -19,12 +24,15 @@ class Resident(models.Model):
     
     def __str__(self):
         return str(self.first_name)
+    class Meta:
+        ordering = ['first_name']
     
     
 class Address(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField()
+    hnum = models.CharField(max_length=20, null=True, blank=True)
     kebele = models.CharField(max_length=100, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
     zone = models.CharField(max_length=100, null=True, blank=True)
@@ -34,6 +42,8 @@ class Address(models.Model):
     
     def __str__(self):
         return str(self.resident.first_name)
+    class Meta:
+        ordering = ['resident']
     
     
 class House(models.Model):

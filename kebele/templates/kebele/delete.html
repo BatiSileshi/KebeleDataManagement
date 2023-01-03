@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    <br>
+<h2> "{{object}}" balleessuu barbaadduu?</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <a href="{% url 'home'%}"> Haqi</a> | 
+    <input type="submit" value="Balleessi">
+</form>
+
+</div>
+{% endblock content %}

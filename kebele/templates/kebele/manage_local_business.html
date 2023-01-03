@@ -2,6 +2,30 @@
 
 {% block content %}
 
-manage local business
+<h4>Hojiiwwan daldalaa ganda kanaa</h4>
+<a href="{% url 'add-local-business' %}">Hojiiwwaan daldalaa galmeessi</a>
 
+<table>
+    <thead>
+        <th>Abbaa Qabeenyaa</th>
+        <th>Daldala</th>
+        <th>Gosa</th>
+        <th>Baayyina</th>
+        <th>Guyyaa Galmee</th>
+    </thead>
+    <tbody>
+        {% for local in local_business %}
+        <tr>
+        <td>{{local.owner.first_name}}</td>
+        <td>{{local.name}}</td>
+        <td>{{local.type}}</td>
+        <td>{{local.quantity}}</td>
+        <td>{{local.created}}</td>
+        <td><a href="{% url 'update-local-business' local.id %}">Fooyyessi</a></td>
+        <td><a href="{% url 'delete-local-business' local.id %}">Balleessi</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content%}
