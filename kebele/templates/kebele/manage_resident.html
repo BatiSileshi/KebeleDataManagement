@@ -23,8 +23,16 @@
         <td>{{resident.sex}}</td>
         <td><a href="{% url 'update-resident' resident.id %}">Fooyyessi</a></td>
 
-          <!-- if resident.id in addresses -->
-        <td><a href="{% url 'add-address' resident.id %}">Teessoo</a></td>
+
+        <td>
+            {% if resident.address %}      
+              Teesson dabalameera
+            {% else %}
+            <a href="{% url 'add-address' resident.id %}">Teessoo dabali</a>
+            {% endif %}        
+        </td>
+
+        
         </tr>
 
         {% endfor %}
@@ -58,6 +66,85 @@
         <td>{{address.zone}}</td>
         <td>{{address.region}}</td>
         <td><a href="{% url 'update-address' address.id %}">Fooyyessi</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<br>
+<hr>
+<h3>Mana Jiraattotaa</h3>
+<a href="{% url 'add-house' %}">Mana galmeessi</a>
+<table>
+    <thead>
+        <th>Abbaa Qabeenyaa</th>
+        <th>Lakk Manaa</th>
+        <th>Baayyina Balbalaa</th>
+        <th>Ballina</th>
+    </thead>
+    <tbody>
+        {% for house in houses %}
+        <tr>
+        <td>{{house.owner.first_name}}</td>
+        <td>{{house.hnum}}</td>
+        <td>{{house.door_number}}</td>
+        <td>{{house.area}}</td>
+
+        <td><a href="{% url 'update-house' house.id %}">Fooyyessi</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<br>
+<hr>
+<h3>Maatii</h3>
+<a href="{% url 'add-family' %}">Maatii galmeessi</a>
+<table>
+    <thead>
+        <th>Geggeessaa Maatii</th>
+        <th>Baayyina Maatii</th>
+        <th>Baayyina Dhiiraa</th>
+        <th>Baayyina Dhalaa</th>
+    </thead>
+    <tbody>
+        {% for family in families %}
+        <tr>
+        <td>{{family.leader}}</td>
+        <td>{{family.family_number}}</td>
+        <td>{{family.male_number}}</td>
+        <td>{{family.female_number}}</td>
+
+        <td><a href="{% url 'update-family' family.id %}">Fooyyessi</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<br>
+<hr>
+<h3>Waraa Eenyummaa Jiraattotaa</h3>
+<a href="{% url 'add-idcard' %}">Waraqaa Eenyummaa haaraa</a>
+<table>
+    <thead>
+        <th>Jiraataa</th>
+        <th>Lakk Eenyummaa</th>
+
+    </thead>
+    <tbody>
+        {% for idcard in idcards %}
+        <tr>
+        <td>{{idcard.resident.first_name}} {{idcard.resident.middle_name}}</td>
+        <td>{{idcard.id_number}}</td>
+
+        <td><a href="{% url 'update-idcard' idcard.id %}">Fooyyessi</a></td>
         </tr>
 
         {% endfor %}

@@ -12,6 +12,18 @@ urlpatterns = [
          #address
     path('add-address/<str:id>/', views.add_address, name="add-address"),
     path('update-address/<str:id>/', views.update_address, name="update-address"),
+         #house
+    path('add-house/', views.add_house, name="add-house"),
+    path('update-house/<str:id>/', views.update_house, name="update-house"),
+         #family
+    path('add-family/', views.add_family, name="add-family"),
+    path('update-family/<str:id>/', views.update_family, name="update-family"),
+         #id card
+    path('add-idcard/', views.add_id_card, name="add-idcard"),
+    path('update-idcard/<str:id>/', views.update_id_card, name="update-idcard"),
+    
+     # ? end of resident management
+    
     
     path('mvd', views.manage_vital_data, name="manage-vital-data"),
     

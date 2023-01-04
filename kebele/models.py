@@ -41,7 +41,7 @@ class Address(models.Model):
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.resident.first_name)
+        return str(self.resident)
     class Meta:
         ordering = ['resident']
     
@@ -55,18 +55,20 @@ class House(models.Model):
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.owner.first_name)
+        return str(self.owner)
     
     
 class Family(models.Model):
     leader = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     # hnum = models.IntegerField( null=True, blank=True)
     family_number= models.IntegerField(null=True, blank=True)
+    male_number= models.IntegerField(null=True, blank=True)
+    female_number= models.IntegerField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.leader.first_name)
+        return str(self.leader)
     
     
 class LocalBusiness(models.Model):
