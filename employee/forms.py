@@ -1,5 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import KebeleEmployee
 
 
 class UserCreationForm(UserCreationForm):
@@ -22,3 +24,20 @@ class UserCreationForm(UserCreationForm):
     #     for name, field in self.fields.items():
     #         field.widget.attrs.update({'class': 'input'})
         
+
+class KebeleEmployeeForm(ModelForm):
+    class Meta:
+        model= KebeleEmployee
+        fields = '__all__'
+        
+        labels = {
+            'employee': 'Hojjetaa',
+            'role': 'Gahee Hojii',
+
+        }
+        
+    # def __init__(self, *args, **kwargs):
+    #     super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        
+    #     for name, field in self.fields.items():
+    #         field.widget.attrs.update({'class': 'input'})

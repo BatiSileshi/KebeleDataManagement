@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Resident, Address, House, Family, LocalBusiness, IDCard, KebeleHouse, KebeleLand
-from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm
+from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleLandForm, KebeleHouseForm
 from django.contrib import messages
 # Create your views here.
 
@@ -239,14 +239,86 @@ def delete_local_business(request, id):
     return render(request, 'kebele/delete.html', context)
 
 
-##############
+
+#############################
+# managing kebele house
+#
+def manage_kebele_house(request):
+    kebele_houses = KebeleHouse.objects.all()
+    context={'kebele_houses':kebele_houses}
+    return render(request, 'kebele/manage_kebele_house.html', context)
+
+def add_kebele_house(request):
+    form = KebeleHouseForm()
+    if request.method == 'POST':
+        form = KebeleHouseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully added kebele house')
+            return redirect('manage-kebele-house')  
+        else:
+            messages.warning(request, 'There was an error while adding kebele house, please try again later!')
+             
+    context={'form':form} 
+    return render(request, "kebele/form.html", context)
+
+
+def update_kebele_house(request, id):
+    kebele_house = KebeleHouse.objects.get(pk=id)    
+    form = KebeleHouseForm(instance=kebele_house)
+    if request.method == "POST":
+        form = KebeleHouseForm(request.POST, instance=kebele_house)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully updated the selected kebele house')
+            return redirect('manage-kebele-house')
+        else:
+             messages.warning(request, 'There was an error while updating the kebele land, please try again later!')
+    context = {'form': form}
+    return render(request, 'kebele/form.html', context)
+#
+# ?end of managing kebele house
+####################################
+
+
+
+#############################
 # managing kebele land
 #
 def manage_kebele_land(request):
-    context={}
+    kebele_lands = KebeleLand.objects.all()
+    context={'kebele_lands':kebele_lands}
     return render(request, 'kebele/manage_kebele_land.html', context)
 
-def manage_kebele_house(request):
-    context={}
-    return render(request, 'kebele/manage_kebele_house.html', context)
+def add_kebele_land(request):
+    form = KebeleLandForm()
+    if request.method == 'POST':
+        form = KebeleLandForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully added kebele land')
+            return redirect('manage-kebele-land')  
+        else:
+            messages.warning(request, 'There was an error while adding kebele land, please try again later!')
+             
+    context={'form':form} 
+    return render(request, "kebele/form.html", context)
+
+
+def update_kebele_land(request, id):
+    kebele_land = KebeleLand.objects.get(pk=id)    
+    form = KebeleLandForm(instance=kebele_land)
+    if request.method == "POST":
+        form = KebeleLandForm(request.POST, instance=kebele_land)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully updated the selected kebele land')
+            return redirect('manage-kebele-land')
+        else:
+             messages.warning(request, 'There was an error while updating the kebele land, please try again later!')
+    context = {'form': form}
+    return render(request, 'kebele/form.html', context)
+#
+# ?end of managing kebele land
+####################################
 

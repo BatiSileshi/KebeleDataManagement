@@ -2,6 +2,27 @@
 
 {% block content %}
 
-manage kebele house
+<h3>Qabeenya manaa Ganda kanaa</h3>
+
+<a href="{% url 'add-kebele-house' %}">Mana galmeessi</a>
+<table>
+    <thead>
+        <th>Lakk Manaa</th>
+        <th>Baayyina balbalaa</th>
+        <th>Ballina</th>
+        <th>Bakka argamaa</th>
+    </thead>
+    <tbody>
+        {% for kebele_house in kebele_houses %}
+        <tr>
+            <td>{{kebele_house.hnum}}</td>
+            <td>{{kebele_house.door_number}}</td>
+            <td>{{kebele_house.area}}</td>
+            <td><a href="">Kaartaa ilaali</a></td>
+            <td><a href="{% url 'update-kebele-house' kebele_house.id %}">Fooyyessi</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock content%}

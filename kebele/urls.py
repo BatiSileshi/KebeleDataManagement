@@ -33,9 +33,17 @@ urlpatterns = [
     path('update-local-business/<str:id>/', views.update_local_business, name="update-local-business"),
     path('delete-local-business/<str:id>/', views.delete_local_business, name="delete-local-business"),
         
+    # managing kebele house
+    path('mkh', views.manage_kebele_house, name="manage-kebele-house"),
+    path('add-kebele-house/', views.add_kebele_house, name="add-kebele-house"),
+    path('update-kebele-house/<str:id>/', views.update_kebele_house, name="update-kebele-house"),
     
+        
+     #managing kebele land
     path('mkl', views.manage_kebele_land, name="manage-kebele-land"),
-    path('mkl', views.manage_kebele_house, name="manage-kebele-house"),
+    path('add-kebele-land/', views.add_kebele_land, name="add-kebele-land"),
+    path('update-kebele-land/<str:id>/', views.update_kebele_land, name="update-kebele-land"),
+
 
     
 ]

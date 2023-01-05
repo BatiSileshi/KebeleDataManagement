@@ -1,6 +1,6 @@
 from django.forms import ModelForm, widgets
 from django import forms
-from .models import Resident, LocalBusiness, Address, House, Family, IDCard
+from .models import Resident, LocalBusiness, Address, House, Family, IDCard, KebeleHouse, KebeleLand
 
 class ResidentForm(ModelForm):
     class Meta:
@@ -85,5 +85,31 @@ class IDCardForm(ModelForm):
         labels = {
             'resident': 'Jiraataa',
             'id_number': 'Lakk Eenyummeessaa',
+
+        }
+        
+        
+class KebeleHouseForm(ModelForm):
+    class Meta:
+        model= KebeleHouse
+        fields = '__all__'
+        
+        labels = {
+            'hnum': 'Lakk Manaa',
+            'door_number': 'Baayyina balbalaa',
+            'location': 'Bakka argamaa',
+            'area': 'Ballina',
+
+        }
+        
+        
+class KebeleLandForm(ModelForm):
+    class Meta:
+        model= KebeleLand
+        fields = '__all__'
+        
+        labels = {
+            'location': 'Bakka argamaa',
+            'area': 'Ballina',
 
         }

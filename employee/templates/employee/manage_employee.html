@@ -1,0 +1,29 @@
+n{% extends 'main.html' %}
+
+{% block content %}
+
+<h3>Bulchiinsa Hojjetoota</h3>
+
+<a href="{% url 'add-employee' %}">Hojjetaa galmeessi</a>
+<table>
+    <thead>
+        <th>Maqaa</th>
+        <th>Lakk Bilbilaa</th>
+        <th>Imeeyilii</th>
+        <th>Gahee Hojii</th>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{employee.employee.first_name}} {{employee.employee.last_name}}</td>
+            <td>{{employee.employee.phone_number}}</td>
+            <td>{{employee.employee.email}}</td>
+            <td>{{employee.role}}</td>
+            <td><a href="{% url 'update-employee' employee.id %}">Fooyyessi</a></td>
+            <td><a href="{% url 'delete-employee' employee.id %}">Balleessi</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content%}

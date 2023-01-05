@@ -20,7 +20,7 @@ class Resident(models.Model):
     religion = models.CharField(max_length=100, null=True, blank=True)
     occupation = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.first_name)
@@ -38,7 +38,7 @@ class Address(models.Model):
     zone = models.CharField(max_length=100, null=True, blank=True)
     region = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.resident)
@@ -52,12 +52,12 @@ class House(models.Model):
     door_number= models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.owner)
     
-    
+     
 class Family(models.Model):
     leader = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     # hnum = models.IntegerField( null=True, blank=True)
@@ -65,7 +65,7 @@ class Family(models.Model):
     male_number= models.IntegerField(null=True, blank=True)
     female_number= models.IntegerField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.leader)
@@ -77,7 +77,7 @@ class LocalBusiness(models.Model):
     type= models.CharField(max_length=100, null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.owner.first_name)
@@ -87,7 +87,7 @@ class IDCard(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     id_number = models.CharField(max_length=20, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.resident.first_name)
@@ -97,7 +97,7 @@ class KebeleLand(models.Model):
     location = models.CharField(max_length=500, null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.location)
@@ -108,7 +108,7 @@ class KebeleHouse(models.Model):
     area = models.CharField(max_length=100, null=True, blank=True)
     location = models.CharField(max_length=500, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateTimeField(auto_now_add=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.location)
