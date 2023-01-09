@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from.forms import UserCreationForm, KebeleEmployeeForm
-from employee.models import KebeleEmployee
+from employee.models import Employee
 # Create your views here.
  
 
@@ -72,7 +72,7 @@ def registerEmployee(request):
 
 # employee management
 def manage_employee(request):
-    employees = KebeleEmployee.objects.all()
+    employees = Employee.objects.all()
     context={'employees':employees}
     return render(request, 'employee/manage_employee.html', context)
 
@@ -93,7 +93,7 @@ def add_employee(request):
 
 
 def update_employee(request, id):
-    employee = KebeleEmployee.objects.get(pk=id)    
+    employee = Employee.objects.get(pk=id)    
     form = KebeleEmployeeForm(instance=employee)
     if request.method == "POST":
         form = KebeleEmployeeForm(request.POST, instance=employee)
@@ -108,7 +108,7 @@ def update_employee(request, id):
 
 
 def delete_employee(request, id):
-    employee = KebeleEmployee.objects.get(pk=id)  
+    employee = Employee.objects.get(pk=id)  
     
     if request.method == "POST":
         if employee.delete():

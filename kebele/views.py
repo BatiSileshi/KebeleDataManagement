@@ -29,7 +29,7 @@ def add_resident(request):
         if form.is_valid():
 
             form.save()
-            return redirect('home')   
+            return redirect('manage-resident')   
     context={'form':form} 
     return render(request, "kebele/form.html", context)
     
@@ -42,7 +42,7 @@ def update_resident(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully updated the selected resident')
-            return redirect('home')
+            return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the resident, please try again later!')
     context = {'form': form}
@@ -62,7 +62,7 @@ def add_address(request, id):
             addr.resident = resident
             addr.save()
             messages.success(request, 'You have successfully added local business')
-            return redirect('home')
+            return redirect('manage-resident')
         else:
             messages.error(request, 'Error occurred') 
             
@@ -80,7 +80,7 @@ def update_address(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully updated the selected address')
-            return redirect('home')
+            return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the address, please try again later!')
     context = {'form': form}
@@ -203,7 +203,7 @@ def add_local_business(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully added local business')
-            return redirect('home')  
+            return redirect('manage-local-business')  
         else:
             messages.warning(request, 'There was an error while adding the local business, please try again later!')
              
@@ -219,7 +219,7 @@ def update_local_business(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully updated the selected local business')
-            return redirect('home')
+            return redirect('manage-local-business')
         else:
              messages.warning(request, 'There was an error while updating the local business, please try again later!')
     context = {'form': form}
@@ -232,7 +232,7 @@ def delete_local_business(request, id):
     if request.method == "POST":
         if local_business.delete():
             messages.success(request, 'You have successfully deleted the selected local business') 
-            return redirect('home')
+            return redirect('manage-local-business')
         else:
             messages.warning(request, 'There was an error during deletion of the selected local business')
     context = {'object': local_business}

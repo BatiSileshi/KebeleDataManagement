@@ -2,23 +2,37 @@ from django.db import models
 
 # Create your models here.
 
+
+class Kebele(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    woreda = models.CharField(max_length=200, null=True, blank=True)
+    zone = models.CharField(max_length=200, null=True, blank=True)
+    region = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+
 class Resident(models.Model):
     SAALA=(
         ('Dhiira', 'Dhiira'),
         ('Dhalaa', 'Dhalaa'),    
     )
-    
+    kebele = models.ForeignKey(Kebele, on_delete=models.SET_NULL, null=True, blank=True )
     first_name=models.CharField(max_length=100, null=True, blank=True)
     middle_name=models.CharField(max_length=100, null=True, blank=True)
     last_name=models.CharField(max_length=100, null=True, blank=True)
+    mother_name=models.CharField(max_length=100, null=True, blank=True)
     photo=models.ImageField(null=True)
-    birth_date = models.DateField(null=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
     age = models.IntegerField(null=True)
     sex = models.CharField(max_length=20, null=True, blank=True, choices=SAALA)
     edu_level = models.CharField(max_length=200, null=True, blank=True)
     nationality = models.CharField(max_length=100, null=True, blank=True)
     religion = models.CharField(max_length=100, null=True, blank=True)
     occupation = models.CharField(max_length=100, null=True, blank=True)
+    is_here = models.BooleanField(default=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
@@ -30,13 +44,9 @@ class Resident(models.Model):
     
 class Address(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
-    email = models.EmailField()
     hnum = models.CharField(max_length=20, null=True, blank=True)
-    kebele = models.CharField(max_length=100, null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
-    zone = models.CharField(max_length=100, null=True, blank=True)
-    region = models.CharField(max_length=100, null=True, blank=True)
+    gooxii = models.CharField(max_length=100, null=True, blank=True)
+    garee = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
@@ -44,10 +54,20 @@ class Address(models.Model):
         return str(self.resident)
     class Meta:
         ordering = ['resident']
+        
+        
+class IDCard(models.Model):
+    resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    id_number = models.CharField(max_length=20, null=True, blank=True)
+    updated=models.DateTimeField(auto_now=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
-    
+    def __str__(self):
+        return str(self.resident.first_name)
+        
+
 class House(models.Model):
-    owner = models.ForeignKey(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     hnum = models.CharField(max_length=100, null=True, blank=True)
     door_number= models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
@@ -55,12 +75,13 @@ class House(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.owner)
+        return str(self.hnum)
     
-     
+        
 class Family(models.Model):
-    leader = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-    # hnum = models.IntegerField( null=True, blank=True)
+    leader = models.ForeignKey(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    members = models.ManyToManyField(Resident, related_name="family_members")
+    house = models.ManyToManyField(House)
     family_number= models.IntegerField(null=True, blank=True)
     male_number= models.IntegerField(null=True, blank=True)
     female_number= models.IntegerField(null=True, blank=True)
@@ -71,28 +92,38 @@ class Family(models.Model):
         return str(self.leader)
     
     
+    
+class VitalData(models.Model):
+    resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    # is_alive haha
+    
+    def __str__(self):
+        return self.resident
+    
+    
+   ################################################### 
+   
+class BusinessOwner(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+    phone_number = models.CharField(max_length=100, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.name)
+    
+   
 class LocalBusiness(models.Model):
-    owner = models.ForeignKey(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     type= models.CharField(max_length=100, null=True, blank=True)
-    quantity = models.IntegerField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.owner.first_name)
+        return str(self.owner.name)
     
 
-class IDCard(models.Model):
-    resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-    id_number = models.CharField(max_length=20, null=True, blank=True)
-    updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateField(auto_now_add=True, null=True)
-    
-    def __str__(self):
-        return str(self.resident.first_name)
-    
-    
+ 
 class KebeleLand(models.Model):
     location = models.CharField(max_length=500, null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
@@ -101,6 +132,7 @@ class KebeleLand(models.Model):
     
     def __str__(self):
         return str(self.location)
+    
     
 class KebeleHouse(models.Model):
     hnum = models.CharField(max_length=100, null=True, blank=True)

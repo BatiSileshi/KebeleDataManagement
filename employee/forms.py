@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import KebeleEmployee
+from .models import Employee
 
 
 class UserCreationForm(UserCreationForm):
@@ -27,7 +27,7 @@ class UserCreationForm(UserCreationForm):
 
 class KebeleEmployeeForm(ModelForm):
     class Meta:
-        model= KebeleEmployee
+        model= Employee
         fields = '__all__'
         
         labels = {
