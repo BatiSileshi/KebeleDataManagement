@@ -7,6 +7,8 @@ urlpatterns = [
     path('login/', views.loginEmployee, name="login"),
     path('logout/', views.logoutEmployee, name="logout"),
     path('register/', views.registerEmployee, name="register"),
+    path('account/', views.employee_profile, name="account"),
+    path('update-profile/', views.editProfile, name="update-profile"),
     #employee management
     path('manage-employee/', views.manage_employee, name="manage-employee"),
     path('add-employee/', views.add_employee, name="add-employee"),

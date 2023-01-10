@@ -1,29 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 # Create your models here.
-class Employee(models.Model):
-    ROLES = (
-        ('Hoji geggeessaa', 'Hoji geggeessaa'),
-        ('To\'ataa', 'To\'ataa'),
-        ('Barreessaa', 'Barreessaa'),
-    )
-    
-    employee = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name=models.CharField(max_length=100, null=True, blank=True)
     last_name=models.CharField(max_length=100, null=True, blank=True)
-    profile_picture=models.ImageField(null=True)
+    profile_picture=models.ImageField(null=True, default='profiles/comedy.png')
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField()
-    role = models.CharField(max_length=100, null=True, blank=True, choices=ROLES)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str((self.first_name, self.role))
+        return str((self.user.username))
     
 
-  
+class Employee(models.Model):
+    ROLES = (
+    ('Hoji geggeessaa', 'Hoji geggeessaa'),
+    ('To\'ataa', 'To\'ataa'),
+    ('Barreessaa', 'Barreessaa'),
+)
+    employee = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    role = models.CharField(max_length=100, null=True, blank=True, choices=ROLES)
+    
+    def __str__(self):
+        return str(self.employee)
+    
     
 class Message(models.Model):
     sender = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True)
@@ -36,3 +42,42 @@ class Message(models.Model):
     
     def __str__(self):
         return str(self.subject)
+    
+    
+def createProfile(sender, instance, created, **kwargs):
+    if created:
+        user=instance
+        profile = Profile.objects.create( 
+            user=user,
+            first_name = user.first_name,
+            last_name= user.last_name,
+            email=user.email,
+
+        )
+
+        
+        
+def editProfile(sender, instance, created, **kwargs):
+    profile = instance
+    user = profile.user
+    
+    if created == False:
+        user.first_name = profile.first_name
+        user.last_name = profile.last_name
+        user.email = profile.email
+        user.save()
+        
+
+        
+        
+def deleteUser(sender, instance, **kwargs):
+    try:
+        user=instance.user
+        user.delete()
+    except:
+        pass
+    
+        
+post_save.connect(createProfile, sender=User)
+post_save.connect(editProfile, sender=Profile)
+post_delete.connect(deleteUser, sender=Profile)

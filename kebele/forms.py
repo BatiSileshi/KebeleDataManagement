@@ -1,19 +1,30 @@
 from django.forms import ModelForm, widgets
 from django import forms
-from .models import Resident, LocalBusiness, Address, House, Family, IDCard, KebeleHouse, KebeleLand
+from .models import Resident, LocalBusiness, Address, House, Family, IDCard, KebeleHouse, KebeleLand, BusinessOwner
 
 class ResidentForm(ModelForm):
     class Meta:
         model= Resident
-        fields = '__all__'
+        fields = '__all__' 
         
         labels = {
+            'kebele': 'Ganda',
             'first_name': 'Maqaa',
-            'last_name': 'Maqaa Abbaa',
+            'middle_name': 'Maqaa Abba',
+            'last_name': 'Maqaa Akaakayyuu',
+            'mother_name': 'Maqaa Haadhaa',
+            'photo': 'Suuraa',
+            'phone_number': 'Bilbila',
+            'first_name': 'Maqaa',
             'email': 'Imeeyilii',
-            'username': 'Maqaa fayyadamaa',
-            'password1': 'Jecha darbii',
-            'password2': 'Jecha darbii mirkaneessaa',
+            'age': 'Umurii',
+            'sex': 'Saala',
+            'edu_level': 'Sadarkaa Barnootaa',
+            'nationality': 'Lammummaa',
+            'religion': 'Amantii',
+            'occupation': 'Hojii',
+            'is_here': 'As jiraata',
+
         }
         
     # def __init__(self, *args, **kwargs):
@@ -23,17 +34,7 @@ class ResidentForm(ModelForm):
     #         field.widget.attrs.update({'class': 'input'})
     
     
-class LocalBusinessForm(ModelForm):
-    class Meta:
-        model= LocalBusiness
-        fields = '__all__'
-        
-        labels = {
-            'owner': 'Abbaa Qabeenyaa',
-            'name': 'Daldala',
-            'type': 'Gosa ',
-            'quantity': 'Baayyina',
-        }
+
         
 
 class AddressForm(ModelForm):
@@ -42,13 +43,10 @@ class AddressForm(ModelForm):
         exclude = ['resident'] 
         
         labels = {
-            'phone_number': 'Lakk bilbilaa',
-            'email': 'Imeeyilii ',
             'hnum': 'Lakk Manaa ',
-            'kebele': 'Ganda',
-            'city': 'Magaalaa',
-            'zone': 'Godina',
-            'region': 'Naannoo',
+            'gooxii': 'Gooxii',
+            'garee': 'Garee',
+
         }
         
 class HouseForm(ModelForm):
@@ -71,6 +69,8 @@ class FamilyForm(ModelForm):
         
         labels = {
             'leader': 'Geggeessaa Maatii',
+            'members': 'Miseensota Maatii',
+            'house': 'Mana',
             'family_number': 'Baayyina Maatii',
             'male_number': 'Baayyina Dhiiraa',
             'female_number': 'Baayyina Dhalaa',
@@ -86,6 +86,30 @@ class IDCardForm(ModelForm):
             'resident': 'Jiraataa',
             'id_number': 'Lakk Eenyummeessaa',
 
+        }
+        
+
+
+class BusinessOwnerForm(ModelForm):
+    class Meta:
+        model = BusinessOwner
+        fields = '__all__'
+        
+        labels = {
+            'name': 'Maqaa',
+            'phone_number': 'Bilbila',
+        }  
+        
+        
+class LocalBusinessForm(ModelForm):
+    class Meta:
+        model= LocalBusiness
+        fields = '__all__'
+        
+        labels = {
+            'owner': 'Abbaa Qabeenyaa',
+            'name': 'Daldala',
+            'type': 'Gosa ',
         }
         
         

@@ -10,16 +10,16 @@
         <th>Abbaa Qabeenyaa</th>
         <th>Daldala</th>
         <th>Gosa</th>
-        <th>Baayyina</th>
+
         <th>Guyyaa Galmee</th>
     </thead>
     <tbody>
         {% for local in local_business %}
         <tr>
-        <td>{{local.owner.first_name}}</td>
+        <td>{{local.owner.name}}</td>
         <td>{{local.name}}</td>
         <td>{{local.type}}</td>
-        <td>{{local.quantity}}</td>
+
         <td>{{local.created}}</td>
         <td><a href="{% url 'update-local-business' local.id %}">Fooyyessi</a></td>
         <td><a href="{% url 'delete-local-business' local.id %}">Balleessi</a></td>
@@ -28,4 +28,30 @@
         {% endfor %}
     </tbody>
 </table>
+
+
+<h4>Abbootii qabeenyaa manneen daldalaa</h4>
+<a href="{% url 'add-lb-owner' %}">Abbaa qabeenyaa mana daldalaa galmeessi</a>
+
+<table>
+    <thead>
+        <th>Maqaa</th>
+        <th>Bilbila</th>
+        <th>Guyyaa Galmee</th>
+    </thead>
+    <tbody>
+        {% for business_owner in business_owners %}
+        <tr>
+        <td>{{business_owner.name}}</td>
+        <td>{{business_owner.phone_number}}</td>
+        <td>{{business_owner.created}}</td>
+        <td><a href="{% url 'update-lb-owner' business_owner.id %}">Fooyyessi</a></td>
+        <td><a href="{% url 'delete-lb-owner' business_owner.id %}">Balleessi</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
 {% endblock content%}

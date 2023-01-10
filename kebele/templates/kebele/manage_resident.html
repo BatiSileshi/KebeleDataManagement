@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h4>manage resident</h4>
+<h4>Bulchiinsa Jiraattotaa</h4>
 <a href="{% url 'add-resident' %}">Jiraataa galmeessi</a>
 
 <table>
@@ -46,25 +46,19 @@
 <table>
     <thead>
         <th>Jiraataa</th>
-        <th>Bilbila</th>
-        <th>Imeeyilii</th>
         <th>Lakk manaa</th>
-        <th>Ganda</th>
-        <th>Magaalaa</th>
-        <th>Godina</th>
-        <th>Naannoo</th>
+        <th>Gooxii</th>
+        <th>Garee</th>
+
     </thead>
     <tbody>
         {% for address in addresses %}
         <tr>
         <td>{{address.resident.first_name}}</td>
-        <td>{{address.phone_number}}</td>
-        <td>{{address.email}}</td>
         <td>{{address.hnum}}</td>
-        <td>{{address.kebele}}</td>
-        <td>{{address.city}}</td>
-        <td>{{address.zone}}</td>
-        <td>{{address.region}}</td>
+        <td>{{address.gooxii}}</td>
+        <td>{{address.garee}}</td>
+
         <td><a href="{% url 'update-address' address.id %}">Fooyyessi</a></td>
         </tr>
 
@@ -81,7 +75,7 @@
     <thead>
         <th>Abbaa Qabeenyaa</th>
         <th>Lakk Manaa</th>
-        <th>Baayyina Balbalaa</th>
+        <th>Balbalaa</th>
         <th>Ballina</th>
     </thead>
     <tbody>

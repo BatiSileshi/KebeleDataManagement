@@ -29,9 +29,16 @@ urlpatterns = [
     
     #local business management
     path('mlb', views.manage_local_business, name="manage-local-business"),
+    
+    #local business
     path('add-local-business/', views.add_local_business, name="add-local-business"),
     path('update-local-business/<str:id>/', views.update_local_business, name="update-local-business"),
     path('delete-local-business/<str:id>/', views.delete_local_business, name="delete-local-business"),
+    
+    #local business owners
+    path('add-lb-owner/', views.add_lb_owner, name="add-lb-owner"),
+    path('update-lb-owner/<str:id>/', views.update_lb_owner, name="update-lb-owner"),
+    path('delete-lb-owner/<str:id>/', views.delete_lb_owner, name="delete-lb-owner"),
         
     # managing kebele house
     path('mkh', views.manage_kebele_house, name="manage-kebele-house"),

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Resident, Address, House, Family, LocalBusiness, IDCard, KebeleHouse, KebeleLand
-from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleLandForm, KebeleHouseForm
+from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, KebeleLand
+from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleLandForm, KebeleHouseForm, BusinessOwnerForm
 from django.contrib import messages
 # Create your views here.
 
@@ -193,9 +193,54 @@ def manage_vital_data(request):
 #
 def manage_local_business(request):
     local_business = LocalBusiness.objects.all()
-    context={'local_business':local_business}
+    business_owners = BusinessOwner.objects.all()
+    context={'local_business':local_business, 'business_owners':business_owners}
     return render(request, 'kebele/manage_local_business.html', context)
 
+# lb owner crud
+def add_lb_owner(request):
+    form = BusinessOwnerForm()
+    if request.method == 'POST':
+        form = BusinessOwnerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully added local business owner')
+            return redirect('manage-local-business')  
+        else:
+            messages.warning(request, 'There was an error while adding the local business, please try again later!')
+             
+    context={'form':form} 
+    return render(request, "kebele/form.html", context)
+
+
+def update_lb_owner(request, id):
+    business_owner = BusinessOwner.objects.get(pk=id)    
+    form = BusinessOwnerForm(instance=business_owner)
+    if request.method == "POST":
+        form = BusinessOwnerForm(request.POST, instance=business_owner)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully updated the selected local business owner')
+            return redirect('manage-local-business')
+        else:
+             messages.warning(request, 'There was an error while updating the local business owner, please try again later!')
+    context = {'form': form}
+    return render(request, 'kebele/form.html', context)
+
+
+def delete_lb_owner(request, id):
+    business_owner = BusinessOwner.objects.get(pk=id) 
+    
+    if request.method == "POST":
+        if business_owner.delete():
+            messages.success(request, 'You have successfully deleted the selected local business owner') 
+            return redirect('manage-local-business')
+        else:
+            messages.warning(request, 'There was an error during deletion of the selected local business owner')
+    context = {'object': business_owner}
+    return render(request, 'kebele/delete.html', context)
+
+# LB crud
 def add_local_business(request):
     form = LocalBusinessForm()
     if request.method == 'POST':

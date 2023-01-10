@@ -107,6 +107,8 @@ class VitalData(models.Model):
 class BusinessOwner(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=100, null=True, blank=True)
+    updated=models.DateTimeField(auto_now=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.name)

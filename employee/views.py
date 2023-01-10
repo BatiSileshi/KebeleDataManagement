@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from.forms import UserCreationForm, KebeleEmployeeForm
+from.forms import UserCreationForm, KebeleEmployeeForm, ProfileForm
 from employee.models import Employee
 # Create your views here.
  
@@ -70,6 +70,29 @@ def registerEmployee(request):
     return render(request, 'employee/login_register.html', context)
 
 
+def employee_profile(request):
+    profile = request.user.profile
+    context = {'profile':profile}
+    return render(request, 'employee/account.html', context)
+
+
+
+def editProfile(request):
+    profile  = request.user.profile
+
+    form = ProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'You have successfully updated your profile')
+            return redirect('index')
+        else:
+            messages.error(request,'There is an error while processing your in put')
+    context = {'form':form}
+    return render(request, 'employee/form.html',context)
+
+
 # employee management
 def manage_employee(request):
     employees = Employee.objects.all()
@@ -78,7 +101,7 @@ def manage_employee(request):
 
 
 def add_employee(request):
-    form = KebeleEmployeeForm()
+    form = KebeleEmployeeForm() 
     if request.method == 'POST':
         form = KebeleEmployeeForm(request.POST)
         if form.is_valid():
