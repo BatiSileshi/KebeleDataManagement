@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from.forms import UserCreationForm, KebeleEmployeeForm, ProfileForm
+from.forms import UserCreationForm, KebeleEmployeeForm, ProfileForm, MessageForm
 from employee.models import Employee
 # Create your views here.
  
@@ -69,13 +69,13 @@ def registerEmployee(request):
     context={'page':page, 'form':form}
     return render(request, 'employee/login_register.html', context)
 
-
+@login_required(login_url='login')
 def employee_profile(request):
     profile = request.user.profile
     context = {'profile':profile}
     return render(request, 'employee/account.html', context)
 
-
+ 
 
 def editProfile(request):
     profile  = request.user.profile
@@ -147,3 +147,60 @@ def delete_employee(request, id):
 
 def send_notification(request):
     pass
+
+
+@login_required(login_url='login')
+def inbox(request):
+    profile = request.user.profile
+    kebele_employee = Employee.objects.get(employee=profile)
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context={'messageRequests':messageRequests, 'unreadCount':unreadCount}
+    return render(request, 'employee/inbox.html', context)
+
+
+
+@login_required(login_url='login')
+def view_message(request, pk):
+    profile = request.user.profile
+    kebele_employee = Employee.objects.get(employee=profile)
+    message = kebele_employee.messages.get(id=pk)
+    if message.is_read == False:
+        message.is_read = True
+        message.save()
+    context={'message':message}
+    return render(request, 'employee/message.html', context)
+
+
+
+
+
+def create_message(request, pk):
+    recipient = Employee.objects.get(id=pk)
+    form = MessageForm()
+    
+    try:
+        profile = request.user.profile
+        kebele_employee = Employee.objects.get(employee=profile)
+        sender = kebele_employee
+    except:
+        sender = None
+        
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit = False)
+            message.sender = sender
+            message.recipient = recipient
+            
+            message.save()
+            
+            messages.success(request, 'Your message was successfully sent')
+            return redirect('home')
+    
+    context={ 'form':form}
+    # if request.user.profile == recipient:
+    #     return HttpResponseRedirect("handler404")
+    return render(request, 'employee/form.html', context) 
+
+ 

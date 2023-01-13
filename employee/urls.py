@@ -14,4 +14,8 @@ urlpatterns = [
     path('add-employee/', views.add_employee, name="add-employee"),
     path('update-employee/<str:id>/', views.update_employee, name="update-employee"),
     path('delete-employee/<str:id>/', views.delete_employee, name="delete-employee"),
+    
+    path('inbox/', views.inbox, name="inbox"),
+    path('message/<str:pk>/', views.view_message, name="message"),
+    path('create-message/<str:pk>/', views.create_message, name="create-message"),
 ]

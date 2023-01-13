@@ -21,6 +21,7 @@ n{% extends 'main.html' %}
             <td>{{employee.role}}</td>
             <td><a href="{% url 'update-employee' employee.id %}">Fooyyessi</a></td>
             <td><a href="{% url 'delete-employee' employee.id %}">Balleessi</a></td>
+            <td><a href="{% url 'create-message' employee.id %}"> Send Message </a></td>
         </tr>
         {% endfor %}
     </tbody>

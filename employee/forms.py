@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Employee, Profile
+from .models import Employee, Profile, Message
 
 
 class UserCreationForm(UserCreationForm):
@@ -49,3 +49,10 @@ class KebeleEmployeeForm(ModelForm):
         
     #     for name, field in self.fields.items():
     #         field.widget.attrs.update({'class': 'input'})
+    
+    
+    
+class MessageForm(ModelForm):
+    class Meta:
+        model= Message
+        fields =['recipient','subject', 'body']

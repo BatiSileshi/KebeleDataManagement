@@ -1,0 +1,23 @@
+<section class="inbox">
+
+
+  
+
+    <h4 class="brand-logo center">INBOX</h4>
+    <div class="container">
+    <h5>New Messages ({{unreadCount}}) </h5>
+    
+        <ul class="messages">
+
+            {% for message in messageRequests %}
+            {% if message.is_read == False %}
+
+            <a href="{% url 'message' message.id %}" ><li style="color: red;">{{message.subject}},  <span>{{message.created}}</span></li></a>
+            {% else %}
+            <a href="{% url 'message' message.id %}" ><li style="color: blue;">{{message.subject}}, <span>{{message.created}}</span></li></a>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div> 
+
+</section>
