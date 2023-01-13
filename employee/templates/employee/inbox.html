@@ -1,14 +1,9 @@
 <section class="inbox">
-
-
-  
-
     <h4 class="brand-logo center">INBOX</h4>
     <div class="container">
-    <h5>New Messages ({{unreadCount}}) </h5>
-    
-        <ul class="messages">
 
+    <h5>New Messages ({{unreadCount}}) </h5>
+        <ul class="messages">
             {% for message in messageRequests %}
             {% if message.is_read == False %}
 
@@ -19,5 +14,4 @@
             {% endfor %}
         </ul>
     </div> 
-
 </section>

@@ -19,3 +19,5 @@ urlpatterns = [
     path('message/<str:pk>/', views.view_message, name="message"),
     path('create-message/<str:pk>/', views.create_message, name="create-message"),
 ]
+
+handler404 = "employee.views.page_not_found"

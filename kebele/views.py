@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, KebeleLand
 from employee.models import Employee
@@ -13,7 +13,7 @@ def home(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here")
+        return HttpResponseRedirect("handler404")
     return render(request, 'kebele/home.html')
 
 ##############

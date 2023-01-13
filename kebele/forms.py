@@ -75,6 +75,10 @@ class FamilyForm(ModelForm):
             'male_number': 'Baayyina Dhiiraa',
             'female_number': 'Baayyina Dhalaa',
         }
+        widgets = {
+            'members': forms.CheckboxSelectMultiple(),
+            'house': forms.CheckboxSelectMultiple(),
+        }
         
         
 class IDCardForm(ModelForm):
