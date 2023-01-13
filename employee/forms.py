@@ -38,11 +38,11 @@ class KebeleEmployeeForm(ModelForm):
         model= Employee
         fields = '__all__'
         
-        # labels = {
-        #     'employee': 'Hojjetaa',
-        #     'role': 'Gahee Hojii',
+        labels = {
+            'employee': 'Hojjetaa',
+            'role': 'Gahee Hojii',
 
-        # }
+        }
         
     # def __init__(self, *args, **kwargs):
     #     super(CustomUserCreationForm, self).__init__(*args, **kwargs)
@@ -55,4 +55,9 @@ class KebeleEmployeeForm(ModelForm):
 class MessageForm(ModelForm):
     class Meta:
         model= Message
-        fields =['recipient','subject', 'body']
+        fields =['subject', 'body']
+        labels = {
+            'subject': 'Mata Duree',
+            'body': 'Ergaa',
+
+        }
