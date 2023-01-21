@@ -16,9 +16,11 @@ urlpatterns = [
          #house
     path('add-house/', views.add_house, name="add-house"),
     path('update-house/<str:id>/', views.update_house, name="update-house"),
+    path('view-house/<str:id>/', views.view_house, name="view-house"),
          #family
     path('add-family/', views.add_family, name="add-family"),
     path('update-family/<str:id>/', views.update_family, name="update-family"),
+    path('view-family/<str:id>/', views.view_family, name="view-family"),
          #id card
     path('add-idcard/', views.add_id_card, name="add-idcard"),
     path('update-idcard/<str:id>/', views.update_id_card, name="update-idcard"),

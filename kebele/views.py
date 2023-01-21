@@ -103,7 +103,7 @@ def add_address(request, id):
         resident = Resident.objects.get(pk=id) 
         
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponseRedirect("handler404")
     
     form = AddressForm()
     if request.method == 'POST':
@@ -189,6 +189,18 @@ def update_house(request, id):
     context = {'form': form}
     return render(request, 'kebele/form.html', context)
 
+
+def view_house(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        house = House.objects.get(pk=id)   
+    except:
+        return HttpResponseRedirect("handler404")
+    context = {'house': house}
+    return render(request, 'kebele/view_house.html', context)
+
+
 # family crud
 @login_required(login_url='login')
 def add_family(request):
@@ -231,6 +243,21 @@ def update_family(request, id):
              messages.warning(request, 'There was an error while updating the family, please try again later!')
     context = {'form': form}
     return render(request, 'kebele/form.html', context)
+
+
+def view_family(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        family = Family.objects.get(pk=id)   
+    except:
+        return HttpResponseRedirect("handler404")
+    members = family.members.all()
+    family_houses = family.house.all()
+    context = {'family': family, 'members':members, 'family_houses':family_houses}
+    return render(request, 'kebele/view_family.html', context)
+
+
 
 
 # IDCArd crud

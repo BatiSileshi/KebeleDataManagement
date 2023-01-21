@@ -10,5 +10,10 @@ sidebarBtn.onclick = function() {
 $(document).ready(function() {
     $("#kebeletable").DataTable();
     $("#addresstable").DataTable();
+    $("#housetable").DataTable();
+    $("#familytable").DataTable();
+    $("#idcardtable").DataTable();
+    
+
 
 });

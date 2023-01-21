@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="home-content">
+    <div class="container">
+        <div class="show-detail d-flex flex-column align-items-center bg-white">
+            <div class="detail-photo">
+
+            </div>
+            <div class="detail info">
+                <div>Leader: <a href="{% url 'view-resident' family.leader.id %}">{{family.leader.first_name}} {{family.leader.middle_name}} {{family.leader.last_name}} </a></div>
+                <div>Family number: {{family.family_number}}</div>
+                <div>Male number: {{family.male_number}}</div>
+                <div>Female number: {{family.female_number}}</div>
+                 <br>
+                <h5>Family members</h5>
+                {% for member in members %}
+                <div>{{member.first_name}} {{member.middle_name}}</div>
+                {% endfor %}
+
+                <br>
+
+                <h5>Family house</h5>
+                {% for family_house in family_houses %}
+                <div>{{family_house.hnum}}</div>
+                {% endfor %}
+
+                
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

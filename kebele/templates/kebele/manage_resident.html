@@ -88,6 +88,8 @@
 
     <br>
     <hr>
+    <hr>
+    <br>
 
 
 
@@ -138,7 +140,6 @@
                                 <td class="update-table">
                                     <a href="{% url 'update-address' address.id %}"><button
                                             class="btn btn-sm btn-danger">Edit</button></a>
-                                    <a href="./show.html"><button class="btn btn-sm btn-info">show</button></a>
 
                                 </td>
                             </tr>
@@ -147,12 +148,90 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th rowspan="1" colspan="1">First Name</th>
-                                <th rowspan="1" colspan="1">Middle Name</th>
-                                <th rowspan="1" colspan="1">Sex</th>
-                                <th rowspan="1" colspan="1">Age</th>
-                                <th rowspan="1" colspan="1">Phone Number</th>
-                                <th rowspan="1" colspan="1">Occupation</th>
+                                <th rowspan="1" colspan="1">Resident</th>
+                                <th rowspan="1" colspan="1">House Number</th>
+                                <th rowspan="1" colspan="1">Local Community</th>
+                                <th rowspan="1" colspan="1">Group</th>
+                                <th rowspan="1" colspan="1">Registered at</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <br>
+    <hr>
+    <hr>
+    <br>
+
+
+
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Resident House</h4>
+            <a href="{% url 'add-house' %}">Add House</a>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="housetable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Owner
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    House Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                    Door Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Area
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Registered at
+                                </th>
+
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for house in houses %}
+                            <tr class="odd">
+                                <td> {{house.owner.first_name}} {{house.owner.middle_name}}</td>
+                                <td>{{house.hnum}}</td>
+                                <td>{{house.door_number}}</td>
+                                <td>{{house.area}}</td>
+                                <td>{{house.created}}</td>
+
+                                <td class="update-table">
+                                    <a href="{% url 'update-house' house.id %}"><button
+                                            class="btn btn-sm btn-danger">Edit</button></a>
+                                    <a href="{% url 'view-house' house.id %}"><button class="btn btn-sm btn-info">Show</button></a>
+                                </td>
+                            </tr>
+                            {%endfor%}
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Owner</th>
+                                <th rowspan="1" colspan="1">House Number</th>
+                                <th rowspan="1" colspan="1">Door Number</th>
+                                <th rowspan="1" colspan="1">Area</th>
+                                <th rowspan="1" colspan="1">Registered at</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -164,84 +243,145 @@
 
     <br>
     <hr>
-    <h3>Mana Jiraattotaa</h3>
-    <a href="{% url 'add-house' %}">Mana galmeessi</a>
-    <table>
-        <thead>
-            <th>Abbaa Qabeenyaa</th>
-            <th>Lakk Manaa</th>
-            <th>Balbalaa</th>
-            <th>Ballina</th>
-        </thead>
-        <tbody>
-            {% for house in houses %}
-            <tr>
-                <td>{{house.owner.first_name}}</td>
-                <td>{{house.hnum}}</td>
-                <td>{{house.door_number}}</td>
-                <td>{{house.area}}</td>
+    <hr>
+    <br>
 
-                <td><a href="{% url 'update-house' house.id %}">Fooyyessi</a></td>
-            </tr>
 
-            {% endfor %}
-        </tbody>
-    </table>
 
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Families</h4>
+            <a href="{% url 'add-family' %}">Add family</a>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="familytable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Family leader
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    Family Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                    Male
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Female
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Registered at
+                                </th>
+
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for family in families %}
+                            <tr class="odd">
+                                <td>{{family.leader.first_name}} {{family.leader.middle_name}}</td>
+                                <td>{{family.family_number}}</td>
+                                <td>{{family.male_number}}</td>
+                                <td>{{family.female_number}}</td>
+                                <td>{{family.created}}</td>
+
+                                <td class="update-table">
+                                    <a href="{% url 'update-family' family.id %}"><button
+                                            class="btn btn-sm btn-danger">Edit</button></a>
+                                    <a href="{% url 'view-family' family.id %}"><button class="btn btn-sm btn-info">Show</button></a>
+                                </td>
+                            </tr>
+                            {%endfor%}
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Family leader</th>
+                                <th rowspan="1" colspan="1">Family Number</th>
+                                <th rowspan="1" colspan="1">Male</th>
+                                <th rowspan="1" colspan="1">Female</th>
+                                <th rowspan="1" colspan="1">Registered at</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <br>
     <hr>
-    <h3>Maatii</h3>
-    <a href="{% url 'add-family' %}">Maatii galmeessi</a>
-    <table>
-        <thead>
-            <th>Geggeessaa Maatii</th>
-            <th>Baayyina Maatii</th>
-            <th>Baayyina Dhiiraa</th>
-            <th>Baayyina Dhalaa</th>
-        </thead>
-        <tbody>
-            {% for family in families %}
-            <tr>
-                <td>{{family.leader}}</td>
-                <td>{{family.family_number}}</td>
-                <td>{{family.male_number}}</td>
-                <td>{{family.female_number}}</td>
-
-                <td><a href="{% url 'update-family' family.id %}">Fooyyessi</a></td>
-            </tr>
-
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <br>
     <hr>
-    <h3>Waraa Eenyummaa Jiraattotaa</h3>
-    <a href="{% url 'add-idcard' %}">Waraqaa Eenyummaa haaraa</a>
-    <table>
-        <thead>
-            <th>Jiraataa</th>
-            <th>Lakk Eenyummaa</th>
+    <br>
 
-        </thead>
-        <tbody>
-            {% for idcard in idcards %}
-            <tr>
-                <td>{{idcard.resident.first_name}} {{idcard.resident.middle_name}}</td>
-                <td>{{idcard.id_number}}</td>
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Resident ID</h4>
+            <a href="{% url 'add-idcard' %}">Add ID Card</a>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="idcardtable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Resident
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    Id number
+                                </th>
+                                
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Given at
+                                </th>
 
-                <td><a href="{% url 'update-idcard' idcard.id %}">Fooyyessi</a></td>
-            </tr>
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for idcard in idcards %}
+                            <tr class="odd">
+                                <td> <a href="{% url 'view-resident' idcard.resident.id %}">{{idcard.resident.first_name}} {{idcard.resident.middle_name}} </a></td>
+                                <td>{{idcard.id_number}}</td>
+                                <td>{{idcard.created}}</td>
 
-            {% endfor %}
-        </tbody>
-    </table>
+                                <td class="update-table">
+                                    <a href="{% url 'update-idcard' idcard.id %}"><button
+                                            class="btn btn-sm btn-danger">Edit</button></a>
+                                </td>
+                            </tr>
+                            {%endfor%}
 
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Resident</th>
+                                <th rowspan="1" colspan="1">Id number</th>
+                                <th rowspan="1" colspan="1">Given at</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
+<br>
+<br>
 
 
 
