@@ -1,13 +1,66 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
 <h5>Welcome to kebele data management system dashboard</h5>
 
+<div class="home-content">
+    <div class="overview-boxes">
+        <div class="box">
+            <div class="right-side">
+                <div class="box-topic">Total Population</div>
+                <div class="number">{{count_resident}}</div>
+                <div class="indicator">
+                    <i class="bx bx-up-arrow-alt"></i>
+                    <span class="text">Up from last year</span>
+                </div>
+            </div>
+            <i class="bx bxs-group cart"></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                <div class="box-topic">Employee</div>
+                <div class="number">{{count_employee}}</div>
+                <div class="indicator">
+                    <i class="bx bx-up-arrow-alt"></i>
+                    <span class="text">Up from last year</span>
+                </div>
+            </div>
+            <i class="bx bxs-user-detail cart two"></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                <div class="box-topic">Local Business</div>
+                <div class="number">{{count_lb}}</div>
+                <div class="indicator">
+                    <i class="bx bx-up-arrow-alt"></i>
+                    <span class="text">Up from last year</span>
+                </div>
+            </div>
+            <i class="bx bx-money cart three"></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                <div class="box-topic">Kebele House</div>
+                <div class="number">{{count_kh}}</div>
+                <div class="indicator">
+                    <i class="bx bx-down-arrow-alt down"></i>
+                    <span class="text">Down From last year</span>
+                </div>
+            </div>
+            <i class="bx bxs-building-house cart four"></i>
+        </div>
+        <div class="box mt-2">
+            <a href="./add.html">
+                <div class="right-side pt-2">
+                    <div class="box-topic">Add new</div>
+                </div>
+            </a>
 
-<ul>
-    <li> <a href="{% url 'manage-resident' %}"> MR </a></li>
-    <li> <a href="{% url 'manage-vital-data' %}"> MVD </a></li>
-    <li> <a href="{% url 'manage-local-business' %}"> MLB </a></li>
-    <li> <a href="{% url 'manage-kebele-house' %}"> MKH </a></li>
-    <li> <a href="{% url 'manage-kebele-land' %}"> MKL </a></li>
-    <li> <a href="{% url 'manage-employee' %}"> ME </a></li>
+            <i class="bx bxs-add-to-queue cart four"></i>
+        </div>
+    </div>
+</div>
 
-    <li> <a href="{% url 'inbox' %}"> Inbox </a></li>
-</ul>
+
+{% endblock content %}

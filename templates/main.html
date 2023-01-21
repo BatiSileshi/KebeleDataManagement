@@ -1,26 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="" rel="stylesheet">
-    </head>
-    <body>
+
+{% load static %}
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hirmata Mantina KDMS</title>
+    <link href="{% static 'vendors/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendors/bootsrap/dataTables.bootstrap5.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendors/style.css' %}" rel="stylesheet" />
+</head>
+
+
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class="bx bxl-magento"></i>
+            <span class="logo_name">Mentina</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="{% url 'home' %}" class="active">
+                    <i class="bx bx-grid-alt"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-resident' %}">
+                    <i class="bx bx-group"></i>
+                    <span class="links_name">Resident Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-vital-data' %}">
+                    <i class="bx bxs-baby-carriage"></i>
+                    <span class="links_name">Manage Vital Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-employee' %}">
+                    <i class="bx bxs-user-detail"></i>
+                    <span class="links_name">Manage Employee</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-local-business' %}">
+                    <i class="bx bx-money"></i>
+                    <span class="links_name">Manage local business </span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-kebele-house' %}">
+                    <i class="bx bx-building-house"></i>
+                    <span class="links_name">Manage kebele house</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manage-kebele-land' %}">
+                    <i class="bx bx-landscape"></i>
+                    <span class="links_name">Manage Kebele land</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'inbox' %}">
+                    <i class="bx bx-landscape"></i>
+                    <span class="links_name">Inbox</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="bx bx-cog"></i>
+                    <span class="links_name">Account Setting</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="{% url 'logout' %}">
+                    <i class="bx bx-log-out"></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+
         {% include 'header.html' %}
 
 
 
 
      
-        <!-- {% if messages %}
+        {% if messages %}
         <ul class="messages"> 
          {% for message in messages %}
          <li {% if message.tags %} class="{{message.tags}} " {% endif %}> {{message}} </li>
     
          {%endfor%}
         </ul>
-        {% endif %} -->
+        {% endif %}
     
     
         {% block content %}
@@ -29,6 +112,13 @@
     
         {% endblock content %}
     
+    </section>
+    <script type="text/javascript" src="{% static 'vendors/jquery/jquery3.5.2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/jquery/jquery.datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/bootsrap/bootsrap.datafiles.js' %}"></script>
+
+    <script src="{% static 'vendors/app.js' %}"></script>
+
     
         {% include 'footer.html' %}
     

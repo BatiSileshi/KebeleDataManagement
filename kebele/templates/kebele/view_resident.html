@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="home-content">
+    <div class="container">
+        <div class="show-detail d-flex flex-column align-items-center bg-white">
+            <div class="detail-photo">
+                {% if resident.photo %}
+                <img src="{{resident.photo.url}}" alt="{{resident.first_name}}" />
+
+                {% endif %}
+            </div>
+            <div class="detail info">
+                <div>Full name: {{resident.first_name}} {{resident.middle_name}} {{resident.last_name}}</div>
+                <div>Mother name: {{resident.mother_name}}</div>
+                {% if resident.phone_number %}
+                <div>Phone number: {{resident.phone_number}}</div>
+                {% endif %}
+                {% if resident.email %}
+                <div>Email: {{resident.email}}</div>
+                {% endif %}
+                <div>Age: {{resident.age}}</div>
+                <div>Sex: {{resident.sex}}</div>
+                <div>Education level: {{resident.edu_level}}</div>
+                <div>Nationality: {{resident.nationality}}</div>
+                <div>Religion: {{resident.religion}}</div>
+                <div>Occupation: {{resident.occupation}}</div>
+                
+                <br>
+                <h5>Address</h5>
+                <div>House Number: {{resident.address.hnum}}</div>
+                <div>Local Community: {{resident.address.gooxii}}</div>
+                <div>Group: {{resident.address.garee}}</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

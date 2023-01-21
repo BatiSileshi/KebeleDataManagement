@@ -2,146 +2,251 @@
 
 {% block content %}
 
-<h4>Bulchiinsa Jiraattotaa</h4>
-<a href="{% url 'add-resident' %}">Jiraataa galmeessi</a>
-
-<table>
-    <thead>
-        <th>Maqaa</th>
-        <th>Maqaa Abbaa</th>
-        <th>Maqaa Akaakayyuu</th>
-        <th>Umurii</th>
-        <th>Saala</th>
-    </thead>
-    <tbody>
-        {% for resident in residents %}
-        <tr>
-        <td>{{resident.first_name}}</td>
-        <td>{{resident.middle_name}}</td>
-        <td>{{resident.last_name}}</td>
-        <td>{{resident.age}}</td>
-        <td>{{resident.sex}}</td>
-        <td><a href="{% url 'update-resident' resident.id %}">Fooyyessi</a></td>
+<div class="home-content">
 
 
-        <td>
-            {% if resident.address %}      
-              Teesson dabalameera
-            {% else %}
-            <a href="{% url 'add-address' resident.id %}">Teessoo dabali</a>
-            {% endif %}        
-        </td>
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Resident Management</h4>
+            <a href="{% url 'add-resident' %}">Register Resident</a>
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="kebeletable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    First Name
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    Middle Name
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                    Sex
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Age
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Phone Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Occupation
+                                </th>
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resident in residents %}
+                            <tr class="odd">
+                                <td class="sorting_1">{{resident.first_name}}</td>
+                                <td>{{resident.middle_name}}</td>
+                                <td>{{resident.sex}}</td>
+                                <td>{{resident.age}}</td>
+                                <td>{{resident.phone_number}}</td>
+                                <td>{{resident.occupation}}</td>
 
-        
-        </tr>
+                                <td class="update-table">
+                                    <a href="{% url 'update-resident' resident.id %}"><button
+                                            class="btn btn-sm btn-danger">Edit</button></a>
+                                    <a href="{% url 'view-resident' resident.id %}"><button class="btn btn-sm btn-info">Show</button></a>
+                                    {% if resident.address %}
+                                    Address added
+                                    {% else %}
+                                    <a href="{% url 'add-address' resident.id %}" class="btn btn-sm btn-primary">Add
+                                        address</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {%endfor%}
 
-        {% endfor %}
-    </tbody>
-</table>
-
-<br>
-<hr>
-<h3>Teessoo Jiraattotaa</h3>
-
-<table>
-    <thead>
-        <th>Jiraataa</th>
-        <th>Lakk manaa</th>
-        <th>Gooxii</th>
-        <th>Garee</th>
-
-    </thead>
-    <tbody>
-        {% for address in addresses %}
-        <tr>
-        <td>{{address.resident.first_name}}</td>
-        <td>{{address.hnum}}</td>
-        <td>{{address.gooxii}}</td>
-        <td>{{address.garee}}</td>
-
-        <td><a href="{% url 'update-address' address.id %}">Fooyyessi</a></td>
-        </tr>
-
-        {% endfor %}
-    </tbody>
-</table>
-
-
-<br>
-<hr>
-<h3>Mana Jiraattotaa</h3>
-<a href="{% url 'add-house' %}">Mana galmeessi</a>
-<table>
-    <thead>
-        <th>Abbaa Qabeenyaa</th>
-        <th>Lakk Manaa</th>
-        <th>Balbalaa</th>
-        <th>Ballina</th>
-    </thead>
-    <tbody>
-        {% for house in houses %}
-        <tr>
-        <td>{{house.owner.first_name}}</td>
-        <td>{{house.hnum}}</td>
-        <td>{{house.door_number}}</td>
-        <td>{{house.area}}</td>
-
-        <td><a href="{% url 'update-house' house.id %}">Fooyyessi</a></td>
-        </tr>
-
-        {% endfor %}
-    </tbody>
-</table>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">First Name</th>
+                                <th rowspan="1" colspan="1">Middle Name</th>
+                                <th rowspan="1" colspan="1">Sex</th>
+                                <th rowspan="1" colspan="1">Age</th>
+                                <th rowspan="1" colspan="1">Phone Number</th>
+                                <th rowspan="1" colspan="1">Occupation</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-<br>
-<hr>
-<h3>Maatii</h3>
-<a href="{% url 'add-family' %}">Maatii galmeessi</a>
-<table>
-    <thead>
-        <th>Geggeessaa Maatii</th>
-        <th>Baayyina Maatii</th>
-        <th>Baayyina Dhiiraa</th>
-        <th>Baayyina Dhalaa</th>
-    </thead>
-    <tbody>
-        {% for family in families %}
-        <tr>
-        <td>{{family.leader}}</td>
-        <td>{{family.family_number}}</td>
-        <td>{{family.male_number}}</td>
-        <td>{{family.female_number}}</td>
-
-        <td><a href="{% url 'update-family' family.id %}">Fooyyessi</a></td>
-        </tr>
-
-        {% endfor %}
-    </tbody>
-</table>
+    <br>
+    <hr>
 
 
-<br>
-<hr>
-<h3>Waraa Eenyummaa Jiraattotaa</h3>
-<a href="{% url 'add-idcard' %}">Waraqaa Eenyummaa haaraa</a>
-<table>
-    <thead>
-        <th>Jiraataa</th>
-        <th>Lakk Eenyummaa</th>
 
-    </thead>
-    <tbody>
-        {% for idcard in idcards %}
-        <tr>
-        <td>{{idcard.resident.first_name}} {{idcard.resident.middle_name}}</td>
-        <td>{{idcard.id_number}}</td>
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Resident Address</h4>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="addresstable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Resident
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    House Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                    Local Community
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Group
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Registered at
+                                </th>
 
-        <td><a href="{% url 'update-idcard' idcard.id %}">Fooyyessi</a></td>
-        </tr>
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for address in addresses %}
+                            <tr class="odd">
+                                <td>{{address.resident.first_name}} {{address.resident.middle_name}}</td>
+                                <td>{{address.hnum}}</td>
+                                <td>{{address.gooxii}}</td>
+                                <td>{{address.garee}}</td>
+                                <td>{{resident.created}}</td>
 
-        {% endfor %}
-    </tbody>
-</table>
+                                <td class="update-table">
+                                    <a href="{% url 'update-address' address.id %}"><button
+                                            class="btn btn-sm btn-danger">Edit</button></a>
+                                    <a href="./show.html"><button class="btn btn-sm btn-info">show</button></a>
+
+                                </td>
+                            </tr>
+                            {%endfor%}
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">First Name</th>
+                                <th rowspan="1" colspan="1">Middle Name</th>
+                                <th rowspan="1" colspan="1">Sex</th>
+                                <th rowspan="1" colspan="1">Age</th>
+                                <th rowspan="1" colspan="1">Phone Number</th>
+                                <th rowspan="1" colspan="1">Occupation</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <hr>
+    <h3>Mana Jiraattotaa</h3>
+    <a href="{% url 'add-house' %}">Mana galmeessi</a>
+    <table>
+        <thead>
+            <th>Abbaa Qabeenyaa</th>
+            <th>Lakk Manaa</th>
+            <th>Balbalaa</th>
+            <th>Ballina</th>
+        </thead>
+        <tbody>
+            {% for house in houses %}
+            <tr>
+                <td>{{house.owner.first_name}}</td>
+                <td>{{house.hnum}}</td>
+                <td>{{house.door_number}}</td>
+                <td>{{house.area}}</td>
+
+                <td><a href="{% url 'update-house' house.id %}">Fooyyessi</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <br>
+    <hr>
+    <h3>Maatii</h3>
+    <a href="{% url 'add-family' %}">Maatii galmeessi</a>
+    <table>
+        <thead>
+            <th>Geggeessaa Maatii</th>
+            <th>Baayyina Maatii</th>
+            <th>Baayyina Dhiiraa</th>
+            <th>Baayyina Dhalaa</th>
+        </thead>
+        <tbody>
+            {% for family in families %}
+            <tr>
+                <td>{{family.leader}}</td>
+                <td>{{family.family_number}}</td>
+                <td>{{family.male_number}}</td>
+                <td>{{family.female_number}}</td>
+
+                <td><a href="{% url 'update-family' family.id %}">Fooyyessi</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <br>
+    <hr>
+    <h3>Waraa Eenyummaa Jiraattotaa</h3>
+    <a href="{% url 'add-idcard' %}">Waraqaa Eenyummaa haaraa</a>
+    <table>
+        <thead>
+            <th>Jiraataa</th>
+            <th>Lakk Eenyummaa</th>
+
+        </thead>
+        <tbody>
+            {% for idcard in idcards %}
+            <tr>
+                <td>{{idcard.resident.first_name}} {{idcard.resident.middle_name}}</td>
+                <td>{{idcard.id_number}}</td>
+
+                <td><a href="{% url 'update-idcard' idcard.id %}">Fooyyessi</a></td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+</div>
 {% endblock content%}

@@ -1,2 +1,14 @@
-header
-<hr>
+        <nav>
+            <div class="sidebar-button">
+                <i class="bx bx-menu sidebarBtn"></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+
+            <div class="profile-details">
+                {% if request.user.profile.profile_picture %}
+                <img src="{{request.user.profile.profile_picture.url}}"
+                    alt="" />
+                {% endif %}
+                <span class="admin_name">{{request.user.profile.first_name}} {{request.user.profile.last_name}}</span>
+            </div>
+        </nav>

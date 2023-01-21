@@ -9,6 +9,7 @@ urlpatterns = [
     path('mr/', views.manage_resident, name="manage-resident"),
     path('add-resident/', views.add_resident, name="add-resident"),
     path('update-resident/<str:id>/', views.update_resident, name="update-resident"),
+    path('view-resident/<str:id>/', views.view_resident, name="view-resident"),
          #address
     path('add-address/<str:id>/', views.add_address, name="add-address"),
     path('update-address/<str:id>/', views.update_address, name="update-address"),

@@ -10,11 +10,18 @@ from django.contrib import messages
 @login_required(login_url='login')
 def home(request):
     profile = request.user.profile
+    count_resident = Resident.objects.all().count()
+    count_employee = Employee.objects.all().count()
+    count_lb = LocalBusiness.objects.all().count()
+    count_kh = KebeleHouse.objects.all().count()
+    
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
         return HttpResponseRedirect("handler404")
-    return render(request, 'kebele/home.html')
+    
+    context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh}
+    return render(request, 'kebele/home.html', context)
 
 ##############
 # managing resident
@@ -76,6 +83,17 @@ def update_resident(request, id):
     return render(request, 'kebele/form.html', context)
 
 
+def view_resident(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        resident = Resident.objects.get(pk=id)   
+    except:
+        return HttpResponse("You are not allowed here!")
+    context = {'resident': resident}
+    return render(request, 'kebele/view_resident.html', context)
+
+
 # address crud
 @login_required(login_url='login')
 def add_address(request, id):
@@ -83,6 +101,7 @@ def add_address(request, id):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
         resident = Resident.objects.get(pk=id) 
+        
     except:
         return HttpResponse("You are not allowed here!")
     
@@ -99,8 +118,8 @@ def add_address(request, id):
         else:
             messages.error(request, 'Error occurred') 
             
-    # if resident.address.resident == resident:
-    #     return HttpResponse("teesson dabalame")
+    # if resident.address:
+    #     return HttpResponseRedirect("handler404")
     context={'form':form} 
     return render(request, "kebele/form.html", context)
 
