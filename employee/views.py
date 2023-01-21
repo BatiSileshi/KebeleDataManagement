@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -175,8 +175,8 @@ def view_message(request, pk):
 
 
 
-def create_message(request, pk):
-    recipient = Employee.objects.get(id=pk)
+def create_message(request, id):
+    recipient = Employee.objects.get(id=id)
     form = MessageForm()
     
     try:
@@ -184,7 +184,7 @@ def create_message(request, pk):
         kebele_employee = Employee.objects.get(employee=profile)
         sender = kebele_employee
     except:
-        sender = None
+        return HttpResponseRedirect("handler404")
         
     if request.method == 'POST':
         form = MessageForm(request.POST)
@@ -199,8 +199,7 @@ def create_message(request, pk):
             return redirect('home')
     
     context={ 'form':form}
-    # if request.user.profile == recipient:
-    #     return HttpResponseRedirect("handler404")
+
     return render(request, 'employee/form.html', context) 
 
 

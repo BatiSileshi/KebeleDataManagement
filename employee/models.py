@@ -26,6 +26,8 @@ class Employee(models.Model):
 )
     employee = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True)
     role = models.CharField(max_length=100, null=True, blank=True, choices=ROLES)
+    updated=models.DateTimeField(auto_now=True, null=True)
+    created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.employee)

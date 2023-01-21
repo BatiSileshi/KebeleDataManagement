@@ -13,6 +13,7 @@ $(document).ready(function() {
     $("#housetable").DataTable();
     $("#familytable").DataTable();
     $("#idcardtable").DataTable();
+    $("#employeetable").DataTable();
     
 
 
