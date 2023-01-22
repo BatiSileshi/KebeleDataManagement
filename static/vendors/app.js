@@ -14,6 +14,8 @@ $(document).ready(function() {
     $("#familytable").DataTable();
     $("#idcardtable").DataTable();
     $("#employeetable").DataTable();
+    $("#lbtable").DataTable();
+    $("#lbotable").DataTable();
     
 
 

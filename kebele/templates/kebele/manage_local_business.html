@@ -2,56 +2,140 @@
 
 {% block content %}
 
-<h4>Hojiiwwan daldalaa ganda kanaa</h4>
-<a href="{% url 'add-local-business' %}">Hojiiwwaan daldalaa galmeessi</a>
 
-<table>
-    <thead>
-        <th>Abbaa Qabeenyaa</th>
-        <th>Daldala</th>
-        <th>Gosa</th>
+<div class="home-content">
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Local Businesses in the Kebele</h4>
+            <a href="{% url 'add-local-business' %}">Reister Local Business</a>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="lbtable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Business Owner
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    Business
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                Type
+                            </th>
 
-        <th>Guyyaa Galmee</th>
-    </thead>
-    <tbody>
-        {% for local in local_business %}
-        <tr>
-        <td>{{local.owner.name}}</td>
-        <td>{{local.name}}</td>
-        <td>{{local.type}}</td>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Registered at
+                                </th>
+    
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for local in local_business %}
+                            <tr class="odd">
+                                <td>{{local.owner.name}}</td>
+                                <td>{{local.name}}</td>
+                                <td>{{local.type}}</td>
+                                <td>{{local.created}}</td>
+    
+                                <td class="update-table">
+                                    <a href="{% url 'update-local-business' local.id %}"><button
+                                            class="btn btn-sm btn-warning">Edit</button></a>
 
-        <td>{{local.created}}</td>
-        <td><a href="{% url 'update-local-business' local.id %}">Fooyyessi</a></td>
-        <td><a href="{% url 'delete-local-business' local.id %}">Balleessi</a></td>
-        </tr>
+                                            <a href="{% url 'delete-local-business' local.id %}"><button class="btn btn-sm btn-danger">Delete</button></a>
+                                    
+                                </td>
+                            </tr>
+                            {%endfor%}
+    
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Business Owner</th>
+                                <th rowspan="1" colspan="1">Business</th>
+                                <th rowspan="1" colspan="1">Type</th>
+                                <th rowspan="1" colspan="1">Registered at</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        {% endfor %}
-    </tbody>
-</table>
+<br>
+<hr>
+<hr>
+<br>
 
+    <div class="container">
+        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <h4>Local Business owners in the kebele</h4>
+            <a href="{% url 'add-lb-owner' %}">Register owner</a>
+           
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <table id="lbotable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                        aria-describedby="example_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending">
+                                    Name
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                    Phone number
+                                </th>
 
-<h4>Abbootii qabeenyaa manneen daldalaa</h4>
-<a href="{% url 'add-lb-owner' %}">Abbaa qabeenyaa mana daldalaa galmeessi</a>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                    Registered at
+                                </th>
+    
+                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for business_owner in business_owners %}
+                            <tr class="odd">
+                                <td>{{business_owner.name}}</td>
+                                <td>{{business_owner.phone_number}}</td>
+                                <td>{{business_owner.created}}</td>
+    
+                                <td class="update-table">
+                                    <a href="{% url 'update-lb-owner' business_owner.id %}"><button
+                                            class="btn btn-sm btn-warning">Edit</button></a>
 
-<table>
-    <thead>
-        <th>Maqaa</th>
-        <th>Bilbila</th>
-        <th>Guyyaa Galmee</th>
-    </thead>
-    <tbody>
-        {% for business_owner in business_owners %}
-        <tr>
-        <td>{{business_owner.name}}</td>
-        <td>{{business_owner.phone_number}}</td>
-        <td>{{business_owner.created}}</td>
-        <td><a href="{% url 'update-lb-owner' business_owner.id %}">Fooyyessi</a></td>
-        <td><a href="{% url 'delete-lb-owner' business_owner.id %}">Balleessi</a></td>
-        </tr>
+                                            <a href="{% url 'delete-lb-owner' business_owner.id %}"><button class="btn btn-sm btn-danger">Delete</button></a>
+                                    
+                                </td>
+                            </tr>
+                            {%endfor%}
+    
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">Name</th>
+                                <th rowspan="1" colspan="1">Phone number</th>
+                                
+                                <th rowspan="1" colspan="1">Registered at</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-        {% endfor %}
-    </tbody>
-</table>
-
-
+    <br>
 {% endblock content%}

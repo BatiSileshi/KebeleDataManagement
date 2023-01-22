@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="container-fluid px-4">
-    <br>
+<div class="home-content">
+    <div class="container">
 <h2> "{{object}}" balleessuu barbaadduu?</h2>
 <form action="" method="POST">
     {% csrf_token %}
@@ -12,5 +12,6 @@
     <input type="submit" value="Balleessi">
 </form>
 
+</div>
 </div>
 {% endblock content %}

@@ -180,8 +180,9 @@ def create_message(request, id):
     form = MessageForm()
     
     try: 
-        
-        sender = request.user.profile
+        profile = request.user.profile
+        kebele_employee = Employee.objects.get(employee=profile)
+        sender = kebele_employee
     except:
         return HttpResponseRedirect("handler404")
         
@@ -195,7 +196,7 @@ def create_message(request, id):
             message.save()
             
             messages.success(request, 'Your message was successfully sent')
-            return redirect('home')
+            return redirect('manage-employee')
     
     context={ 'form':form}
 

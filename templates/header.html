@@ -7,8 +7,8 @@
             <div class="profile-details">
                 {% if request.user.profile.profile_picture %}
                 <img src="{{request.user.profile.profile_picture.url}}"
-                    alt="" />
+                    alt="{{request.user.profile.first_name}} " />
                 {% endif %}
-                <span class="admin_name">{{request.user.profile.first_name}} {{request.user.profile.last_name}}</span>
+               <a href="{% url 'account' %}"> <span class="admin_name">{{request.user.profile.first_name}} {{request.user.profile.last_name}} </a></span>
             </div>
         </nav>
