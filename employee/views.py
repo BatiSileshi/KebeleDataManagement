@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from.forms import UserCreationForm, KebeleEmployeeForm, ProfileForm, MessageForm
-from employee.models import Employee
+from .models import Employee, Profile
 # Create your views here.
  
 
@@ -179,10 +179,9 @@ def create_message(request, id):
     recipient = Employee.objects.get(id=id)
     form = MessageForm()
     
-    try:
-        profile = request.user.profile
-        kebele_employee = Employee.objects.get(employee=profile)
-        sender = kebele_employee
+    try: 
+        
+        sender = request.user.profile
     except:
         return HttpResponseRedirect("handler404")
         
