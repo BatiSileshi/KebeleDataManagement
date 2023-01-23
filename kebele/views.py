@@ -520,6 +520,18 @@ def update_kebele_house(request, id):
              messages.warning(request, 'There was an error while updating the kebele land, please try again later!')
     context = {'form': form}
     return render(request, 'kebele/form.html', context)
+
+
+def view_kebele_house(request, id):
+    try:
+        kebele_house = KebeleHouse.objects.get(id=id) 
+    except:
+        return HttpResponseRedirect("handler404")
+    context = {'kebele_house': kebele_house}
+    return render(request, 'kebele/view_kebele_house.html', context)
+
+
+
 #
 # ?end of managing kebele house
 ####################################

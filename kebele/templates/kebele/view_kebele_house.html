@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="home-content">
+    <div class="container">
+        <div class="show-detail d-flex flex-column align-items-center bg-white">
+            <div class="detail-photo">
+
+            </div>
+            <div class="detail info">
+
+                <div>House number: {{kebele_house.hnum}}</div>
+                <div>Door number: {{kebele_house.door_number}}</div>
+                <div>Area: {{kebele_house.area}}</div>
+
+                
+                <br>
+                <h5>Map</h5>
+                <div>{{kebele_house.location}}</div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

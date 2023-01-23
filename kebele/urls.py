@@ -47,6 +47,7 @@ urlpatterns = [
     path('mkh', views.manage_kebele_house, name="manage-kebele-house"),
     path('add-kebele-house/', views.add_kebele_house, name="add-kebele-house"),
     path('update-kebele-house/<str:id>/', views.update_kebele_house, name="update-kebele-house"),
+    path('view-kh/<str:id>/', views.view_kebele_house, name="view-kh"),
     
         
      #managing kebele land

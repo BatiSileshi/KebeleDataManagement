@@ -2,27 +2,73 @@
 
 {% block content %}
 
-<h3>Qabeenya manaa Ganda kanaa</h3>
+<div class="home-content">
+    <div class="container">
+    <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+        <h3>Kebele Houses</h3>
 
-<a href="{% url 'add-kebele-house' %}">Mana galmeessi</a>
-<table>
-    <thead>
-        <th>Lakk Manaa</th>
-        <th>Baayyina balbalaa</th>
-        <th>Ballina</th>
-        <th>Bakka argamaa</th>
-    </thead>
-    <tbody>
-        {% for kebele_house in kebele_houses %}
-        <tr>
-            <td>{{kebele_house.hnum}}</td>
-            <td>{{kebele_house.door_number}}</td>
-            <td>{{kebele_house.area}}</td>
-            <td><a href="">Kaartaa ilaali</a></td>
-            <td><a href="{% url 'update-kebele-house' kebele_house.id %}">Fooyyessi</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <a href="{% url 'add-kebele-house' %}">Add kebele house</a>
+       
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <table id="housetable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                    aria-describedby="example_info">
+                    <thead>
+                        <tr>
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                aria-label="Name: activate to sort column descending">
+                                House number
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 82.8px" aria-label="Position: activate to sort column ascending">
+                                Door
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
+                                Area
+                            </th>
+
+                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
+                                style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
+                                Registered at
+                            </th>
+
+                            <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for kebele_house in kebele_houses %}
+                        <tr class="odd">
+                            <td>{{kebele_house.hnum}}</td>
+                            <td>{{kebele_house.door_number}}</td>
+                            <td>{{kebele_house.area}}</td>
+                            <td>{{house.created}}</td>
+
+                            <td class="update-table">
+                                <a href="{% url 'update-kebele-house' kebele_house.id %}"><button
+                                        class="btn btn-sm btn-danger">Edit</button></a>
+                                <a href="{% url 'view-kh' kebele_house.id %}"><button class="btn btn-sm btn-info">View Map</button></a>
+                            </td>
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th rowspan="1" colspan="1">House number</th>
+                            <th rowspan="1" colspan="1">Door</th>
+                            <th rowspan="1" colspan="1">Area</th>
+                            <th rowspan="1" colspan="1">Registered at</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
 
 {% endblock content%}
