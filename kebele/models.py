@@ -32,7 +32,6 @@ class Resident(models.Model):
     nationality = models.CharField(max_length=100, null=True, blank=True)
     religion = models.CharField(max_length=100, null=True, blank=True)
     occupation = models.CharField(max_length=100, null=True, blank=True)
-    is_here = models.BooleanField(default=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
