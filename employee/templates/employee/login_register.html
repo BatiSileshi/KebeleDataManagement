@@ -1,57 +1,42 @@
+{% load static %}
+<link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
+<link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> {% if page == 'register' %}
 
-
-{% if page == 'register' %}
 <div class="container">
-   <br>
-   <h4>Galmaa'i</h4>
-   <form action="{% url 'register' %}" method="POST">
-    {% csrf_token %}
-<div>
-    {% for field in form %}
-      {{field.label}}
+    <br />
+    <h4>Galmaa'i</h4>
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            {% for field in form %} {{field.label}} {{field}} {% for error in field.errors %}
 
+            <small style="color: red">{{error}}</small> {% endfor %} <br /> {%endfor%}
+        </div>
 
-      {{field}}
-
-      {% for error in field.errors %}
-
-      <small style="color: red;">{{error}}</small>
-
-      {% endfor %}
-      <br>
-
-
-      {%endfor%}
-
-   </div>
-   
-    <input type="submit" value="Galmaa'i">
-    <a href="{% url 'login' %}">Seeni</a>
-   </form>
+        <input type="submit" value="Galmaa'i" />
+        <a href="{% url 'login' %}" class="btn btn-primary">Seeni</a>
+    </form>
 </div>
 {% else %}
 
-<br>
+<br />
 <div class="container">
-<h4>Seeni</h4>
-<form action="" method="POST">
-    {% csrf_token %}
-    <label for="">Maqaa fayyadamaa
-    <input type="text" name="username">
-   </label>
+    <h4>Seeni</h4>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Maqaa fayyadamaa <input type="text" name="username" / >
+    </label>
 
-    <label for="">Jecha iccitii
-    <input type="password" name="password">
-   </label>
-      
-   
-    <input type="submit" value="Seeni">  | 
+        <label for="">Jecha iccitii
+      <input type="password" name="password" />
+    </label>
 
-    <a href="{% url 'reset_password' %}">Jecha iccitii dagattanii?</a>
-   </form>
-   <br>
-   <p>   Galmaa'uu barbaadduu?  <a href="{% url 'register' %}">Galmaa'aa</a></p>
+        <input type="submit" value="Seeni" /> |
 
+        <a href="{% url 'reset_password' %}">Jecha iccitii dagattanii?</a>
+    </form>
+    <br />
+    <p>Galmaa'uu barbaadduu?</p>
+    <a href="{% url 'register' %}" class="btn btn-primary">Galmaa'aa</a>
 </div>
 {%endif%}
-
