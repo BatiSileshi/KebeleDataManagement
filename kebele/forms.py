@@ -23,15 +23,16 @@ class ResidentForm(ModelForm):
             'nationality': 'Lammummaa',
             'religion': 'Amantii',
             'occupation': 'Hojii',
-            'is_here': 'As jiraata',
+
 
         }
         
-    # def __init__(self, *args, **kwargs):
-    #     super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(ResidentForm, self).__init__(*args, **kwargs)
         
-    #     for name, field in self.fields.items():
-    #         field.widget.attrs.update({'class': 'input'})
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+            
     
     
 
@@ -49,6 +50,14 @@ class AddressForm(ModelForm):
 
         }
         
+    def __init__(self, *args, **kwargs):
+        super(AddressForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+            
+            
+        
 class HouseForm(ModelForm):
     class Meta:
         model= House
@@ -60,6 +69,12 @@ class HouseForm(ModelForm):
             'door_number': 'Baayyina balbalaa',
             'area': 'Ballina',
         }
+        
+    def __init__(self, *args, **kwargs):
+        super(HouseForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
         
         
 class FamilyForm(ModelForm):
@@ -80,6 +95,15 @@ class FamilyForm(ModelForm):
             'house': forms.CheckboxSelectMultiple(),
         }
         
+    def __init__(self, *args, **kwargs):
+        super(FamilyForm, self).__init__(*args, **kwargs)
+        self.fields['leader'].widget.attrs.update({'class': 'form-control'})
+        self.fields['members'].widget.attrs.update({'id': 'form-check-input'})
+        self.fields['house'].widget.attrs.update({'id': 'form-check-input'})
+        self.fields['family_number'].widget.attrs.update({'class': 'form-control'})
+        self.fields['male_number'].widget.attrs.update({'class': 'form-control'})
+        self.fields['female_number'].widget.attrs.update({'class': 'form-control'})
+        
         
 class IDCardForm(ModelForm):
     class Meta:
@@ -92,6 +116,11 @@ class IDCardForm(ModelForm):
 
         }
         
+    def __init__(self, *args, **kwargs):
+        super(IDCardForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
 
 
 class BusinessOwnerForm(ModelForm):
@@ -104,6 +133,11 @@ class BusinessOwnerForm(ModelForm):
             'phone_number': 'Bilbila',
         }  
         
+    def __init__(self, *args, **kwargs):
+        super(BusinessOwnerForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
         
 class LocalBusinessForm(ModelForm):
     class Meta:
@@ -116,6 +150,11 @@ class LocalBusinessForm(ModelForm):
             'type': 'Gosa ',
         }
         
+    def __init__(self, *args, **kwargs):
+        super(LocalBusinessForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
         
 class KebeleHouseForm(ModelForm):
     class Meta:
@@ -130,6 +169,12 @@ class KebeleHouseForm(ModelForm):
 
         }
         
+    def __init__(self, *args, **kwargs):
+        super(KebeleHouseForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+        
         
 class KebeleLandForm(ModelForm):
     class Meta:
@@ -141,3 +186,9 @@ class KebeleLandForm(ModelForm):
             'area': 'Ballina',
 
         }
+        
+    def __init__(self, *args, **kwargs):
+        super(KebeleLandForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
