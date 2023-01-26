@@ -22,20 +22,22 @@
                 </div>
                 <div class="svg"></div>
                 <div class="getstarted text-center">
-                    <a href="{% url 'home' %} "><button class="btn btn-outline-primary">Get Started</button></a
-            >
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'home' %} "><button class="btn btn-outline-primary">Get Started</button></a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" > <button class="btn btn-outline-primary">Get Started</button> </a>
+
+                    {% endif %}
+
+        
+            
           </div>
         </div>
       </div>
     </section>
 
-    <header>
-      {% if request.user.is_authenticated%}
-      <a href="{% url 'logout' %} ">bahi</a> |
-                    <a href="{% url 'account' %} ">Account</a> | {% else %}
-                    <a href="{% url 'login' %} ">seeni</a> |
-                    <a href="{% url 'register' %} ">galmaa'i</a> | {% endif %}
-                    </header>
+
 </body>
 
 </html>

@@ -18,7 +18,7 @@ def home(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponseRedirect("handler404")
+        return HttpResponseRedirect("index")
     
     context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh}
     return render(request, 'kebele/home.html', context)
@@ -32,7 +32,7 @@ def manage_resident(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here")
+        return HttpResponse("handler404")
     
     residents = Resident.objects.all()
     addresses = Address.objects.all()
@@ -49,7 +49,7 @@ def add_resident(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     form = ResidentForm()
     if request.method == 'POST':
         form = ResidentForm(request.POST, request.FILES)
@@ -68,7 +68,7 @@ def update_resident(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         resident = Resident.objects.get(pk=id)   
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
      
     form = ResidentForm(instance=resident)
     if request.method == "POST":
@@ -89,7 +89,7 @@ def view_resident(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         resident = Resident.objects.get(pk=id)   
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     context = {'resident': resident}
     return render(request, 'kebele/view_resident.html', context)
 
@@ -101,6 +101,7 @@ def add_address(request, id):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
         resident = Resident.objects.get(pk=id) 
+      
         
     except:
         return HttpResponseRedirect("handler404")
@@ -132,7 +133,7 @@ def update_address(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         address = Address.objects.get(pk=id) 
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
   
     form = AddressForm(instance=address)
     if request.method == "POST":
@@ -154,7 +155,7 @@ def add_house(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     form = HouseForm()
     if request.method == 'POST':
         form = HouseForm(request.POST)
@@ -175,7 +176,7 @@ def update_house(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         house = House.objects.get(pk=id) 
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
        
     form = HouseForm(instance=house)
     if request.method == "POST":
@@ -209,7 +210,7 @@ def add_family(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     form = FamilyForm()
     if request.method == 'POST':
         form = FamilyForm(request.POST)
@@ -231,7 +232,7 @@ def update_family(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         family = Family.objects.get(pk=id) 
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     form = FamilyForm(instance=family)
     if request.method == "POST":
         form = FamilyForm(request.POST, instance=family)
@@ -267,7 +268,7 @@ def add_id_card(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     form = IDCardForm()
     if request.method == 'POST':
         form = IDCardForm(request.POST)
@@ -288,7 +289,7 @@ def update_id_card(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         card = IDCard.objects.get(pk=id)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
         
     form = IDCardForm(instance=card)
     if request.method == "POST":
@@ -315,7 +316,7 @@ def manage_vital_data(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     
     context={}
     return render(request, 'kebele/manage_vital_data.html', context)
@@ -331,7 +332,7 @@ def manage_local_business(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     
     local_business = LocalBusiness.objects.all()
     business_owners = BusinessOwner.objects.all()
@@ -345,7 +346,7 @@ def add_lb_owner(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     
     form = BusinessOwnerForm()
     if request.method == 'POST':
@@ -368,7 +369,7 @@ def update_lb_owner(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         business_owner = BusinessOwner.objects.get(pk=id) 
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
        
     form = BusinessOwnerForm(instance=business_owner)
     if request.method == "POST":
@@ -391,7 +392,7 @@ def delete_lb_owner(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         business_owner = BusinessOwner.objects.get(pk=id) 
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     
     if request.method == "POST":
         if business_owner.delete():
@@ -409,7 +410,7 @@ def add_local_business(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     form = LocalBusinessForm()
     if request.method == 'POST':
         form = LocalBusinessForm(request.POST)
@@ -431,7 +432,7 @@ def update_local_business(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         local_business = LocalBusiness.objects.get(pk=id)  
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
        
     form = LocalBusinessForm(instance=local_business)
     if request.method == "POST":
@@ -453,7 +454,7 @@ def delete_local_business(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         local_business = LocalBusiness.objects.get(pk=id)  
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     
     if request.method == "POST":
         if local_business.delete():
@@ -475,7 +476,7 @@ def manage_kebele_house(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile) 
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     kebele_houses = KebeleHouse.objects.all()
     context={'kebele_houses':kebele_houses}
     return render(request, 'kebele/manage_kebele_house.html', context)
@@ -486,7 +487,7 @@ def add_kebele_house(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse("handler404")
     form = KebeleHouseForm()
     if request.method == 'POST':
         form = KebeleHouseForm(request.POST)
@@ -508,7 +509,7 @@ def update_kebele_house(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         kebele_house = KebeleHouse.objects.get(pk=id)  
     except:
-        return HttpResponse("You are not allowed here!")   
+        return HttpResponse("handler404")   
     form = KebeleHouseForm(instance=kebele_house)
     if request.method == "POST":
         form = KebeleHouseForm(request.POST, instance=kebele_house)
@@ -547,7 +548,7 @@ def manage_kebele_land(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile) 
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     kebele_lands = KebeleLand.objects.all()
     context={'kebele_lands':kebele_lands}
     return render(request, 'kebele/manage_kebele_land.html', context)
@@ -559,7 +560,7 @@ def add_kebele_land(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile) 
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
     form = KebeleLandForm()
     if request.method == 'POST':
         form = KebeleLandForm(request.POST)
@@ -581,7 +582,7 @@ def update_kebele_land(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         kebele_land = KebeleLand.objects.get(pk=id)    
     except:
-        return HttpResponse("You are not allowed here!") 
+        return HttpResponse("handler404") 
       
     form = KebeleLandForm(instance=kebele_land)
     if request.method == "POST":

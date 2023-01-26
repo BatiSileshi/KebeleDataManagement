@@ -33,7 +33,7 @@ def loginEmployee(request):
         
         if user is not None:
             login(request, user)
-            return redirect(request.GET['next'] if 'next' in request.GET else 'index') 
+            return redirect(request.GET['next'] if 'next' in request.GET else 'home') 
         else:
             messages.error(request, 'Username or password does not exist')
             
@@ -44,7 +44,7 @@ def loginEmployee(request):
 def logoutEmployee(request):
     logout(request)
     messages.error(request, 'User was logged out!')
-    return redirect('login')
+    return redirect('index')
 
 
 def registerEmployee(request):   
