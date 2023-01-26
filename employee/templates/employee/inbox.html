@@ -15,10 +15,22 @@
         <ul class="messages">
             {% for message in messageRequests %}
             {% if message.is_read == False %}
-
-            <a href="{% url 'message' message.id %}" ><li style="color: red;">{{message.subject}},  <span>{{message.created}}</span></li></a>
+            <div style="background-color:  rgb(201, 196, 196);">
+            <a href="{% url 'message' message.id %}" ><li > 
+                <p>{{message.subject}} 
+                    <br>
+                    <span>{{message.created}}</span> <br>
+                    <span>By: {{message.sender.employee.first_name}} {{message.sender.employee.last_name}}</span>
+                </p> 
+     
+                </li></a> </div>
             {% else %}
-            <a href="{% url 'message' message.id %}" ><li style="color: blue;">{{message.subject}}, <span>{{message.created}}</span></li></a>
+            
+            <a href="{% url 'message' message.id %}" ><li>{{message.subject}} <br> 
+                <span>{{message.created}}</span> <br>
+                <span>By: {{message.sender.employee.first_name}} {{message.sender.employee.last_name}}</span>
+            
+            </li></a>
             {% endif %}
             {% endfor %}
         </ul>
