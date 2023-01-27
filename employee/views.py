@@ -256,12 +256,12 @@ def create_message(request, id):
 #         if form.is_valid():
 #             message = form.save(commit = False)
             
-#             for rec in recipients:
-#                 message.sender = sender
-#                 message.recipient__id.set(rec)
+            
+#             message.sender = sender
+                
 #             message.save()
-                    
-#             # message.recipient.set(request.POST.get('recipient'))
+#             for rec in recipients:         
+#                 message.recipient.add(rec)
 #             messages.success(request, 'Your message was successfully sent')
 #             return redirect('manage-employee')
     
