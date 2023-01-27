@@ -63,7 +63,7 @@ class KebeleEmployeeForm(ModelForm):
 class MessageForm(ModelForm):
     class Meta:
         model= Message
-        fields =['subject', 'body']
+        fields =['recipient', 'subject', 'body']
         labels = {
             'subject': 'Mata Duree',
             'body': 'Ergaa',

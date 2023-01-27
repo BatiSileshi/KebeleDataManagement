@@ -76,7 +76,7 @@ def employee_profile(request):
     return render(request, 'employee/account.html', context)
 
  
-
+@login_required(login_url='login')
 def editProfile(request):
     profile  = request.user.profile
 
@@ -94,13 +94,27 @@ def editProfile(request):
 
 
 # employee management
+@login_required(login_url='login')
 def manage_employee(request):
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)   
+    except:
+        return HttpResponse("handler404") 
+      
     employees = Employee.objects.all()
     context={'employees':employees}
     return render(request, 'employee/manage_employee.html', context)
 
 
+@login_required(login_url='login')
 def add_employee(request):
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)   
+    except:
+        return HttpResponse("handler404") 
+    
     form = KebeleEmployeeForm() 
     if request.method == 'POST':
         form = KebeleEmployeeForm(request.POST)
@@ -115,8 +129,15 @@ def add_employee(request):
     return render(request, "employee/form.html", context)
 
 
+@login_required(login_url='login')
 def update_employee(request, id):
-    employee = Employee.objects.get(pk=id)    
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)  
+        employee = Employee.objects.get(pk=id)  
+    except:
+        return HttpResponse("handler404") 
+       
     form = KebeleEmployeeForm(instance=employee)
     if request.method == "POST":
         form = KebeleEmployeeForm(request.POST, instance=employee)
@@ -129,9 +150,14 @@ def update_employee(request, id):
     context = {'form': form}
     return render(request, 'employee/form.html', context)
 
-
+@login_required(login_url='login')
 def delete_employee(request, id):
-    employee = Employee.objects.get(pk=id)  
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)  
+        employee = Employee.objects.get(pk=id)  
+    except:
+        return HttpResponse("handler404") 
     
     if request.method == "POST":
         if employee.delete():
@@ -151,8 +177,11 @@ def send_notification(request):
 
 @login_required(login_url='login')
 def inbox(request):
-    profile = request.user.profile
-    kebele_employee = Employee.objects.get(employee=profile)
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)   
+    except:
+        return HttpResponse("handler404") 
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
     context={'messageRequests':messageRequests, 'unreadCount':unreadCount}
@@ -162,9 +191,13 @@ def inbox(request):
 
 @login_required(login_url='login')
 def view_message(request, pk):
-    profile = request.user.profile
-    kebele_employee = Employee.objects.get(employee=profile)
-    message = kebele_employee.messages.get(id=pk)
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile) 
+        message = kebele_employee.messages.get(id=pk)  
+    except:
+        return HttpResponse("handler404") 
+    
     if message.is_read == False:
         message.is_read = True
         message.save()
@@ -201,6 +234,41 @@ def create_message(request, id):
     context={ 'form':form}
 
     return render(request, 'employee/form.html', context) 
+
+
+
+
+#  use create method
+# def create_message_all(request):
+#     recipients = Employee.objects.all()
+#     form = MessageForm()
+
+    
+#     try: 
+#         profile = request.user.profile
+#         kebele_employee = Employee.objects.get(employee=profile)
+#         sender = kebele_employee
+#     except:
+#         return HttpResponseRedirect("handler404")
+        
+#     if request.method == 'POST':
+#         form = MessageForm(request.POST)
+#         if form.is_valid():
+#             message = form.save(commit = False)
+            
+#             for rec in recipients:
+#                 message.sender = sender
+#                 message.recipient__id.set(rec)
+#             message.save()
+                    
+#             # message.recipient.set(request.POST.get('recipient'))
+#             messages.success(request, 'Your message was successfully sent')
+#             return redirect('manage-employee')
+    
+#     context={ 'form':form}
+
+#     return render(request, 'employee/form.html', context) 
+
 
 
 def page_not_found(request, exception):
