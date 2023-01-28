@@ -20,7 +20,9 @@ def home(request):
     except:
         return HttpResponseRedirect("index")
     
-    context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh}
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh, 'unreadCount':unreadCount}
     return render(request, 'kebele/home.html', context)
 
 ##############
@@ -39,7 +41,10 @@ def manage_resident(request):
     houses = House.objects.all()
     families = Family.objects.all()
     idcards = IDCard.objects.all()
-    context={'residents':residents, 'addresses':addresses, 'houses':houses, 'families':families, 'idcards':idcards}
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context={'residents':residents, 'addresses':addresses, 'houses':houses, 'families':families, 'idcards':idcards, 'unreadCount':unreadCount}
     return render(request, 'kebele/manage_resident.html', context)
 
 
@@ -56,8 +61,11 @@ def add_resident(request):
         if form.is_valid():
 
             form.save()
-            return redirect('manage-resident')   
-    context={'form':form} 
+            return redirect('manage-resident') 
+        
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()  
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
     
 
@@ -79,7 +87,10 @@ def update_resident(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the resident, please try again later!')
-    context = {'form': form}
+             
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -90,7 +101,10 @@ def view_resident(request, id):
         resident = Resident.objects.get(pk=id)   
     except:
         return HttpResponse("handler404")
-    context = {'resident': resident}
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context = {'resident': resident, 'unreadCount': unreadCount}
     return render(request, 'kebele/view_resident.html', context)
 
 
@@ -100,11 +114,12 @@ def add_address(request, id):
     profile = request.user.profile
     try:
         kebele_employee = Employee.objects.get(employee=profile)
-        resident = Resident.objects.get(pk=id) 
-      
-        
+        resident = Resident.objects.get(pk=id)    
     except:
         return HttpResponseRedirect("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     
     form = AddressForm()
     if request.method == 'POST':
@@ -121,7 +136,7 @@ def add_address(request, id):
             
     # if resident.address:
     #     return HttpResponseRedirect("handler404")
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -134,6 +149,9 @@ def update_address(request, id):
         address = Address.objects.get(pk=id) 
     except:
         return HttpResponse("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
   
     form = AddressForm(instance=address)
     if request.method == "POST":
@@ -144,7 +162,7 @@ def update_address(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the address, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -156,6 +174,9 @@ def add_house(request):
         kebele_employee = Employee.objects.get(employee=profile)
     except:
         return HttpResponse("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = HouseForm()
     if request.method == 'POST':
         form = HouseForm(request.POST)
@@ -165,7 +186,7 @@ def add_house(request):
             return redirect('manage-resident')
         else:
             messages.error(request, 'Error occurred') 
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -178,6 +199,8 @@ def update_house(request, id):
     except:
         return HttpResponse("handler404")
        
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = HouseForm(instance=house)
     if request.method == "POST":
         form = HouseForm(request.POST, instance=house)
@@ -187,7 +210,7 @@ def update_house(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the house, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -198,7 +221,10 @@ def view_house(request, id):
         house = House.objects.get(pk=id)   
     except:
         return HttpResponseRedirect("handler404")
-    context = {'house': house}
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context = {'house': house, 'unreadCount': unreadCount}
     return render(request, 'kebele/view_house.html', context)
 
 
@@ -211,6 +237,9 @@ def add_family(request):
         kebele_employee = Employee.objects.get(employee=profile)
     except:
         return HttpResponse("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = FamilyForm()
     if request.method == 'POST':
         form = FamilyForm(request.POST)
@@ -220,7 +249,7 @@ def add_family(request):
             return redirect('manage-resident')
         else:
             messages.error(request, 'Error occurred') 
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -233,6 +262,9 @@ def update_family(request, id):
         family = Family.objects.get(pk=id) 
     except:
         return HttpResponse("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = FamilyForm(instance=family)
     if request.method == "POST":
         form = FamilyForm(request.POST, instance=family)
@@ -242,7 +274,7 @@ def update_family(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -253,9 +285,12 @@ def view_family(request, id):
         family = Family.objects.get(pk=id)   
     except:
         return HttpResponseRedirect("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     members = family.members.all()
     family_houses = family.house.all()
-    context = {'family': family, 'members':members, 'family_houses':family_houses}
+    context = {'family': family, 'members':members, 'family_houses':family_houses, 'unreadCount': unreadCount}
     return render(request, 'kebele/view_family.html', context)
 
 
@@ -269,6 +304,9 @@ def add_id_card(request):
         kebele_employee = Employee.objects.get(employee=profile)
     except:
         return HttpResponse("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = IDCardForm()
     if request.method == 'POST':
         form = IDCardForm(request.POST)
@@ -278,7 +316,7 @@ def add_id_card(request):
             return redirect('manage-resident')
         else:
             messages.error(request, 'Error occurred') 
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -290,6 +328,9 @@ def update_id_card(request, id):
         card = IDCard.objects.get(pk=id)
     except:
         return HttpResponse("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
         
     form = IDCardForm(instance=card)
     if request.method == "POST":
@@ -300,7 +341,7 @@ def update_id_card(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 # ?end of managing resident
@@ -318,7 +359,9 @@ def manage_vital_data(request):
     except:
         return HttpResponse("handler404") 
     
-    context={}
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context={'unreadCount':unreadCount}
     return render(request, 'kebele/manage_vital_data.html', context)
 
 
@@ -334,9 +377,11 @@ def manage_local_business(request):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     local_business = LocalBusiness.objects.all()
     business_owners = BusinessOwner.objects.all()
-    context={'local_business':local_business, 'business_owners':business_owners}
+    context={'local_business':local_business, 'business_owners':business_owners, 'unreadCount':unreadCount}
     return render(request, 'kebele/manage_local_business.html', context)
 
 # lb owner crud
@@ -348,6 +393,8 @@ def add_lb_owner(request):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = BusinessOwnerForm()
     if request.method == 'POST':
         form = BusinessOwnerForm(request.POST)
@@ -358,7 +405,7 @@ def add_lb_owner(request):
         else:
             messages.warning(request, 'There was an error while adding the local business, please try again later!')
              
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -371,6 +418,8 @@ def update_lb_owner(request, id):
     except:
         return HttpResponse("handler404") 
        
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = BusinessOwnerForm(instance=business_owner)
     if request.method == "POST":
         form = BusinessOwnerForm(request.POST, instance=business_owner)
@@ -380,7 +429,7 @@ def update_lb_owner(request, id):
             return redirect('manage-local-business')
         else:
              messages.warning(request, 'There was an error while updating the local business owner, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -394,13 +443,15 @@ def delete_lb_owner(request, id):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     if request.method == "POST":
         if business_owner.delete():
             messages.success(request, 'You have successfully deleted the selected local business owner') 
             return redirect('manage-local-business')
         else:
             messages.warning(request, 'There was an error during deletion of the selected local business owner')
-    context = {'object': business_owner}
+    context = {'object': business_owner, 'unreadCount': unreadCount}
     return render(request, 'kebele/delete.html', context)
 
 # LB crud
@@ -411,6 +462,9 @@ def add_local_business(request):
         kebele_employee = Employee.objects.get(employee=profile)
     except:
         return HttpResponse("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = LocalBusinessForm()
     if request.method == 'POST':
         form = LocalBusinessForm(request.POST)
@@ -421,7 +475,7 @@ def add_local_business(request):
         else:
             messages.warning(request, 'There was an error while adding the local business, please try again later!')
              
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "kebele/form.html", context)
 
 
@@ -433,6 +487,9 @@ def update_local_business(request, id):
         local_business = LocalBusiness.objects.get(pk=id)  
     except:
         return HttpResponse("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
        
     form = LocalBusinessForm(instance=local_business)
     if request.method == "POST":
@@ -443,7 +500,7 @@ def update_local_business(request, id):
             return redirect('manage-local-business')
         else:
              messages.warning(request, 'There was an error while updating the local business, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
 
@@ -456,13 +513,15 @@ def delete_local_business(request, id):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     if request.method == "POST":
         if local_business.delete():
             messages.success(request, 'You have successfully deleted the selected local business') 
             return redirect('manage-local-business')
         else:
             messages.warning(request, 'There was an error during deletion of the selected local business')
-    context = {'object': local_business}
+    context = {'object': local_business, 'unreadCount': unreadCount}
     return render(request, 'kebele/delete.html', context)
 
 
@@ -477,8 +536,11 @@ def manage_kebele_house(request):
         kebele_employee = Employee.objects.get(employee=profile) 
     except:
         return HttpResponse("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     kebele_houses = KebeleHouse.objects.all()
-    context={'kebele_houses':kebele_houses}
+    context={'kebele_houses':kebele_houses, 'unreadCount':unreadCount}
     return render(request, 'kebele/manage_kebele_house.html', context)
 
 @login_required(login_url='login')

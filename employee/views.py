@@ -206,12 +206,9 @@ def view_message(request, pk):
 
 
 
-
-
-def create_message(request, id):
-    recipient = Employee.objects.get(id=id)
+#  use create method
+def create_message_all(request):
     form = MessageForm()
-    
     try: 
         profile = request.user.profile
         kebele_employee = Employee.objects.get(employee=profile)
@@ -221,53 +218,26 @@ def create_message(request, id):
         
     if request.method == 'POST':
         form = MessageForm(request.POST)
+        recip_list = request.POST.getlist("recipient")
         if form.is_valid():
-            message = form.save(commit = False)
+            message = form.save(commit = False)       
             message.sender = sender
-            message.recipient = recipient
-            
             message.save()
             
-            messages.success(request, 'Your message was successfully sent')
-            return redirect('manage-employee')
+            for recip in recip_list:
+                recipient = {}
+                try:
+                     recipient = Employee.objects.get(id=recip) 
+                except:
+                    return HttpResponseRedirect("handler404")   
+                message.recipient.add(recipient)  
+    
+        messages.success(request, 'Your message was successfully sent')
+        return redirect('manage-employee')
     
     context={ 'form':form}
 
     return render(request, 'employee/form.html', context) 
-
-
-
-
-#  use create method
-# def create_message_all(request):
-#     recipients = Employee.objects.all()
-#     form = MessageForm()
-
-    
-#     try: 
-#         profile = request.user.profile
-#         kebele_employee = Employee.objects.get(employee=profile)
-#         sender = kebele_employee
-#     except:
-#         return HttpResponseRedirect("handler404")
-        
-#     if request.method == 'POST':
-#         form = MessageForm(request.POST)
-#         if form.is_valid():
-#             message = form.save(commit = False)
-            
-            
-#             message.sender = sender
-                
-#             message.save()
-#             for rec in recipients:         
-#                 message.recipient.add(rec)
-#             messages.success(request, 'Your message was successfully sent')
-#             return redirect('manage-employee')
-    
-#     context={ 'form':form}
-
-#     return render(request, 'employee/form.html', context) 
 
 
 
