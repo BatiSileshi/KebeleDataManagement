@@ -35,7 +35,25 @@
             {% endfor %}
         </ul>
     </div> 
+
+    <br>
+    <div>
+        <h5>Sent messages ({{sent_messages_count}})</h5>
+        {% for sent_message in sent_messages %}
+        <ul><li>
+        <p>{{sent_message.subject}} 
+            <br>
+            <span>{{sent_message.created}}</span> <br>
+            <span><a href="{% url 'sent-message' sent_message.id %}">View</a></span>
+        </p> 
+    </li></ul>
+        {% endfor %}
+
+
+    </div>
 </section>
+
+
 </div>
 </div>
 

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from.forms import UserCreationForm, KebeleEmployeeForm, ProfileForm, MessageForm
-from .models import Employee, Profile
+from .models import Employee, Profile, Message
 # Create your views here.
  
 
@@ -101,9 +101,11 @@ def manage_employee(request):
         kebele_employee = Employee.objects.get(employee=profile)   
     except:
         return HttpResponse("handler404") 
-      
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     employees = Employee.objects.all()
-    context={'employees':employees}
+    context={'employees':employees, 'unreadCount':unreadCount}
     return render(request, 'employee/manage_employee.html', context)
 
 
@@ -115,6 +117,8 @@ def add_employee(request):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = KebeleEmployeeForm() 
     if request.method == 'POST':
         form = KebeleEmployeeForm(request.POST)
@@ -125,7 +129,7 @@ def add_employee(request):
         else:
             messages.warning(request, 'There was an error while adding the employee, please try again later!')
              
-    context={'form':form} 
+    context={'form':form, 'unreadCount':unreadCount} 
     return render(request, "employee/form.html", context)
 
 
@@ -138,6 +142,8 @@ def update_employee(request, id):
     except:
         return HttpResponse("handler404") 
        
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     form = KebeleEmployeeForm(instance=employee)
     if request.method == "POST":
         form = KebeleEmployeeForm(request.POST, instance=employee)
@@ -147,7 +153,7 @@ def update_employee(request, id):
             return redirect('home')
         else:
              messages.warning(request, 'There was an error while updating the employee, please try again later!')
-    context = {'form': form}
+    context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'employee/form.html', context)
 
 @login_required(login_url='login')
@@ -159,13 +165,15 @@ def delete_employee(request, id):
     except:
         return HttpResponse("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     if request.method == "POST":
         if employee.delete():
             messages.success(request, 'You have successfully deleted the selected employee') 
             return redirect('home')
         else:
             messages.warning(request, 'There was an error during deletion of the selected employee')
-    context = {'object': employee}
+    context = {'object': employee, 'unreadCount': unreadCount}
     return render(request, 'employee/delete.html', context)
 
 
@@ -181,10 +189,12 @@ def inbox(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)   
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    context={'messageRequests':messageRequests, 'unreadCount':unreadCount}
+    sent_messages = Message.objects.filter(sender=kebele_employee)
+    sent_messages_count = Message.objects.filter(sender=kebele_employee).count()
+    context={'messageRequests':messageRequests, 'unreadCount':unreadCount, 'sent_messages':sent_messages, 'sent_messages_count':sent_messages_count}
     return render(request, 'employee/inbox.html', context)
 
 
@@ -196,13 +206,30 @@ def view_message(request, pk):
         kebele_employee = Employee.objects.get(employee=profile) 
         message = kebele_employee.messages.get(id=pk)  
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     if message.is_read == False:
         message.is_read = True
         message.save()
-    context={'message':message}
+    context={'message':message, 'unreadCount':unreadCount}
     return render(request, 'employee/message.html', context)
+
+
+@login_required(login_url='login')
+def view_sent_message(request, pk):
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile) 
+        message = Message.objects.get(id=pk, sender=kebele_employee)  
+    except:
+        return HttpResponseRedirect("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context={'message':message, 'unreadCount':unreadCount}
+    return render(request, 'employee/sent_message.html', context)
 
 
 
@@ -215,7 +242,9 @@ def create_message_all(request):
         sender = kebele_employee
     except:
         return HttpResponseRedirect("handler404")
-        
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()    
     if request.method == 'POST':
         form = MessageForm(request.POST)
         recip_list = request.POST.getlist("recipient")
@@ -235,7 +264,7 @@ def create_message_all(request):
         messages.success(request, 'Your message was successfully sent')
         return redirect('manage-employee')
     
-    context={ 'form':form}
+    context={ 'form':form, 'unreadCount':unreadCount}
 
     return render(request, 'employee/form.html', context) 
 
