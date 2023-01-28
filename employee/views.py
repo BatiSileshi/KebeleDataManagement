@@ -71,14 +71,29 @@ def registerEmployee(request):
 
 @login_required(login_url='login')
 def employee_profile(request):
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)   
+    except:
+        return HttpResponseRedirect("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
     profile = request.user.profile
-    context = {'profile':profile}
+    context = {'profile':profile, 'unreadCount':unreadCount}
     return render(request, 'employee/account.html', context)
 
  
 @login_required(login_url='login')
 def editProfile(request):
-    profile  = request.user.profile
+    profile=request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)   
+    except:
+        return HttpResponseRedirect("handler404") 
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
 
     form = ProfileForm(instance=profile)
     if request.method == 'POST':
@@ -86,10 +101,10 @@ def editProfile(request):
         if form.is_valid():
             form.save()
             messages.success(request,'You have successfully updated your profile')
-            return redirect('index')
+            return redirect('account')
         else:
             messages.error(request,'There is an error while processing your in put')
-    context = {'form':form}
+    context = {'form':form, 'unreadCount':unreadCount}
     return render(request, 'employee/form.html',context)
 
 
@@ -98,9 +113,9 @@ def editProfile(request):
 def manage_employee(request):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile)   
+        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
@@ -113,9 +128,9 @@ def manage_employee(request):
 def add_employee(request):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile)   
+        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
@@ -137,10 +152,10 @@ def add_employee(request):
 def update_employee(request, id):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile)  
+        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
         employee = Employee.objects.get(pk=id)  
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
        
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
@@ -160,10 +175,10 @@ def update_employee(request, id):
 def delete_employee(request, id):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile)  
+        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
         employee = Employee.objects.get(pk=id)  
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
@@ -175,8 +190,6 @@ def delete_employee(request, id):
             messages.warning(request, 'There was an error during deletion of the selected employee')
     context = {'object': employee, 'unreadCount': unreadCount}
     return render(request, 'employee/delete.html', context)
-
-
 
 
 def send_notification(request):
