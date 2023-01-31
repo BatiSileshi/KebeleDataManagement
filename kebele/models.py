@@ -143,6 +143,7 @@ class KebeleHouse(models.Model):
     hnum = models.CharField(max_length=100, null=True, blank=True)
     door_number= models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
+    resident = models.OneToOneField(Resident,on_delete=models.SET_NULL,null=True,blank=True)
     location = models.PointField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)

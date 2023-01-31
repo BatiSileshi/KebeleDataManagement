@@ -44,23 +44,71 @@ window.onload = ()=>{
   function search(){
 
   
-  var map = L.map('map').setView([7.66703805520462, 36.83638500456251],13);
+  var map = L.map('map').setView([7.66703805520462, 36.83638500456251],10);
   L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
     attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
 }).addTo(map);
+
+
+var kebele = [{
+    "type": "Feature",
+    "properties": {"Name": "Mantina Kebele"},
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+            [ 36.83539025395925, 7.669867573572341,],
+            [ 37.830326243420465,7.669867573572366],
+            [ 35.82912461380109 ,7.675821928238875],
+            [36.9377076825109,7.78373768998414 ],
+            [37.6379651745722,7.670888326006797],
+            [ 36.83539025395925, 6.969867573572341,],
+            [ 35.830326243420465,7.669867573572366],
+            [ 34.82912461380109 ,8.175821928238875],
+            [33.8377076825109,7.88373768998414 ],
+            [36.8379651745722,7.670888326006797]
+        ]]
+    }
+}];
+
+L.geoJSON(kebele, {
+    style: function(feature) {
+        switch (feature.properties.Name) {
+            case 'Mantina Kebele':  return {color: "#0000ff", opacity: 0.7};
+        }
+    }
+}).addTo(map);
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
        yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
        var popup = L.popup(); */
 
-  {% for e in kebele_houses %}
- L.marker({{e.lat_lng}}).addTo(map).bindPopup(`<div> 
- <h1> House Number  {{e.hnum}}</h1>
- <p> None one Lives in </p>
- <p>Kebele house </p> </div>
+  {% for kebele_house in kebele_houses %}
+ L.marker({{kebele_house.lat_lng}}).addTo(map).bindPopup(`<div> <h3> House Number:- {{kebele_house.hnum}}</h3>
+ {% if kebele_house.resident %}
  
- 
+  {% if kebele_house.resident.photo %}
+                <img src="{{kebele_house.resident.photo.url}}" style="width:70px; " alt="{{kebele_house.resident.first_name}}" />
+
+                {% endif %}
+            <span><h4>Resident:-</h4></span> <h5>  {{kebele_house.resident.first_name }}  {{kebele_house.resident.middle_name }} Lives in </h5>
+{% else %}
+<p> No one lives here now </p>
+{% endif %}
+</div>
  `).openPopup();
   {% endfor %}
      
