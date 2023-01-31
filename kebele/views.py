@@ -49,6 +49,28 @@ def manage_resident(request):
 
 
 @login_required(login_url='login')
+def see_map(request):
+    kebele_houses = KebeleHouse.objects.all()
+    initial = kebele_houses.first().lat_lng
+    context={'kebele_houses':kebele_houses,'initial':initial}
+    return render(request, 'kebele/see_map.html', context)
+
+
+@login_required(login_url='login')
+def see_house_in_map(request,pk):
+    try:
+
+        kebele_house= KebeleHouse.objects.get(id=pk)
+    except:
+        return  HttpResponseRedirect('handler404')
+
+    context={'kebele_house':kebele_house}
+    return render(request, 'kebele/see_house_in_map.html', context)
+
+
+
+
+@login_required(login_url='login')
 def add_resident(request):
     profile = request.user.profile
     try:

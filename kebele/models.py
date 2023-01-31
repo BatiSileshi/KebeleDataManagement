@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from django.contrib.gis.db import models
 
 
 class Kebele(models.Model):
@@ -142,9 +143,15 @@ class KebeleHouse(models.Model):
     hnum = models.CharField(max_length=100, null=True, blank=True)
     door_number= models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)
-    location = models.CharField(max_length=500, null=True, blank=True)
+    location = models.PointField(null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
         return str(self.location)
+    
+
+    @property   
+    def lat_lng(self): 
+      return list(getattr(self.location,'coords',[])[::-1])
+                

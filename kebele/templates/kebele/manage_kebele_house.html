@@ -6,9 +6,9 @@
     <div class="container">
     <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
         <h3>Kebele Houses</h3>
-
+        <a href="{% url 'see-map' %}"><button class="btn btn-sm btn-info">View on map</button></a> <br>
         <a href="{% url 'add-kebele-house' %}">Add kebele house</a>
-       
+        
         <div class="row">
             <div class="col-sm-12 table-responsive">
                 <table id="housetable" class="table dataTable table-bordered table-striped" style="width: 100%"
@@ -48,7 +48,7 @@
                             <td class="update-table">
                                 <a href="{% url 'update-kebele-house' kebele_house.id %}"><button
                                         class="btn btn-sm btn-danger">Edit</button></a>
-                                <a href="{% url 'view-kh' kebele_house.id %}"><button class="btn btn-sm btn-info">View Map</button></a>
+                                <a href="{% url 'see-house-in-map' kebele_house.id %}"><button class="btn btn-sm btn-info">View Map</button></a>
                             </td>
                         </tr>
                         {%endfor%}
@@ -65,6 +65,8 @@
                 </table>
             </div>
         </div>
+
+      
     </div>
 
 

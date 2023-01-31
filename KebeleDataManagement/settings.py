@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kebele.apps.KebeleConfig',
     'employee.apps.EmployeeConfig',
+      'django.contrib.gis', 
 ]
 
 MIDDLEWARE = [

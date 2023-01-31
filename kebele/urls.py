@@ -56,6 +56,8 @@ urlpatterns = [
 #     path('add-kebele-land/', views.add_kebele_land, name="add-kebele-land"),
 #     path('update-kebele-land/<str:id>/', views.update_kebele_land, name="update-kebele-land"),
 
-
+#see map
+path('map/',views.see_map,name="see-map"),
+path('map/<str:pk>/',views.see_house_in_map,name="see-house-in-map"),
     
 ]

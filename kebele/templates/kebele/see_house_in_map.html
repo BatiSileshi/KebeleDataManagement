@@ -1,0 +1,89 @@
+
+<head>
+                        <title>KDBMS</title>
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+crossorigin=""/>
+
+                        
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+ integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+ crossorigin=""></script>
+                      </head>
+                      
+                      {% extends 'main.html' %}
+                    {% load static %}
+                      
+                      
+                        {% block content %}
+
+                        <br>
+                        <br>
+                        <br>
+                        
+                        <section class="ourHotels" id="ourHotels">
+                            <div class="container">
+                                <div class="section-title">
+                                  <h2 class=" displayer hotel-header">explore on map</h2>
+                                </div>
+
+                                <div style="height:600px;" id="map"></div>
+
+                              
+                            </section>
+                          {% comment %} </script>
+                          <script src="{% static 'index/assets/js/distance.js' %}"> {% endcomment %}
+                          </script>                   
+
+
+<script type="text/javascript">
+window.onload = ()=>{
+    search();
+  }; 
+
+  function search(){
+
+  
+  var map = L.map('map').setView([7.66703805520462, 36.83638500456251],13);
+  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3'],
+    attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
+}).addTo(map);
+/*let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
+       yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
+       var popup = L.popup(); */
+
+  
+ L.marker({{kebele_house.lat_lng}}).addTo(map).bindPopup(`<div> 
+ <h1> House Number  {{e.hnum}}</h1>
+ <p> None one Lives in </p>
+ <p>Kebele house </p> </div>
+ 
+ `).openPopup();
+  
+     
+
+
+  /* function onMapClick(e) {
+           popup
+               .setLatLng(e.latlng)
+               .setContent("You clicked here")
+               .openOn(map);
+               // e.latlng.toString()
+           
+           
+            let position1 = {}
+            position1.lat = value.coords.latitude;
+            position1.lng = value.coords.longitude;
+          let  displayer  = document.querySelector(".displayer")
+            displayer.innerHTML = `The clicked Point is ${position(position1,e.latlng)}m  away from you `;
+           
+
+       } */
+  
+      // map.on('click', onMapClick);
+}
+</script>     
+{% endblock content %}
+                        
