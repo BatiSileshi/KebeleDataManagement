@@ -568,7 +568,7 @@ def manage_kebele_house(request):
 @login_required(login_url='login')
 def add_kebele_house(request):
     profile = request.user.profile
-    residents = []
+    residents = {}
     try:
       Employee.objects.get(employee=profile)
       resident_ids = list(KebeleHouse.objects.all().values_list('resident',flat=True).distinct())
@@ -579,19 +579,20 @@ def add_kebele_house(request):
     if request.method == 'POST':
             #code for adding kebele house 
             hnum = request.POST.get("hnum")
-            door_num = request.POST.get("door_num")
+            door_number = request.POST.get("door_number")
             area = request.POST.get("area")
             resident = request.POST.get("resident")
             lat = float(request.POST.get('lat'))
             lng = float(request.POST.get('lng'))
             location = Point(lng, lat,srid=4326)
+            
             try:
-                resident = Resident.objects.get(resident=resident)
+                resident = Resident.objects.get(id=resident)
             except:
                 resident = None
                 
             
-            house = KebeleHouse.objects.create(hnum=hnum, door_number=door_num,area = area,location=location)
+            house = KebeleHouse.objects.create(hnum=hnum, door_number=door_number,area = area,location=location)
             if resident != None:
                 house.resident = resident
                 house.save()
@@ -607,22 +608,44 @@ def add_kebele_house(request):
 @login_required(login_url='login')
 def update_kebele_house(request, id):
     profile = request.user.profile
+    residents = []
     try:
         kebele_employee = Employee.objects.get(employee=profile)
-        kebele_house = KebeleHouse.objects.get(pk=id)  
+        kebele_house = KebeleHouse.objects.get(pk=id) 
+        resident_ids = list(KebeleHouse.objects.all().values_list('resident',flat=True).distinct())
+        residents =  Resident.objects.all().exclude(id__in=resident_ids)
     except:
         return HttpResponse("handler404")   
-    form = KebeleHouseForm(instance=kebele_house)
+  
     if request.method == "POST":
-        form = KebeleHouseForm(request.POST, instance=kebele_house)
-        if form.is_valid():
-            form.save()
+            hnum = request.POST.get("hnum")
+            door_number = request.POST.get("door_number")
+            area = request.POST.get("area")
+            resident = request.POST.get("resident")
+            lat = float(request.POST.get('lat'))
+            lng = float(request.POST.get('lng'))
+            location = Point(lng, lat,srid=4326)
+            
+            try:
+                resident = Resident.objects.get(id=resident)
+            except:
+                resident = None
+                
+            
+            kebele_house.area = area
+            kebele_house.hnum = hnum
+            kebele_house.location = location
+            kebele_house.door_number = door_number
+            kebele_house.save()
+            if resident != None:
+                kebele_house.resident = resident
+                kebele_house.save()
+            
             messages.success(request, 'You have successfully updated the selected kebele house')
             return redirect('manage-kebele-house')
-        else:
-             messages.warning(request, 'There was an error while updating the kebele land, please try again later!')
-    context = {'form': form}
-    return render(request, 'kebele/form.html', context)
+
+    context = {'kebele_house':kebele_house,'residents':residents}
+    return render(request, 'kebele/update_kebele_house.html', context)
 
 
 def view_kebele_house(request, id):
@@ -639,8 +662,7 @@ def view_kebele_house(request, id):
 @login_required(login_url='login')
 def see_map(request):
     kebele_houses = KebeleHouse.objects.all()
-    initial = kebele_houses.first().lat_lng
-    context={'kebele_houses':kebele_houses,'initial':initial}
+    context={'kebele_houses':kebele_houses}
     return render(request, 'kebele/see_map.html', context)
 
 
