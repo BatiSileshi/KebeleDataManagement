@@ -10,14 +10,6 @@ class UserCreationForm(UserCreationForm):
         model= User
         fields = ['first_name','last_name', 'email', 'username', 'password1', 'password2']
         
-        labels = {
-            'first_name': 'Maqaa',
-            'last_name': 'Maqaa Abbaa',
-            'email': 'Imeeyilii',
-            'username': 'Maqaa fayyadamaa',
-            'password1': 'Jecha darbii',
-            'password2': 'Jecha darbii mirkaneessaa',
-        }
         
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -47,11 +39,6 @@ class KebeleEmployeeForm(ModelForm):
         model= Employee
         fields = '__all__'
         
-        labels = {
-            'employee': 'Hojjetaa',
-            'role': 'Gahee Hojii',
-
-        }
         
     def __init__(self, *args, **kwargs):
         super(KebeleEmployeeForm, self).__init__(*args, **kwargs)
@@ -68,10 +55,7 @@ class MessageForm(ModelForm):
         widgets = {
             'recipient': forms.CheckboxSelectMultiple(),
         }
-        labels = {
-            'subject': 'Mata Duree',
-            'body': 'Ergaa',
-        }
+
         
     def __init__(self, *args, **kwargs):
         super(MessageForm, self).__init__(*args, **kwargs)

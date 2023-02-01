@@ -7,36 +7,13 @@ class ResidentForm(ModelForm):
         model= Resident
         fields = '__all__' 
         
-        labels = {
-            'kebele': 'Ganda',
-            'first_name': 'Maqaa',
-            'middle_name': 'Maqaa Abba',
-            'last_name': 'Maqaa Akaakayyuu',
-            'mother_name': 'Maqaa Haadhaa',
-            'photo': 'Suuraa',
-            'phone_number': 'Bilbila',
-            'first_name': 'Maqaa',
-            'email': 'Imeeyilii',
-            'age': 'Umurii',
-            'sex': 'Saala',
-            'edu_level': 'Sadarkaa Barnootaa',
-            'nationality': 'Lammummaa',
-            'religion': 'Amantii',
-            'occupation': 'Hojii',
-
-
-        }
         
     def __init__(self, *args, **kwargs):
         super(ResidentForm, self).__init__(*args, **kwargs)
         
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
-            
-    
-    
-
-        
+               
 
 class AddressForm(ModelForm):
     class Meta:
@@ -44,9 +21,9 @@ class AddressForm(ModelForm):
         exclude = ['resident'] 
         
         labels = {
-            'hnum': 'Lakk Manaa ',
-            'gooxii': 'Gooxii',
-            'garee': 'Garee',
+            'hnum': 'House number ',
+            'gooxii': 'Local community',
+            'garee': 'Group',
 
         }
         
@@ -64,10 +41,7 @@ class HouseForm(ModelForm):
         fields = '__all__'
         
         labels = {
-            'owner': 'Abbaa qabeenyaa',
-            'hnum': 'Lakk Manaa ',
-            'door_number': 'Baayyina balbalaa',
-            'area': 'Ballina',
+            'hnum': 'House number ',
         }
         
     def __init__(self, *args, **kwargs):
@@ -81,15 +55,8 @@ class FamilyForm(ModelForm):
     class Meta:
         model= Family
         fields = '__all__'
-        
-        labels = {
-            'leader': 'Geggeessaa Maatii',
-            'members': 'Miseensota Maatii',
-            'house': 'Mana',
-            'family_number': 'Baayyina Maatii',
-            'male_number': 'Baayyina Dhiiraa',
-            'female_number': 'Baayyina Dhalaa',
-        }
+
+
         widgets = {
             'members': forms.CheckboxSelectMultiple(),
             'house': forms.CheckboxSelectMultiple(),
@@ -110,11 +77,7 @@ class IDCardForm(ModelForm):
         model= IDCard
         fields = '__all__'
         
-        labels = {
-            'resident': 'Jiraataa',
-            'id_number': 'Lakk Eenyummeessaa',
 
-        }
         
     def __init__(self, *args, **kwargs):
         super(IDCardForm, self).__init__(*args, **kwargs)
@@ -128,10 +91,7 @@ class BusinessOwnerForm(ModelForm):
         model = BusinessOwner
         fields = '__all__'
         
-        labels = {
-            'name': 'Maqaa',
-            'phone_number': 'Bilbila',
-        }  
+
         
     def __init__(self, *args, **kwargs):
         super(BusinessOwnerForm, self).__init__(*args, **kwargs)
@@ -144,11 +104,7 @@ class LocalBusinessForm(ModelForm):
         model= LocalBusiness
         fields = '__all__'
         
-        labels = {
-            'owner': 'Abbaa Qabeenyaa',
-            'name': 'Daldala',
-            'type': 'Gosa ',
-        }
+
         
     def __init__(self, *args, **kwargs):
         super(LocalBusinessForm, self).__init__(*args, **kwargs)
@@ -162,10 +118,7 @@ class KebeleHouseForm(ModelForm):
         fields = '__all__'
         
         labels = {
-            'hnum': 'Lakk Manaa',
-            'door_number': 'Baayyina balbalaa',
-            'location': 'Bakka argamaa',
-            'area': 'Ballina',
+            'hnum': 'House number',
 
         }
         
