@@ -113,7 +113,7 @@ def editProfile(request):
 def manage_employee(request):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
+        kebele_employee = Employee.objects.get(employee=profile, role="manager")   
     except:
         return HttpResponseRedirect("handler404") 
     
@@ -128,7 +128,7 @@ def manage_employee(request):
 def add_employee(request):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
+        kebele_employee = Employee.objects.get(employee=profile, role="manager")   
     except:
         return HttpResponseRedirect("handler404") 
     
@@ -152,7 +152,7 @@ def add_employee(request):
 def update_employee(request, id):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
+        kebele_employee = Employee.objects.get(employee=profile, role="manager")   
         employee = Employee.objects.get(pk=id)  
     except:
         return HttpResponseRedirect("handler404") 
@@ -165,7 +165,7 @@ def update_employee(request, id):
         if form.is_valid():
             form.save()
             messages.success(request, 'You have successfully updated the selected employee')
-            return redirect('home')
+            return redirect('manage-employee')
         else:
              messages.warning(request, 'There was an error while updating the employee, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
@@ -175,7 +175,7 @@ def update_employee(request, id):
 def delete_employee(request, id):
     profile=request.user.profile
     try:
-        kebele_employee = Employee.objects.get(employee=profile, role="Hoji geggeessaa")   
+        kebele_employee = Employee.objects.get(employee=profile, role="manager")   
         employee = Employee.objects.get(pk=id)  
     except:
         return HttpResponseRedirect("handler404") 
@@ -185,15 +185,12 @@ def delete_employee(request, id):
     if request.method == "POST":
         if employee.delete():
             messages.success(request, 'You have successfully deleted the selected employee') 
-            return redirect('home')
+            return redirect('manage-employee')
         else:
             messages.warning(request, 'There was an error during deletion of the selected employee')
     context = {'object': employee, 'unreadCount': unreadCount}
     return render(request, 'employee/delete.html', context)
 
-
-def send_notification(request):
-    pass
 
 
 @login_required(login_url='login')
@@ -236,12 +233,13 @@ def view_sent_message(request, pk):
     try:
         kebele_employee = Employee.objects.get(employee=profile) 
         message = Message.objects.get(id=pk, sender=kebele_employee)  
+        recipients = message.recipient.all()
     except:
         return HttpResponseRedirect("handler404") 
-    
+     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    context={'message':message, 'unreadCount':unreadCount}
+    context={'message':message, 'unreadCount':unreadCount, 'recipients':recipients}
     return render(request, 'employee/sent_message.html', context)
 
 

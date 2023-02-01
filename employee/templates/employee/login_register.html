@@ -1,10 +1,14 @@
 {% load static %}
 <link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
-<link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> {% if page == 'register' %}
+<link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> 
+
+<div class="home-content">
+    <div class="container">
+{% if page == 'register' %}
 
 <div class="container">
     <br />
-    <h4>Galmaa'i</h4>
+    <h4>Register</h4>
     <form action="{% url 'register' %}" method="POST">
         {% csrf_token %}
         <div>
@@ -13,30 +17,32 @@
             <small style="color: red">{{error}}</small> {% endfor %} <br /> {%endfor%}
         </div>
 
-        <input type="submit" value="Galmaa'i" />
-        <a href="{% url 'login' %}" class="btn btn-primary">Seeni</a>
+        <input type="submit" value="Register" />
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
     </form>
 </div>
 {% else %}
 
 <br />
 <div class="container">
-    <h4>Seeni</h4>
+    <h4>Login</h4>
     <form action="" method="POST">
         {% csrf_token %}
-        <label for="">Maqaa fayyadamaa <input type="text" name="username" / >
+        <label for="">Username <input type="text" name="username" / >
     </label>
 
-        <label for="">Jecha iccitii
+        <label for="">Passord
       <input type="password" name="password" />
     </label>
 
-        <input type="submit" value="Seeni" /> |
+        <input type="submit" value="Login" /> |
 
-        <a href="{% url 'reset_password' %}">Jecha iccitii dagattanii?</a>
+        <a href="{% url 'reset_password' %}">Forgot password?</a>
     </form>
     <br />
-    <p>Galmaa'uu barbaadduu?</p>
-    <a href="{% url 'register' %}" class="btn btn-primary">Galmaa'aa</a>
+    <p>Have an account?</p>
+    <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
 </div>
 {%endif%}
+    </div>
+</div>

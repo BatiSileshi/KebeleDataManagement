@@ -35,13 +35,14 @@
                     <span class="links_name">Resident Management</span>
                 </a>
             </li>
-
+             {% if request.user.profile.employee.role == "manager"%}
             <li>
                 <a href="{% url 'manage-employee' %}">
                     <i class="bx bxs-user-detail"></i>
                     <span class="links_name">Manage Employee</span>
                 </a>
             </li>
+            {% endif %}
             <li>
                 <a href="{% url 'manage-local-business' %}">
                     <i class="bx bx-money"></i>

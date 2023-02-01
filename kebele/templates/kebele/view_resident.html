@@ -12,6 +12,10 @@
                 {% endif %}
             </div>
             <div class="detail info">
+                <div>Kebele: {{resident.kebele.name}}</div>
+                <div>Woreda: {{resident.kebele.woreda}}</div>
+                <div>Zone: {{resident.kebele.zone}}</div>
+
                 <div>Full name: {{resident.first_name}} {{resident.middle_name}} {{resident.last_name}}</div>
                 <div>Mother name: {{resident.mother_name}}</div>
                 {% if resident.phone_number %}
@@ -29,6 +33,7 @@
                 
                 <br>
                 <h5>Address</h5>
+
                 <div>House Number: {{resident.address.hnum}}</div>
                 <div>Local Community: {{resident.address.gooxii}}</div>
                 <div>Group: {{resident.address.garee}}</div>

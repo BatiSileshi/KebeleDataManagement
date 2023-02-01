@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse
+from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, Kebele
 from employee.models import Employee
 from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleHouseForm, BusinessOwnerForm
 from django.contrib import messages
@@ -14,7 +14,7 @@ def home(request):
     count_employee = Employee.objects.all().count()
     count_lb = LocalBusiness.objects.all().count()
     count_kh = KebeleHouse.objects.all().count()
-    
+    kebele = Kebele.objects.all()
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
@@ -22,7 +22,7 @@ def home(request):
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh, 'unreadCount':unreadCount}
+    context ={'count_resident':count_resident, 'count_employee':count_employee, 'count_lb':count_lb, 'count_kh':count_kh, 'unreadCount':unreadCount, 'kebele':kebele}
     return render(request, 'kebele/home.html', context)
 
 ##############
@@ -294,7 +294,7 @@ def view_family(request, id):
     return render(request, 'kebele/view_family.html', context)
 
 
-
+ 
 
 # IDCArd crud
 @login_required(login_url='login')

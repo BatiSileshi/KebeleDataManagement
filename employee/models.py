@@ -21,8 +21,8 @@ class Profile(models.Model):
 class Employee(models.Model):
     ROLES = (
     ('manager', 'Manager'),
-    ('vice_manager', 'Vice Manager'),
-    ('Barreessaa', 'Barreessaa'),
+    ('manager', 'Vice Manager'),
+    ('other_employee', 'Other Employee'),
 )
     employee = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True)
     role = models.CharField(max_length=100, null=True, blank=True, choices=ROLES)
