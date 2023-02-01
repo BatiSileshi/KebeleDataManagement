@@ -149,7 +149,7 @@ class KebeleHouse(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.location)
+        return str(self.hnum)
     
 
     @property   
