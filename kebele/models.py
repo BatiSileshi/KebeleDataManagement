@@ -44,6 +44,7 @@ class Resident(models.Model):
 class Address(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     hnum = models.CharField(max_length=20, null=True, blank=True)
+    zone = models.CharField(max_length=100, null=True, blank=True)
     gooxii = models.CharField(max_length=100, null=True, blank=True)
     garee = models.CharField(max_length=100, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
@@ -58,7 +59,7 @@ class Address(models.Model):
 class IDCard(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     emergency = models.CharField(max_length=200, null=True, blank=True)
-    emergency_contact= models.IntegerField(max_length=20, null=True, blank=True)
+    emergency_contact= models.IntegerField(null=True, blank=True)
     id_number = models.CharField(max_length=20, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
