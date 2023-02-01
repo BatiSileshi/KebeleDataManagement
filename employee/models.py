@@ -20,8 +20,8 @@ class Profile(models.Model):
 
 class Employee(models.Model):
     ROLES = (
-    ('Hoji geggeessaa', 'Hoji geggeessaa'),
-    ('To\'ataa', 'To\'ataa'),
+    ('manager', 'Manager'),
+    ('vice_manager', 'Vice Manager'),
     ('Barreessaa', 'Barreessaa'),
 )
     employee = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True, blank=True)
@@ -35,8 +35,6 @@ class Employee(models.Model):
     
 class Message(models.Model):
     sender = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True)
-    # recipient = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True, related_name="messages")
-    
     recipient = models.ManyToManyField(Employee,  blank=True, related_name="messages")
     subject = models.CharField(max_length=200, null=True, blank=True)
     body = models.TextField()

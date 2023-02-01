@@ -362,6 +362,7 @@
                                 <td class="update-table">
                                     <a href="{% url 'update-idcard' idcard.id %}"><button
                                             class="btn btn-sm btn-danger">Edit</button></a>
+                                    <a href="{% url 'view-idcard' idcard.id %}"><button class="btn btn-sm btn-info">Show</button></a>
                                 </td>
                             </tr>
                             {%endfor%}

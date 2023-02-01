@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="home-content">
+    <div class="container">
+        <div class="show-detail d-flex flex-column align-items-center bg-white">
+            <div class="detail-photo">
+                {% if idcard.resident.photo %}
+                <img src="{{idcard.resident.photo.url}}" alt="{{idcard.resident.first_name}}" />
+
+                {% endif %}
+            </div>
+            <div class="detail info">
+                <div>ID number: {{idcard.id_number}}</div>
+                <div>First name: {{idcard.resident.first_name}} </div>
+                <div>Middle name: {{idcard.resident.middle_name}}</div>
+                <div>Last name: {{idcard.resident.last_name}}</div>
+                <div>Mother name: {{idcard.resident.mother_name}}</div>
+                <div>Age: {{idcard.resident.age}}</div>
+                <div>Sex: {{idcard.resident.sex}}</div>
+                <div>Occupation: {{idcard.resident.occupation}}</div>
+                <div>Emergency: {{idcard.emergency}}</div>
+                <div>Emergency contact: {{idcard.emergency_contact}}</div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

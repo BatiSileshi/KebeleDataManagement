@@ -24,11 +24,12 @@ urlpatterns = [
          #id card
     path('add-idcard/', views.add_id_card, name="add-idcard"),
     path('update-idcard/<str:id>/', views.update_id_card, name="update-idcard"),
+    path('view-idcard/<str:id>/', views.view_idcard, name="view-idcard"),
     
      # ? end of resident management
     
     
-    path('mvd', views.manage_vital_data, name="manage-vital-data"),
+#     path('mvd', views.manage_vital_data, name="manage-vital-data"),
     
     #local business management
     path('mlb', views.manage_local_business, name="manage-local-business"),
@@ -51,9 +52,9 @@ urlpatterns = [
     
         
      #managing kebele land
-    path('mkl', views.manage_kebele_land, name="manage-kebele-land"),
-    path('add-kebele-land/', views.add_kebele_land, name="add-kebele-land"),
-    path('update-kebele-land/<str:id>/', views.update_kebele_land, name="update-kebele-land"),
+#     path('mkl', views.manage_kebele_land, name="manage-kebele-land"),
+#     path('add-kebele-land/', views.add_kebele_land, name="add-kebele-land"),
+#     path('update-kebele-land/<str:id>/', views.update_kebele_land, name="update-kebele-land"),
 
 
     

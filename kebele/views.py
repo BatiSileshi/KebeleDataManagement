@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, KebeleLand
+from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse
 from employee.models import Employee
-from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleLandForm, KebeleHouseForm, BusinessOwnerForm
+from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleHouseForm, BusinessOwnerForm
 from django.contrib import messages
 # Create your views here.
 
@@ -344,6 +344,23 @@ def update_id_card(request, id):
     context = {'form': form, 'unreadCount': unreadCount}
     return render(request, 'kebele/form.html', context)
 
+
+
+
+def view_idcard(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        idcard = IDCard.objects.get(pk=id)   
+    except:
+        return HttpResponseRedirect("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+
+    context = {'idcard': idcard, 'unreadCount': unreadCount}
+    return render(request, 'kebele/view_idcard.html', context)
+
 # ?end of managing resident
 ###############
 
@@ -351,18 +368,18 @@ def update_id_card(request, id):
 ##############
 # managing vital data
 #
-@login_required(login_url='login')
-def manage_vital_data(request):
-    profile = request.user.profile
-    try:
-        kebele_employee = Employee.objects.get(employee=profile)
-    except:
-        return HttpResponse("handler404") 
+# @login_required(login_url='login')
+# def manage_vital_data(request):
+#     profile = request.user.profile
+#     try:
+#         kebele_employee = Employee.objects.get(employee=profile)
+#     except:
+#         return HttpResponse("handler404") 
     
-    messageRequests = kebele_employee.messages.all()
-    unreadCount = messageRequests.filter(is_read=False).count()
-    context={'unreadCount':unreadCount}
-    return render(request, 'kebele/manage_vital_data.html', context)
+#     messageRequests = kebele_employee.messages.all()
+#     unreadCount = messageRequests.filter(is_read=False).count()
+#     context={'unreadCount':unreadCount}
+#     return render(request, 'kebele/manage_vital_data.html', context)
 
 
 
@@ -600,64 +617,4 @@ def view_kebele_house(request, id):
 ####################################
 
 
-
-#############################
-# managing kebele land
-#
-@login_required(login_url='login')
-def manage_kebele_land(request):
-    profile = request.user.profile
-    try:
-        kebele_employee = Employee.objects.get(employee=profile) 
-    except:
-        return HttpResponse("handler404") 
-    kebele_lands = KebeleLand.objects.all()
-    context={'kebele_lands':kebele_lands}
-    return render(request, 'kebele/manage_kebele_land.html', context)
-
-
-@login_required(login_url='login')
-def add_kebele_land(request):
-    profile = request.user.profile
-    try:
-        kebele_employee = Employee.objects.get(employee=profile) 
-    except:
-        return HttpResponse("handler404") 
-    form = KebeleLandForm()
-    if request.method == 'POST':
-        form = KebeleLandForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'You have successfully added kebele land')
-            return redirect('manage-kebele-land')  
-        else:
-            messages.warning(request, 'There was an error while adding kebele land, please try again later!')
-             
-    context={'form':form} 
-    return render(request, "kebele/form.html", context)
-
-
-@login_required(login_url='login')
-def update_kebele_land(request, id):
-    profile = request.user.profile
-    try:
-        kebele_employee = Employee.objects.get(employee=profile)
-        kebele_land = KebeleLand.objects.get(pk=id)    
-    except:
-        return HttpResponse("handler404") 
-      
-    form = KebeleLandForm(instance=kebele_land)
-    if request.method == "POST":
-        form = KebeleLandForm(request.POST, instance=kebele_land)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'You have successfully updated the selected kebele land')
-            return redirect('manage-kebele-land')
-        else:
-             messages.warning(request, 'There was an error while updating the kebele land, please try again later!')
-    context = {'form': form}
-    return render(request, 'kebele/form.html', context)
-#
-# ?end of managing kebele land
-####################################
 

@@ -15,8 +15,8 @@ class Kebele(models.Model):
 
 class Resident(models.Model):
     SAALA=(
-        ('Dhiira', 'Dhiira'),
-        ('Dhalaa', 'Dhalaa'),    
+        ('Male', 'Male'),
+        ('Female', 'Female'),    
     )
     kebele = models.ForeignKey(Kebele, on_delete=models.SET_NULL, null=True, blank=True )
     first_name=models.CharField(max_length=100, null=True, blank=True)
@@ -57,6 +57,8 @@ class Address(models.Model):
         
 class IDCard(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    emergency = models.CharField(max_length=200, null=True, blank=True)
+    emergency_contact= models.IntegerField(max_length=20, null=True, blank=True)
     id_number = models.CharField(max_length=20, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
@@ -92,13 +94,13 @@ class Family(models.Model):
     
     
     
-class VitalData(models.Model):
-    resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-    # is_alive haha
+# class VitalData(models.Model):
+#     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
+#     birth_date = models.DateField(null=True, blank=True)
+#     # is_alive haha
     
-    def __str__(self):
-        return self.resident
+#     def __str__(self):
+#         return self.resident
     
     
    ################################################### 
@@ -125,14 +127,14 @@ class LocalBusiness(models.Model):
     
 
  
-class KebeleLand(models.Model):
-    location = models.CharField(max_length=500, null=True, blank=True)
-    area = models.CharField(max_length=100, null=True, blank=True)
-    updated=models.DateTimeField(auto_now=True, null=True)
-    created=models.DateField(auto_now_add=True, null=True)
+# class KebeleLand(models.Model):
+#     location = models.CharField(max_length=500, null=True, blank=True)
+#     area = models.CharField(max_length=100, null=True, blank=True)
+#     updated=models.DateTimeField(auto_now=True, null=True)
+#     created=models.DateField(auto_now_add=True, null=True)
     
-    def __str__(self):
-        return str(self.location)
+#     def __str__(self):
+#         return str(self.location)
     
     
 class KebeleHouse(models.Model):
