@@ -596,6 +596,9 @@ def add_kebele_house(request):
             if resident != None:
                 house.resident = resident
                 house.save()
+            else:
+                house.resident = None
+                house.save()
             messages.success(request, 'You have successfully added kebele house')
             return redirect('manage-kebele-house')  
         # else:
@@ -640,7 +643,9 @@ def update_kebele_house(request, id):
             if resident != None:
                 kebele_house.resident = resident
                 kebele_house.save()
-            
+            else:
+                kebele_house.resident = None
+                kebele_house.save()
             messages.success(request, 'You have successfully updated the selected kebele house')
             return redirect('manage-kebele-house')
 

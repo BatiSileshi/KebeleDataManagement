@@ -43,9 +43,11 @@ crossorigin=""/>
 <label for="cars">Who is Living in</label>
  <br>
 <select name="resident" id="resident">
+    <option value="">Leave it open</option>
     {% for resident in residents %}
   <option value="{{resident.id}}">{{ resident.first_name }} {{ resident.middle_name }}</option>
  {% endfor %}
+ 
 </select> 
     <input type="hidden" name="lat" id="lat" required>
     <input type="hidden" name="lng" id="lng" required>
