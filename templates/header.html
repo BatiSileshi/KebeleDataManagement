@@ -1,4 +1,6 @@
-        <nav>
+      <div class="removedNav">
+        <nav class ="nav-content">
+            
             <div class="sidebar-button">
                 <i class="bx bx-menu sidebarBtn"></i>
                 <span class="dashboard">Dashboard</span>
@@ -12,3 +14,4 @@
                <a href="{% url 'account' %}"> <span class="admin_name">{{request.user.profile.first_name}} {{request.user.profile.last_name}} </a></span>
             </div>
         </nav>
+      </div>

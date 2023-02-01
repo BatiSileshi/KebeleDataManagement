@@ -18,5 +18,22 @@ $(document).ready(function() {
     $("#lbotable").DataTable();
     
 
-
+ 
 });
+const printedpart =document.querySelector('.printed-part')
+console.log(printedpart)
+
+const btn = document.getElementById('printbtn')
+btn.addEventListener('click' ,Print)
+
+const bodyContent = document.querySelector('.body-content')
+const nav = document.querySelector('.removedNav')
+
+const navContent = document.querySelector('.nav-content')
+console.log(nav)
+function Print(){
+     nav.removeChild(navContent)
+     bodyContent.removeChild(sidebar)
+    printedpart.removeChild(btn)
+    window.print()
+}

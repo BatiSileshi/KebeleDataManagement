@@ -3,8 +3,10 @@
 {% block content %}
 
 <div class="home-content">
-    <div class="container">
+    <div class="container ">
         <div class="show-detail d-flex flex-column align-items-center bg-white">
+
+            <div class=" printed-part">
             <div class="detail-photo">
                 {% if idcard.resident.photo %}
                 <img src="{{idcard.resident.photo.url}}" alt="{{idcard.resident.first_name}}" />
@@ -25,6 +27,13 @@
 
 
             </div>
+            <br>
+        <br>
+   <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
+    <br>
+    <br>
+            </div>
+
         </div>
     </div>
 </div>
