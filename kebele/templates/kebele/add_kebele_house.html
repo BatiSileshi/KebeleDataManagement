@@ -14,50 +14,75 @@ crossorigin=""/>
                       {% extends 'main.html' %}
                     {% load static %}
                       
-                      
                         {% block content %}
 
                         <br>
                         <br>
                         <br>
+
+                        <br>
+
+<div class="home-content">
+  <div class="container">
+
+
+<form action="" method="POST">
+ {% csrf_token %}
+ <label>House Number</label>
+  <br>
+    <input type="text" name="hnum" required>
+    
+ <br>
+    <label>Door Number</label>
+    <br>
+    <input type="text" name="door_number" required>
+     <br>
+<label> Area</label><br>
+<input type="text" name="area" required>
+ <br>
+<label for="cars">Who is Living in</label>
+ <br>
+<select name="resident" id="resident">
+    <option value="">Leave it open</option>
+    {% for resident in residents %}
+  <option value="{{resident.id}}">{{ resident.first_name }} {{ resident.middle_name }}</option>
+ {% endfor %}
+ 
+</select> 
+    <input type="hidden" name="lat" id="lat" required>
+    <input type="hidden" name="lng" id="lng" required>
+    <input style="display:none;" type="text" id="checking" required>
+ <br>
+ <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+</div>
+</div>
+
+<br>
+<br>
+
                         
-                        <section class="map" id="map">
+                        <section class="none" id="none">
                             <div class="container">
                                 <div class="section-title">
-                                  <h2 class=" displayer map-header"> Mantina Kebele House</h2>
+                                  <h2 class=" displayer none-header">select the house's location in the map </h2>
                                 </div>
 
-                                <div style="height:600px;" id="map"></div>
+                                <div style="height:300px;" id="map"></div>
 
                               
                             </section>
-                                         
+                                           
 
 
 <script type="text/javascript">
-  let lat_lng = {{ kebele_house.lat_lng }} ;
-  let house_lat = lat_lng[0];
-  let house_lng = lat_lng[1];
 window.onload = ()=>{
     search();
   }; 
 
   function search(){
 
-//     var geojsonFeature = {
-//     "type": "Feature",
-//     "properties": {
-//         "name": "Coors Field",
-//         "amenity": "Baseball Stadium",
-//         "popupContent": "This is where the Rockies play!"
-//     },
-//     "geometry": {
-//         "type": "Point",
-//         "coordinates": [-104.99404, 39.75621]
-//     }
-// };
-
-//   var map = L.map('map').setView([8.13558142027241, 36.785265134017315], 4);
   var map = L.map('map').setView([7.673312617837222, 36.838995144155895],10);
 
   L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
@@ -90,59 +115,29 @@ var kebele = [{
 L.geoJSON(kebele, {
     style: function(feature) {
         switch (feature.properties.Name) {
-            case 'Mantina Kebele':  return {color: "#0000ff", opacity: 0.7};
+            case 'Mantina Kebele':  return {color: "#0000ff", opacity: 0.9};
         }
     }
 }).addTo(map);
-/*let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
-       yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
-       var popup = L.popup(); */
-
-
-      
-  
- L.marker(
-  L.latLng(
-   house_lat,house_lng
-  )
-).addTo(map).bindPopup(`
- <div> 
- <h3> House Number:- {{kebele_house.hnum}}</h3>
- {% if kebele_house.resident %}
- 
-  {% if kebele_house.resident.photo %}
-                <img src="{{kebele_house.resident.photo.url}}" style="width:70px; " alt="{{kebele_house.resident.first_name}}" />
-
-                {% endif %}
-            <span><h4>Resident:-</h4></span> <h5>  {{kebele_house.resident.first_name }}  {{kebele_house.resident.middle_name }} Lives in </h5>
-{% else %}
-<p> No one lives here now </p>
-{% endif %}
-</div>
- 
- `).openPopup();
+       var popup = L.popup(); 
   
      
 
 
-  /* function onMapClick(e) {
+  function onMapClick(e) {
            popup
                .setLatLng(e.latlng)
-               .setContent("You clicked here")
+               .setContent("selected point for kebele house")
                .openOn(map);
-               // e.latlng.toString()
-           
-           
-            let position1 = {}
-            position1.lat = value.coords.latitude;
-            position1.lng = value.coords.longitude;
-          let  displayer  = document.querySelector(".displayer")
-            displayer.innerHTML = `The clicked Point is ${position(position1,e.latlng)}m  away from you `;
-           
+               document.getElementById("checking").value = "done";
+          document.getElementById('lat').value = e.latlng.lat;
+          document.getElementById('lng').value = e.latlng.lng;
 
-       } */
+        
+
+       } 
   
-      // map.on('click', onMapClick);
+    map.on('click', onMapClick);
 }
 </script>     
 {% endblock content %}
