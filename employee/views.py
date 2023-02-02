@@ -119,7 +119,7 @@ def manage_employee(request):
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    employees = Employee.objects.all()
+    employees = Employee.objects.all().order_by('-created')
     context={'employees':employees, 'unreadCount':unreadCount}
     return render(request, 'employee/manage_employee.html', context)
 
@@ -200,9 +200,9 @@ def inbox(request):
         kebele_employee = Employee.objects.get(employee=profile)   
     except:
         return HttpResponseRedirect("handler404") 
-    messageRequests = kebele_employee.messages.all()
+    messageRequests = kebele_employee.messages.all().order_by('-created')
     unreadCount = messageRequests.filter(is_read=False).count()
-    sent_messages = Message.objects.filter(sender=kebele_employee)
+    sent_messages = Message.objects.filter(sender=kebele_employee).order_by('-created')
     sent_messages_count = Message.objects.filter(sender=kebele_employee).count()
     context={'messageRequests':messageRequests, 'unreadCount':unreadCount, 'sent_messages':sent_messages, 'sent_messages_count':sent_messages_count}
     return render(request, 'employee/inbox.html', context)
@@ -251,7 +251,7 @@ def create_message_all(request):
         profile = request.user.profile
         kebele_employee = Employee.objects.get(employee=profile)
         sender = kebele_employee
-    except:
+    except: 
         return HttpResponseRedirect("handler404")
     
     messageRequests = kebele_employee.messages.all()
@@ -267,7 +267,7 @@ def create_message_all(request):
             for recip in recip_list:
                 recipient = {}
                 try:
-                     recipient = Employee.objects.get(id=recip) 
+                     recipient = Employee.objects.get(id=recip)
                 except:
                     return HttpResponseRedirect("handler404")   
                 message.recipient.add(recipient)  

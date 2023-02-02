@@ -20,6 +20,13 @@
                                 aria-label="Name: activate to sort column descending">
                                 House number
                             </th>
+
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                            colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                            aria-label="Name: activate to sort column descending">
+                            Lives in
+                        </th>
+
                             <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
                                 style="width: 82.8px" aria-label="Position: activate to sort column ascending">
                                 Door
@@ -36,11 +43,12 @@
 
                             <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         {% for kebele_house in kebele_houses %}
                         <tr class="odd">
                             <td>{{kebele_house.hnum}}</td>
+                            <td>{{kebele_house.resident.first_name}} {{kebele_house.resident.last_name}}</td>
                             <td>{{kebele_house.door_number}}</td>
                             <td>{{kebele_house.area}}</td>
                             <td>{{kebele_house.created}}</td>
@@ -57,6 +65,7 @@
                     <tfoot>
                         <tr>
                             <th rowspan="1" colspan="1">House number</th>
+                            <th rowspan="1" colspan="1">Lives in</th>
                             <th rowspan="1" colspan="1">Door</th>
                             <th rowspan="1" colspan="1">Area</th>
                             <th rowspan="1" colspan="1">Registered at</th>

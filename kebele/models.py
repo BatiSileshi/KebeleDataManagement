@@ -37,7 +37,7 @@ class Resident(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.first_name)
+        return str(self.first_name, self.last_name)
     class Meta:
         ordering = ['first_name']
     
@@ -66,7 +66,7 @@ class IDCard(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.resident.first_name)
+        return str(self.resident)
         
 
 class House(models.Model):
@@ -96,13 +96,6 @@ class Family(models.Model):
     
     
     
-# class VitalData(models.Model):
-#     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-#     birth_date = models.DateField(null=True, blank=True)
-#     # is_alive haha
-    
-#     def __str__(self):
-#         return self.resident
     
     
    ################################################### 
@@ -129,14 +122,7 @@ class LocalBusiness(models.Model):
     
 
  
-# class KebeleLand(models.Model):
-#     location = models.CharField(max_length=500, null=True, blank=True)
-#     area = models.CharField(max_length=100, null=True, blank=True)
-#     updated=models.DateTimeField(auto_now=True, null=True)
-#     created=models.DateField(auto_now_add=True, null=True)
-    
-#     def __str__(self):
-#         return str(self.location)
+
     
     
 class KebeleHouse(models.Model):

@@ -1,6 +1,5 @@
 
 <head>
-                        <title>KDBMS</title>
                         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
 integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
 crossorigin=""/>
@@ -17,32 +16,28 @@ crossorigin=""/>
                         {% block content %}
 
                         <br>
-                        <br>
-                        <br>
-
-                        <br>
 
 <div class="home-content">
   <div class="container">
 
 
-<form action="" method="POST">
+<form action="" method="POST" class="form-control">
  {% csrf_token %}
  <label>House Number</label>
   <br>
-    <input type="text" name="hnum" value={{kebele_house.hnum}} required>
+    <input type="text" name="hnum" value={{kebele_house.hnum}}  class="form-control" required>
     
  <br>
     <label>Door Number</label>
     <br>
-    <input type="text" name="door_number" value={{kebele_house.door_number}} required>
+    <input type="text" name="door_number" value={{kebele_house.door_number}}  class="form-control" required>
      <br>
 <label> Area</label><br>
-<input type="text" name="area" value={{kebele_house.area}} required>
+<input type="text" name="area" value={{kebele_house.area}}  class="form-control" required>
  <br>
 <label for="cars">Who is Living in</label>
  <br>
-<select name="resident" id="resident">
+<select name="resident" id="resident"  class="form-control">
 <option value="{{ kebele_house.resident.id}}">{{ kebele_house.resident.first_name }} {{ kebele_house.resident.middle_name }}</option>
     {% for resident in residents %}
   <option value="{{resident.id}}">{{ resident.first_name }} {{ resident.middle_name }}</option>
@@ -52,6 +47,19 @@ crossorigin=""/>
     <input type="hidden" name="lat" id="lat" required>
     <input type="hidden" name="lng" id="lng" required>
  <br>
+
+
+ <section class="none" id="none">
+  <div class="container">
+      <div class="section-title">
+        <h2 class=" displayer none-header">Select the house in map </h2>
+      </div>
+
+      <div style="height:300px;" id="map"></div>
+
+    
+  </section>
+<br>
  <input type="submit" value="Save" class="btn btn-primary">
 </form>
 
@@ -62,16 +70,7 @@ crossorigin=""/>
 <br>
 
                         
-                        <section class="none" id="none">
-                            <div class="container">
-                                <div class="section-title">
-                                  <h2 class=" displayer none-header">select the house in map </h2>
-                                </div>
 
-                                <div style="height:300px;" id="map"></div>
-
-                              
-                            </section>
                                            
 
 

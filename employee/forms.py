@@ -52,9 +52,12 @@ class MessageForm(ModelForm):
     class Meta:
         model= Message
         fields =['recipient', 'subject', 'body']
+        
         widgets = {
-            'recipient': forms.CheckboxSelectMultiple(),
+            'recipient': forms.CheckboxSelectMultiple()
         }
+        
+        
 
         
     def __init__(self, *args, **kwargs):
@@ -62,6 +65,7 @@ class MessageForm(ModelForm):
         
         for name, field in self.fields.items():
             self.fields['recipient'].widget.attrs.update({'id': 'form-check-input'})
+            
             self.fields['subject'].widget.attrs.update({'class': 'form-control'})
             self.fields['body'].widget.attrs.update({'class': 'form-control'})
         
