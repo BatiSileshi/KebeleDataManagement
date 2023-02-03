@@ -273,7 +273,11 @@ def create_message_all(request):
                 message.recipient.add(recipient)  
     
         messages.success(request, 'Your message was successfully sent')
-        return redirect('manage-employee')
+        if request.user.profile.employee.role == "other_employee":
+            return redirect('inbox')
+        else:
+            return redirect('manage-employee')
+            
     
     context={ 'form':form, 'unreadCount':unreadCount}
 

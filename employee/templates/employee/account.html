@@ -11,9 +11,9 @@
     <div class="container">
 
         <div class="detail info">
-            <div class="detail-photo">
+            <div class="detail-photo" >
                 {% if profile.profile_picture %}
-                <img src="{{profile.profile_picture.url}}" alt="{{profile.first_name}}" />
+                <img src="{{profile.profile_picture.url}}" alt="{{profile.first_name}}" style="width: 100px; height: 100px; border-radius: 50px;" />
 
                 {% endif %}
             </div>
@@ -29,7 +29,9 @@
             
             <br>
             <a href="{% url 'update-profile' %}">Update Profile</a>
+            
 
+            
         </div>
 
     </div>
