@@ -3,47 +3,21 @@
 {% block content %}
 
 <div class="home-content">
-    <div class="container">
-        <div class="show-detail d-flex flex-column  bg-white">
-<div class=" printed-part">
+  <div class="container">
+    <div class="show-detail d-flex flex-column  bg-white">
+      <div class=" printed-part">
 
-    <div class="detail-photo">
-        {% if resident.photo %}
-        <img src="{{resident.photo.url}}" alt="{{resident.first_name}}" />
+        <div class="detail-photo">
+          {% if resident.photo %}
+          <img src="{{resident.photo.url}}" alt="{{resident.first_name}}" />
 
-        {% endif %}
-    </div>
-    <div class="detail info">
-        <!-- <div>Kebele: {{resident.kebele.name}}</div>
-        <div>Woreda: {{resident.kebele.woreda}}</div>
-        <div>Zone: {{resident.kebele.zone}}</div>
-
-        <div>Full name: {{resident.first_name}} {{resident.middle_name}} {{resident.last_name}}</div>
-        <div>Mother name: {{resident.mother_name}}</div>
-        {% if resident.phone_number %}
-        <div>Phone number: {{resident.phone_number}}</div>
-        {% endif %}
-        {% if resident.email %}
-        <div>Email: {{resident.email}}</div>
-        {% endif %}
-        <div>Age: {{resident.age}}</div> 
-        <div>Sex: {{resident.sex}}</div>
-        <div>Education level: {{resident.edu_level}}</div>
-        <div>Nationality: {{resident.nationality}}</div>
-        <div>Religion: {{resident.religion}}</div>
-        <div>Occupation: {{resident.occupation}}</div>
-        
-        <br>
-        <h5>Address</h5>
-
-        <div>House Number: {{resident.address.hnum}}</div>
-        <div>Zone: {{resident.address.zone}}</div>
-        <div>Local Community: {{resident.address.gooxii}}</div>
-        <div>Group: {{resident.address.garee}}</div> -->
+          {% endif %}
+        </div>
+        <div class="detail info">
 
 
 
-        <table class="table">
+          <table class="table">
 
             <tbody>
               <tr>
@@ -66,7 +40,7 @@
                 <th scope="row">Mother name</th>
                 <td>{{resident.mother_name}}</td>
               </tr>
-        
+
               <tr>
                 <th scope="row">Phone number</th>
                 {% if resident.phone_number %}
@@ -79,7 +53,7 @@
                 <td>{{resident.email}}</td>
                 {% endif %}
               </tr>
-        
+
               <tr>
                 <th scope="row">Age</th>
                 <td>{{resident.age}}</td>
@@ -104,7 +78,7 @@
                 <th scope="row">Occupation</th>
                 <td>{{resident.occupation}}</td>
               </tr>
-        
+
               <tr>
                 <th scope="row">House number</th>
                 <td>{{resident.address.hnum}}</td>
@@ -117,35 +91,35 @@
                 <th scope="row">Local community</th>
                 <td>{{resident.address.gooxii}}</td>
               </tr>
-        
+
               <tr>
                 <th scope="row">Group</th>
                 <td>{{resident.address.garee}}</td>
               </tr>
-              
+
             </tbody>
           </table>
-           
+
+        </div>
+        <br>
+        <br>
+        <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
+        <br>
+        <br>
+      </div>
     </div>
-<br>
-<br>
-   <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
-    <br>
-    <br>
-</div>
-</div>
-
-
-        
 
 
 
 
 
 
-   
-    </div>
+
+
+
+
+  </div>
 </div>
 
- 
+
 {% endblock content %}

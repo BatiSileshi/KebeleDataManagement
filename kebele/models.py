@@ -37,7 +37,7 @@ class Resident(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.first_name, self.last_name)
+        return str((self.first_name, self.last_name))
     class Meta:
         ordering = ['first_name']
     

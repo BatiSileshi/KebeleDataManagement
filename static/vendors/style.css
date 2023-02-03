@@ -409,13 +409,49 @@ nav .profile-details i {
     flex-wrap: nowrap;
 }
 
-.show-detail {
-    padding-top: 20px;
+
+.flag{
+    width:65px !important;
+    height: 40px;
+}
+.card
+
+.flag-img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.flag-center{
+    font-size: 15px;
+    max-width:200px;
 }
 
-.detail-photo {
-    height: 150px;
-    width: 150px;
+.id-header{
+    font-size: 12px;
+}
+
+.show-detail{
+    width: 400px;
+
+}
+
+.show-detail .detail-photo {
+    height: 140px;
+    width: 120px;
+}
+.details-underline{
+    text-decoration: underline;
+}
+
+.show-detail .detail-photo img{
+   object-fit: cover;
+   width: 100%;
+   border-radius: 0;
+}
+
+.show-detail .detail-info{
+    font-size: 13px;
+
 }
 
 .detail-photo img {

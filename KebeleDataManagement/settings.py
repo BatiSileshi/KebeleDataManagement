@@ -85,18 +85,28 @@ WSGI_APPLICATION = 'KebeleDataManagement.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'kdbms',
+#         'USER': 'root',
+#         'PASSWORD': 'cc3377ch',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'kdbms',
-        'USER': 'root',
-        'PASSWORD': 'cc3377ch',
+        'USER': 'baty',
+        'PASSWORD': 'pgadminmtnv@03',
         'HOST': 'localhost',
         'PORT': '5432'
     }
 }
-
-
 
 
 

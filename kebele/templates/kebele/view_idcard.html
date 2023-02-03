@@ -3,40 +3,76 @@
 {% block content %}
 
 <div class="home-content">
-    <div class="container ">
-        <div class="show-detail d-flex flex-column align-items-center bg-white">
+    <div class="container  d-flex align-items-center justify-content-center">
+        <div class="show-detail card p-2">
 
             <div class=" printed-part">
-            <div class="detail-photo">
-                {% if idcard.resident.photo %}
-                <img src="{{idcard.resident.photo.url}}" alt="{{idcard.resident.first_name}}" />
+                <div class="d-flex justify-content-between flex-row bg-primary">
+                    <div class="flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flag_of_the_Oromia_Region.svg/800px-Flag_of_the_Oromia_Region.svg.png?20220810160240"
+                            class="flag-img" alt="flag">
+                    </div>
+                    <div class="flag-center">
+                        Bulchiinsa Magaalaa Jimmaa
+                        Waajjira Ganda Mantiinaa
+                    </div>
+                    <div class="flag">
+                        <img src="https://cdn.britannica.com/12/12-004-A40EEB6F/Flag-Ethiopia.jpg" class="flag-img"
+                            alt="flag">
+                    </div>
 
-                {% endif %}
-            </div>
-            <div class="detail info">
-                <div>ID number: {{idcard.id_number}}</div>
-                <div>First name: {{idcard.resident.first_name}} </div>
-                <div>Middle name: {{idcard.resident.middle_name}}</div>
-                <div>Last name: {{idcard.resident.last_name}}</div>
-                <div>Mother name: {{idcard.resident.mother_name}}</div>
-                <div>Age: {{idcard.resident.age}}</div>
-                <div>Sex: {{idcard.resident.sex}}</div>
-                <div>Occupation: {{idcard.resident.occupation}}</div>
-                <div>Emergency: {{idcard.emergency}}</div>
-                <div>Emergency contact: {{idcard.emergency_contact}}</div>
+                </div>
+
+                <div class="d-flex justify-content-around id-header m-1">
+                    <div class="">
+                        Waraqaa Eenyummaa
+                    </div>
+                    <div class="">
+                        <div>Lakk/W/Eny <span class="details-underline"> {{idcard.id_number}} </span></div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row nowrap justify-content-between">
+
+                    <div class="detail-info text-black">
+
+                        <div>Maqaa: <span class="details-underline"> {{idcard.resident.first_name}}
+                                {{idcard.resident.middle_name}} </span></div>
+
+                        <div>Maqaa Akaakayyuu: <span class="details-underline"> {{idcard.resident.last_name}} </span>
+                        </div>
+                        <div>Maqaa Haadhaa: <span class="details-underline"> {{idcard.resident.mother_name}} </span>
+                        </div>
+                        <div class="d-flex gap-2">
+
+                            <div>Umurii: <span class="details-underline"> {{idcard.resident.age}} </span></div>
+                            <div> Saala: <span class="details-underline"> {{idcard.resident.sex}} </span></div>
+                        </div>
+                        <div>Hojii: <span class="details-underline"> {{idcard.resident.occupation}} </span></div>
+                        <div>Waamama yeroo rakkoo: <span class="details-underline"> {{idcard.emergency}} </span></div>
+                        <div>Lakk Bilbilaa: <span class="details-underline"> {{idcard.emergency_contact}} </span></div>
 
 
-            </div>
-            <br>
-        <br>
-   <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
-    <br>
-    <br>
+                    </div>
+                    <div class="detail-photo">
+                        {% if idcard.resident.photo %}
+                        <img src="{{idcard.resident.photo.url}}" alt="{{idcard.resident.first_name}}" />
+
+                        {% endif %}
+                    </div>
+                </div>
+
+                <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
             </div>
 
         </div>
+
     </div>
+
+
+     
+   
 </div>
+
 
 
 {% endblock content %}
