@@ -15,7 +15,7 @@ class Profile(models.Model):
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str((self.user.username))
+        return str((self.first_name))
     
 
 class Employee(models.Model):
@@ -30,7 +30,7 @@ class Employee(models.Model):
     created=models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str(self.employee)
+        return str((self.employee.first_name, self.employee.last_name))
     
     
 class Message(models.Model):

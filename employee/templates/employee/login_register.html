@@ -1,6 +1,18 @@
+
+
 {% load static %}
-<link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
-<link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hirmata Mantina KDMS</title>
+    <link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> 
+</head>
+
 
 <div class="home-content">
     <div class="container">
@@ -26,14 +38,16 @@
 <br />
 <div class="container">
     <h4>Login</h4>
-    <form action="" method="POST">
+    <form action="" method="POST" class="form-group">
         {% csrf_token %}
-        <label for="">Username <input type="text" name="username" / >
+        <label for="">Username  
+        <input type="text" name="username" class="form-control"/>
     </label>
-
-        <label for="">Passord
-      <input type="password" name="password" />
+<br>
+        <label for="">Password  
+      <input type="password" name="password" class="form-control"/>
     </label>
+    <br>
 
         <input type="submit" value="Login" class="btn btn-primary" /> |
 
