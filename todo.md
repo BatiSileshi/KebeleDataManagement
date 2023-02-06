@@ -4,6 +4,9 @@
 (D) Restrict views based on employee role {cm:2023-01-31}
 (E) REstrict add address view if resident has address
 (F) add search for foreign key fields (resident)
+(G) Add birth certificate 
+(H) Validation
+(I) Renew Id
 
 
 hotel

@@ -16,6 +16,11 @@
                         <thead>
                             <tr>
                                 <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
+                                colspan="1" style="width: 61.5833px" aria-sort="ascending"
+                                aria-label="Name: activate to sort column descending">
+                                Id
+                            </th>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
                                     colspan="1" style="width: 61.5833px" aria-sort="ascending"
                                     aria-label="Name: activate to sort column descending">
                                     First Name
@@ -46,6 +51,7 @@
                         <tbody>
                             {% for resident in residents %}
                             <tr class="odd">
+                                <td>{{resident.id}}</td>
                                 <td class="sorting_1">{{resident.first_name}}</td>
                                 <td>{{resident.middle_name}}</td>
                                 <td>{{resident.sex}}</td>
@@ -70,6 +76,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th rowspan="1" colspan="1">Id</th>
                                 <th rowspan="1" colspan="1">First Name</th>
                                 <th rowspan="1" colspan="1">Middle Name</th>
                                 <th rowspan="1" colspan="1">Sex</th>
