@@ -17,8 +17,8 @@
             <small style="color: red">{{error}}</small> {% endfor %} <br /> {%endfor%}
         </div>
 
-        <input type="submit" value="Register" />
-        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        <input type="submit" value="Register" class="btn btn-primary" />
+        <a href="{% url 'login' %}" >Login</a>
     </form>
 </div>
 {% else %}
@@ -35,13 +35,13 @@
       <input type="password" name="password" />
     </label>
 
-        <input type="submit" value="Login" /> |
+        <input type="submit" value="Login" class="btn btn-primary" /> |
 
         <a href="{% url 'reset_password' %}">Forgot password?</a>
     </form>
     <br />
     <p>Have an account?</p>
-    <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+    <a href="{% url 'register' %}" >Register</a>
 </div>
 {%endif%}
     </div>

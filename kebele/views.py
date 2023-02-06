@@ -66,7 +66,10 @@ def add_resident(request):
         if form.is_valid():
 
             form.save()
+            messages.success(request, 'You have successfully added resident')
             return redirect('manage-resident') 
+        else:
+            messages.warning(request,'There was an error during registration of resident')
         
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()  
@@ -368,23 +371,6 @@ def view_idcard(request, id):
 
 # ?end of managing resident
 ###############
-
-
-##############
-# managing vital data
-#
-# @login_required(login_url='login')
-# def manage_vital_data(request):
-#     profile = request.user.profile
-#     try:
-#         kebele_employee = Employee.objects.get(employee=profile)
-#     except:
-#         return HttpResponse("handler404") 
-    
-#     messageRequests = kebele_employee.messages.all()
-#     unreadCount = messageRequests.filter(is_read=False).count()
-#     context={'unreadCount':unreadCount}
-#     return render(request, 'kebele/manage_vital_data.html', context)
 
 
 

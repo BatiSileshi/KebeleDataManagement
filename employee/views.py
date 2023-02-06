@@ -103,7 +103,7 @@ def editProfile(request):
             messages.success(request,'You have successfully updated your profile')
             return redirect('account')
         else:
-            messages.error(request,'There is an error while processing your in put')
+            messages.warning(request,'There is an error while processing your in put')
     context = {'form':form, 'unreadCount':unreadCount}
     return render(request, 'employee/form.html',context)
 
