@@ -7,6 +7,8 @@
 (G) Add birth certificate 
 (H) Validation
 (I) Renew Id
+(J) When manager leaves the kebele -
+
 
 
 
@@ -26,7 +28,8 @@ Certificates
    
 
 
-
+## validation
+1. First name qofa yoo tahe space qabaachuu hin qabu
 
 
 
