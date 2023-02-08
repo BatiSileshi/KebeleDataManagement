@@ -679,7 +679,8 @@ def see_house_in_map(request,pk):
 ##########################
 
 def certificates(request):
-    context={}
+    certificates = BirthCertificate.objects.all()
+    context={'certificates':certificates}
     return render(request, 'kebele/certificates.html', context)
 
 

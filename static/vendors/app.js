@@ -16,6 +16,7 @@ $(document).ready(function() {
     $("#employeetable").DataTable();
     $("#lbtable").DataTable();
     $("#lbotable").DataTable();
+    $("#certificatetable").DataTable();
     
 
  
