@@ -1,6 +1,6 @@
 from django.forms import ModelForm, widgets
 from django import forms
-from .models import Resident, LocalBusiness, Address, House, Family, IDCard, KebeleHouse,  BusinessOwner
+from .models import Resident, LocalBusiness, Address, House, Family, IDCard, BirthCertificate, KebeleHouse,  BusinessOwner
 
 class ResidentForm(ModelForm):
     class Meta:
@@ -128,4 +128,17 @@ class KebeleHouseForm(ModelForm):
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
         
+        
+        
+class BirthCertificateForm(ModelForm):
+    class Meta:
+        model= BirthCertificate
+        fields = '__all__'
+
+        
+    def __init__(self, *args, **kwargs):
+        super(BirthCertificateForm, self).__init__(*args, **kwargs)
+        
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
         

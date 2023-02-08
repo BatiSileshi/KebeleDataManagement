@@ -142,3 +142,25 @@ class KebeleHouse(models.Model):
     def lat_lng(self): 
       return list(getattr(self.location,'coords',[])[::-1])
                 
+                
+                
+class BirthCertificate(models.Model):
+    SAALA=(
+        ('Male', 'Male'),
+        ('Female', 'Female'),    
+    )
+    child = models.CharField(max_length=100, null=True, blank=True)
+    birth_registration_number = models.BigIntegerField(null=True, blank=True)
+    birth_uniques_number = models.BigIntegerField(null=True, blank=True)
+    father = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'sex': 'Male'})
+    mother = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'sex': 'Female'}, related_name="mother")
+    sex = models.CharField(max_length=20, null=True, blank=True, choices=SAALA)
+    birthday = models.DateField(null=True, blank=True)
+    nationality = models.CharField(max_length=100, null=True, blank=True)
+    updated=models.DateTimeField(auto_now=True, null=True)
+    created=models.DateField(auto_now_add=True, null=True)
+    
+    def __str__(self):
+        return str(self.child)
+    
+    

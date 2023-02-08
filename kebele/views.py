@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, Kebele
+from .models import Resident, Address, House, Family, LocalBusiness, IDCard, BusinessOwner, KebeleHouse, Kebele, BirthCertificate
 from employee.models import Employee
-from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleHouseForm, BusinessOwnerForm
+from .forms import ResidentForm, LocalBusinessForm, AddressForm, HouseForm, FamilyForm, IDCardForm, KebeleHouseForm, BusinessOwnerForm, BirthCertificateForm
 from django.contrib import messages
 # Create your views here.
 from django.contrib.gis.geos import Point
@@ -681,4 +681,53 @@ def see_house_in_map(request,pk):
 def certificates(request):
     context={}
     return render(request, 'kebele/certificates.html', context)
+
+
+login_required(login_url='login')
+def add_birth_certificate(request):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+    except:
+        return HttpResponse("handler404")
+    form = BirthCertificateForm()
+    if request.method == 'POST':
+        form = BirthCertificateForm(request.POST, request.FILES)
+        if form.is_valid():
+
+            form.save()
+            messages.success(request, 'You have successfully added birth')
+            return redirect('certificates') 
+        else:
+            messages.warning(request,'There was an error during registration of birth certificate')
+        
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()  
+    context={'form':form, 'unreadCount':unreadCount} 
+    return render(request, "kebele/form.html", context)
+    
+
+# @login_required(login_url='login')
+# def update_birth_certificate(request, id):
+#     profile = request.user.profile
+#     try:
+#         kebele_employee = Employee.objects.get(employee=profile)
+#         certificate = BirthCertificate.objects.get(pk=id)   
+#     except:
+#         return HttpResponse("handler404")
+     
+#     form = BirthCertificateForm(instance=certificate)
+#     if request.method == "POST":
+#         form = BirthCertificateForm(request.POST, instance=certificate)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'You have successfully updated the selected certificate')
+#             return redirect('certificates')
+#         else:
+#              messages.warning(request, 'There was an error while updating the certificate, please try again later!')
+             
+#     messageRequests = kebele_employee.messages.all()
+#     unreadCount = messageRequests.filter(is_read=False).count()
+#     context = {'form': form, 'unreadCount': unreadCount}
+#     return render(request, 'kebele/form.html', context)
 

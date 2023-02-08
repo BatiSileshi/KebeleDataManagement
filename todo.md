@@ -21,7 +21,6 @@ Certificates
    - sex
    - birthday 
    - birth_place
-   - mother (from resident)
    - nationality
    - created
    
