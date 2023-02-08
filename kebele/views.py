@@ -676,3 +676,9 @@ def see_house_in_map(request,pk):
 
 
 
+##########################
+
+def certificates(request):
+    context={}
+    return render(request, 'kebele/certificates.html', context)
+

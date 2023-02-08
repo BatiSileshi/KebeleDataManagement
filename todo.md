@@ -9,6 +9,30 @@
 (I) Renew Id
 
 
+
+
+Certificates
+1. Birth certificate
+   - child
+   - birth_registration_number
+   - birth_uniques_number
+   - father
+   - mother
+   - sex
+   - birthday 
+   - birth_place
+   - mother (from resident)
+   - nationality
+   - created
+   
+
+
+
+
+
+
+
+
 hotel
 
 limiting users list, when adding a new hotel admin

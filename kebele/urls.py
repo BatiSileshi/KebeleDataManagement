@@ -50,11 +50,12 @@ urlpatterns = [
     path('update-kebele-house/<str:id>/', views.update_kebele_house, name="update-kebele-house"),
     path('view-kh/<str:id>/', views.view_kebele_house, name="view-kh"),
     
+    
+    
+        # certificates
+    path('certificate', views.certificates, name="certificates"),
+    
         
-     #managing kebele land
-#     path('mkl', views.manage_kebele_land, name="manage-kebele-land"),
-#     path('add-kebele-land/', views.add_kebele_land, name="add-kebele-land"),
-#     path('update-kebele-land/<str:id>/', views.update_kebele_land, name="update-kebele-land"),
 
 #see map
 path('map/',views.see_map,name="see-map"),
