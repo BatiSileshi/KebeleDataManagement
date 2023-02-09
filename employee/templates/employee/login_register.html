@@ -1,5 +1,3 @@
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hirmata Mantina KDMS</title>
     <link href="{% static 'vendors/bootsrap/Bootsrapv5.2.0.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'vendors/style.css' %}" rel="stylesheet" /> 
+    <link href="{% static 'vendors/style.css' %}" rel="stylesheet" />
 </head>
 
 
-<div class="home-content">
+<div class="">
     <div class="container">
-{% if page == 'register' %}
+        {% if page == 'register' %}
 
-<div class="container">
-    <br />
+        <div class="container d-flex justify-content-center align-items-center">
+<div class="login-register mt-lg-2">
     <h4>Register</h4>
     <form action="{% url 'register' %}" method="POST">
         {% csrf_token %}
@@ -30,33 +28,58 @@
         </div>
 
         <input type="submit" value="Register" class="btn btn-primary" />
-        <a href="{% url 'login' %}" >Login</a>
+        <div>
+            <a href="{% url 'login' %}" class="link-danger">Login</a>
+        </div>
+     
     </form>
 </div>
-{% else %}
+         
+        </div>
+        {% else %}
 
-<br />
-<div class="container">
-    <h4>Login</h4>
-    <form action="" method="POST" class="form-group">
-        {% csrf_token %}
-        <label for="">Username  
-        <input type="text" name="username" class="form-control"/>
-    </label>
-<br>
-        <label for="">Password  
-      <input type="password" name="password" class="form-control"/>
-    </label>
-    <br>
+      
+        <div class="container d-flex justify-content-center  ">
+            <div class="login-register mt-lg-3">
+                <h4>Login</h4>
+                <form action="" method="POST" class="form-group ">
+                    {% csrf_token %}
+                    <div>
+                        <label for="" clas="label">Username</label>
+                    </div>
+                    <div>
+                        <input type="text" name="username" class="form-control" />
+                    </div>
+                    <div>
+                        <label for="" clas="label">Password
 
-        <input type="submit" value="Login" class="btn btn-primary" /> |
+                        </label>
+                    </div>
+                    <div class="mb-2">
+                        <input type="password" name="password" class="form-control" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Login" class="btn btn-primary" />
 
-        <a href="{% url 'reset_password' %}">Forgot password?</a>
-    </form>
-    <br />
-    <p>Have an account?</p>
-    <a href="{% url 'register' %}" >Register</a>
-</div>
-{%endif%}
+                    </div>
+
+
+                    <a href="{% url 'reset_password' %}">Forgot password?</a>
+                </form>
+                <div>
+
+                    <p>Have an account?</p>
+                </div>
+                <div>
+                    <a href="{% url 'register' %}" class="link-danger">Register</a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        {%endif%}
     </div>
 </div>
