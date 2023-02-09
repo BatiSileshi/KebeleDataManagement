@@ -732,3 +732,16 @@ def add_birth_certificate(request):
 #     context = {'form': form, 'unreadCount': unreadCount}
 #     return render(request, 'kebele/birth_form.html', context)
 
+
+def view_birth_certificate(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        birth = BirthCertificate.objects.get(pk=id)   
+    except:
+        return HttpResponse("handler404")
+    
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context = {'birth': birth, 'unreadCount': unreadCount}
+    return render(request, 'kebele/view_birth_certificate.html', context)

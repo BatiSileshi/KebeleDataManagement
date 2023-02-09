@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="home-content">
+  <div class="container">
+    <div class="show-detail d-flex flex-column  bg-white">
+      <div class=" printed-part">
+
+
+        <div class="detail info">
+
+
+
+          <table class="table">
+
+            <tbody>
+              <tr>
+               
+                <td>{{birth.child}}</td>
+              </tr>
+              <tr>
+                <td>{{birth.birth_registration_number}}</td>
+              </tr>
+              <tr>
+                <td>{{birth.birth_unique_number}}</td>
+              </tr>
+              <tr>
+                <td>{{birth.father.first_name}} {{birth.father.middle_name}}</td>
+              </tr>
+              <tr>
+                <td>{{birth.mother.first_name}} {{birth.mother.middle_name}}</td>
+              </tr>
+
+              <tr>
+                <td>{{birth.sex}}</td>
+              </tr>
+              <tr>
+                <td>{{birth.birthday}}</td>
+              </tr>
+
+              <tr>
+                <td>{{birth.nationality}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Guyyaa dhalooti itti galmaahe</th>
+                <td>{{birth.created}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+
+        </div>
+        <br>
+        <br>
+        <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
+        <br>
+        <br>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+{% endblock content %}

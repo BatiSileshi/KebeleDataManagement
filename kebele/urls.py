@@ -55,6 +55,7 @@ urlpatterns = [
         # certificates
     path('certificate', views.certificates, name="certificates"),
     path('add-certificate/', views.add_birth_certificate, name="add-birth-certificate"),
+    path('view-bc/<str:id>/', views.view_birth_certificate, name="view-bc"),
     
         
 
