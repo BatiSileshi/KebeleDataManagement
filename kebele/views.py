@@ -74,7 +74,7 @@ def add_resident(request):
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()  
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/resident_form.html", context)
     
 
 @login_required(login_url='login')
@@ -99,7 +99,7 @@ def update_resident(request, id):
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/resident_form.html', context)
 
 
 def view_resident(request, id):
@@ -145,7 +145,7 @@ def add_address(request, id):
     # if resident.address:
     #     return HttpResponseRedirect("handler404")
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/address_form.html", context)
 
 
 @login_required(login_url='login')
@@ -171,7 +171,7 @@ def update_address(request, id):
         else:
              messages.warning(request, 'There was an error while updating the address, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/address_form.html', context)
 
 
 # house crud
@@ -195,7 +195,7 @@ def add_house(request):
         else:
             messages.error(request, 'Error occurred') 
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/house_form.html", context)
 
 
 @login_required(login_url='login')
@@ -219,7 +219,7 @@ def update_house(request, id):
         else:
              messages.warning(request, 'There was an error while updating the house, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/house_form.html', context)
 
 
 def view_house(request, id):
@@ -258,7 +258,7 @@ def add_family(request):
         else:
             messages.error(request, 'Error occurred') 
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/family_form.html", context)
 
 
 @login_required(login_url='login')
@@ -283,7 +283,7 @@ def update_family(request, id):
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/family_form.html', context)
 
 
 def view_family(request, id):
@@ -325,7 +325,7 @@ def add_id_card(request):
         else:
             messages.error(request, 'Error occurred') 
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/id_form.html", context)
 
 
 @login_required(login_url='login')
@@ -350,7 +350,7 @@ def update_id_card(request, id):
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/id_form.html', context)
 
 
 
@@ -414,7 +414,7 @@ def add_lb_owner(request):
             messages.warning(request, 'There was an error while adding the local business, please try again later!')
              
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/lb_owner_form.html", context)
 
 
 @login_required(login_url='login')
@@ -438,7 +438,7 @@ def update_lb_owner(request, id):
         else:
              messages.warning(request, 'There was an error while updating the local business owner, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/lb_owner_form.html', context)
 
 
 @login_required(login_url='login')
@@ -484,7 +484,7 @@ def add_local_business(request):
             messages.warning(request, 'There was an error while adding the local business, please try again later!')
              
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/lb_form.html", context)
 
 
 @login_required(login_url='login')
@@ -509,7 +509,7 @@ def update_local_business(request, id):
         else:
              messages.warning(request, 'There was an error while updating the local business, please try again later!')
     context = {'form': form, 'unreadCount': unreadCount}
-    return render(request, 'kebele/form.html', context)
+    return render(request, 'kebele/lb_form.html', context)
 
 
 @login_required(login_url='login')
@@ -705,7 +705,7 @@ def add_birth_certificate(request):
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()  
     context={'form':form, 'unreadCount':unreadCount} 
-    return render(request, "kebele/form.html", context)
+    return render(request, "kebele/birth_form.html", context)
     
 
 # @login_required(login_url='login')
@@ -730,5 +730,5 @@ def add_birth_certificate(request):
 #     messageRequests = kebele_employee.messages.all()
 #     unreadCount = messageRequests.filter(is_read=False).count()
 #     context = {'form': form, 'unreadCount': unreadCount}
-#     return render(request, 'kebele/form.html', context)
+#     return render(request, 'kebele/birth_form.html', context)
 
