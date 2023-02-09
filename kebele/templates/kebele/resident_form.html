@@ -1,12 +1,13 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content%}
 
 
   <div class="container">
 
-
-<form action="" method="POST" enctype="multipart/form-data">
+<p id="phone_number_error"> </p>
+<form action="" method="POST" id="form" name="myform" enctype="multipart/form-data">
  {% csrf_token %}
     
    {{form.as_p}}
@@ -21,5 +22,5 @@
 <br>
 
 
-
+ <script src="{% static 'vendors/validation.js' %}"></script>
 {% endblock content%}

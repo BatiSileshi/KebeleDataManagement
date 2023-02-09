@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content%}
 
 
@@ -7,7 +7,7 @@
   <div class="container">
 
 
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" id="form" name="myform"  enctype="multipart/form-data">
  {% csrf_token %}
 
    {% if card.resident %}
@@ -24,6 +24,9 @@
 
   {% else %}
 
+  <div>
+   <p id="phone_number_error"></p>
+  </div>
   <div>
     <label for="">Resident</label>
 
@@ -64,6 +67,6 @@
 <br>
 <br>
 
-
+<script src="{% static 'vendors/id_validation.js' %}"></script>
 
 {% endblock content%}

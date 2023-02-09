@@ -1,45 +1,16 @@
-document.getElementById("id_phone_number").type = "number";
-const firstname = document.getElementById("id_first_name");
-firstname.addEventListener('keypress',(event)=>{
+
+document.getElementById("id_emergency_contact").type = "number";
+const emergency = document.getElementById("id_emergency");
+emergency.addEventListener('keypress',(event)=>{
       let inputedValue = event.charCode;
       if(!(inputedValue>=65&&inputedValue<=122) && (inputedValue =32 && inputedValue !=0)){
           event.preventDefault() 
       }
-});
-    
-const middlename = document.getElementById("id_middle_name");
-middlename.addEventListener('keypress',(event)=>{
-    let inputedValue = event.charCode;
-    if(!(inputedValue>=65&&inputedValue<=122) && (inputedValue =32 && inputedValue !=0)){
-        event.preventDefault() 
-    }
-   
-});
-     const lastname = document.getElementById("id_last_name");
-   lastname.addEventListener('keypress',(event)=>{
-    let inputedValue = event.charCode;
-    if(!(inputedValue>=65&&inputedValue<=122) && (inputedValue =32 && inputedValue !=0)){
-        event.preventDefault() 
-    }
-          }
-
-
-
-          );
- 
-          const mothername = document.getElementById("id_mother_name");
-          mothername.addEventListener('keypress',(event)=>{
-            let inputedValue = event.charCode;
-            if(!(inputedValue>=65&&inputedValue<=122) && (inputedValue!=32 && inputedValue !=0)){
-                event.preventDefault() 
-            }
-
-                 });           
-let errorFound=(valid_age ,phone_number)=>{
-
-    console.log(valid_age,phone_number);
+});          
+let errorFound=(phone_number)=>{
+    console.log(phone_number);
     document.getElementById('form').addEventListener("submit",function(event){
-        if(valid_age && phone_number){
+        if(phone_number){
             document.myform.submit()   
         }
     
@@ -53,10 +24,9 @@ let errorFound=(valid_age ,phone_number)=>{
 
 function validator(){
     let valid_phone_number = false
-    let valid_age = false
-    document.getElementById('id_phone_number').addEventListener('input',()=>{
+    document.getElementById('id_emergency_contact').addEventListener('input',()=>{
         let  displayPhoneNumberError = document.getElementById("phone_number_error");
-               let phone_number = document.getElementById('id_phone_number').value
+               let phone_number = document.getElementById('id_emergency_contact').value
                let  phone_number_length =  phone_number.toString().length
               
                if(phone_number_length  < 9){
@@ -94,23 +64,9 @@ function validator(){
              }
              errorFound(valid_age,valid_phone_number)  
           
-            });
-       
-                const age = document.getElementById("id_age");
-                age.addEventListener('input',(e)=>{
-                         if (age.value <= 18 || age.value >= 150 ) {
-                            valid_age = false;
-                         }
-                         else{
-                            valid_age = true;
-                         }
-                         
-     
-errorFound(valid_age,valid_phone_number);       
+            });    
+errorFound(valid_phone_number);       
                        
-
-});      
-
 }
 
 validator();
