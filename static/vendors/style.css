@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -36,6 +37,14 @@
     color: #fff;
     font-size: 24px;
     font-weight: 500;
+    
+    
+}
+.sidebar .logo-details .logo_name a{
+    color: #fff;
+    text-decoration: none;
+    
+    
 }
 
 .sidebar .nav-links {
@@ -216,6 +225,7 @@ nav .profile-details i {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 130px;
     width: calc(100% / 4 - 15px);
     background: #fff;
     padding: 15px 14px;
@@ -468,7 +478,7 @@ nav .profile-details i {
     width: 100%;
     border:7px solid rgb(64, 154, 234);
     padding:15px 15px 15px 15px;
-    background-color: #a1ccc2 !important;
+    background-color: rgb(175, 208, 200,0.5) !important;
 }
 .certificate-detail div{
     margin-bottom: 5px;
@@ -476,8 +486,8 @@ nav .profile-details i {
 }
 
 .flag1{
-    width:100px !important;
-    height: 80px;
+    width:120px !important;
+    height: 100px;
 }
 .flag-img1{
     object-fit: cover;
@@ -531,4 +541,42 @@ nav .profile-details i {
 .login-register:hover{
     box-shadow: 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.kebele-showcase{
+   
+    height: 45vh;
+   width: 97%;
+
+    background: url(../images/showcase-bg.png),rgb(47, 45, 45,0.85) ;
+    background-blend-mode: multiply;
+   
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(237, 237, 237, 0.1);
+  
+}
+
+.kebele-showcase h4{
+    font-size: 57px;
+    color:whitesmoke;
+}
+.kebele-showcase p{
+    font-size: 30px;
+    font-weight:lighter;
+    color:whitesmoke;
+}
+
+.account-info{
+    padding: 20px 20px 20px 20px;
+    background-color: white !important;
+    font-size: 20px;
+ 
+    color: black;
+}
+
+.account-info span{
+  
 }

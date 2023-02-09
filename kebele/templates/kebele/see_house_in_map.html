@@ -141,17 +141,26 @@ L.geoJSON(kebele, {
   )
 ).addTo(map).bindPopup(`
  <div> 
- <h3> House Number:- {{kebele_house.hnum}}</h3>
+ <h6> House Number:- {{kebele_house.hnum}}</h3>
  {% if kebele_house.resident %}
  
   {% if kebele_house.resident.photo %}
-                <img src="{{kebele_house.resident.photo.url}}" style="width:70px; " alt="{{kebele_house.resident.first_name}}" />
-
-                {% endif %}
-            <span><h4>Resident:-</h4></span> <h5>  {{kebele_house.resident.first_name }}  {{kebele_house.resident.middle_name }} Lives in </h5>
-{% else %}
-<p> No one lives here now </p>
+  <div class="row">
+  <div class="col-lg-4">
+             <img src="{{kebele_house.resident.photo.url}}" style="width:50px; width:60px; border-radius:5px; " alt="{{kebele_house.resident.first_name}}" />
+  </div>
+    {% endif %}
+  <div class="col-lg-8">
+        <span>Resident </span>{{kebele_house.resident.first_name }} {{kebele_house.resident.middle_name }} 
+      {% else %}
+   <p> No one lives here now </p>
 {% endif %}
+  </div>
+  </div>
+             
+
+              
+    
 </div>
  
  `).openPopup();

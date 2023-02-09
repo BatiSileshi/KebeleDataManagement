@@ -1,45 +1,44 @@
-
-
 {% extends 'main.html' %}
 
 {% block content %}
 
- 
+
 
 
 <div class="home-content">
-    <div class="container">
+    <div class="container d-flex justify-content-center align-items-center">
 
-        <div class="detail info">
-            <div class="detail-photo" >
+        <div class="account-info mt-3 d-flex flex-column">
+            <div class="detail-photo align-self-center m-2">
                 {% if profile.profile_picture %}
-                <img src="{{profile.profile_picture.url}}" alt="{{profile.first_name}}" style="width: 100px; height: 100px; border-radius: 50px;" />
+                <img src="{{profile.profile_picture.url}}" alt="{{profile.first_name}}"
+                    style="width: 150px; height: 150px; border-radius: 50%;" />
 
                 {% endif %}
             </div>
-            <div>Username: {{profile.user}} </div>
-            <div>Full name: {{profile.first_name}} {{profile.last_name}}</div>
+            <div>Username:  <span class="acoount-info"> {{profile.user}}</span>     </div>
+            <div>Full name: <span class="acoount-info">{{profile.first_name}} {{profile.last_name}}</span>  </div>
             {% if profile.phone_number %}
-            <div>Phone number: {{profile.phone_number}} </div>
+            <div>Phone number: <span class="acoount-info">{{profile.phone_number}}</span>   </div>
             {% else %}
-            <div>Phone number: not added </div>
+            <div>Phone number: <span class="acoount-info"></span>  not added </div>
             {% endif %}
-            <div>Email: {{profile.email}} </div>
-            
-            
-            <br>
-            <a href="{% url 'update-profile' %}">Update Profile</a>
-            
+            <div>Email: <span class="acoount-info"> {{profile.email}}</span>  </div>
 
-            
+
+            <br>
+            <a href="{% url 'update-profile' %}" class="btn btn-primary">Update Profile</a>
+
+
+
         </div>
 
     </div>
-   
+
 </div>
 
 
-   
 
 
-    {% endblock content %}
+
+{% endblock content %}
