@@ -4,72 +4,96 @@
 
 <div class="home-content">
   <div class="container">
-    <div class="show-detail d-flex flex-column  bg-white">
-      <div class=" printed-part">
+    <div class="certificate-detail d-flex flex-column   bg-white">
 
 
-        <div class="detail info">
-
-
-
-          <table class="table">
-
-            <tbody>
-              <tr>
-               
-                <td>{{birth.child}}</td>
-              </tr>
-              <tr>
-                <td>{{birth.birth_registration_number}}</td>
-              </tr>
-              <tr>
-                <td>{{birth.birth_unique_number}}</td>
-              </tr>
-              <tr>
-                <td>{{birth.father.first_name}} {{birth.father.middle_name}}</td>
-              </tr>
-              <tr>
-                <td>{{birth.mother.first_name}} {{birth.mother.middle_name}}</td>
-              </tr>
-
-              <tr>
-                <td>{{birth.sex}}</td>
-              </tr>
-              <tr>
-                <td>{{birth.birthday}}</td>
-              </tr>
-
-              <tr>
-                <td>{{birth.nationality}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Guyyaa dhalooti itti galmaahe</th>
-                <td>{{birth.created}}</td>
-              </tr>
-
-
-            </tbody>
-          </table>
-
+      <div class="d-flex justify-content-around flex-row">
+        <div class="flag1">
+          <img src="https://cdn.britannica.com/12/12-004-A40EEB6F/Flag-Ethiopia.jpg" class="flag-img1" alt="flag">
         </div>
-        <br>
-        <br>
-        <button id="printbtn" class="btn btn-sm btn-primary">Print</button>
-        <br>
-        <br>
+
+        <div class="flag1">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flag_of_the_Oromia_Region.svg/800px-Flag_of_the_Oromia_Region.svg.png?20220810160240"
+            class="flag-img1" alt="flag">
+        </div>
+
+
       </div>
-    </div>
+      <div class="text-dark text-center align-self-center">
+        <h4>
+          Mootummaa Federalawaa Dimokratawaa Rippabkiika Itiyoopiyaatti Ragaalee Bu'ura Hawaasummaa
+        </h4>
+      </div>
+      <div class="text-dark text-center align-self-center">
+        <h3>Waraqaa Ragaa Dhalootaa</h3>
+      </div>
+      <div class="align-self-end">
+        <div>Lakkoofsa Unkaa Galmee Kabajaa Dhalootaa <span class="details-underline">{{birth.birth_registration_number}}</span></div>
+        <div>Lakk. Addaa Galmeessa Dhalootaa    <span class="details-underline">{{birth.birth_unique_number}}</span></div>
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Maqaa Daa'imaa    <span class="details-underline">{{birth.child}}</span></div>
+        <div>Maqaa Abbaa   <span class="details-underline">{{birth.father.first_name}}</span></div>
+        <div>Maqaa Akaakayyuu    <span class="details-underline">{{birth.father.middle_name}}</span></div>
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Koorniyaa    <span class="details-underline">{{birth.sex}}</span></div>
+        <div>Guyyaa Dhaloota ji'a <span class="details-underline">{{birth.child}}</span></div>
+        <div>Guyyaa   <span class="details-underline">{{birth.child}}</span></div>
+        <div>Bara   <span class="details-underline">{{birth.child}}</span></div>
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Iddoo Dhalootaa    <span class="details-underline">{{birth.child}}</span></div>
+        <div>Lammummaa    <span class="details-underline">{{birth.child}}</span></div>
+        <div>Guyyaa   <span class="details-underline">{{birth.child}}</span></div>
+        <div>Bara   <span class="details-underline">{{birth.child}}</span></div>
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Iddoo Dhalootaa    <span class="details-underline">{{birth.child}}</span></div>
+        <div>Lammummaa    <span class="details-underline">{{birth.birthday}}</span></div>
+      
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Maqaa Guutuu Haadhaa    <span class="details-underline">{{birth.mother.first_name}} {{birth.mother.middle_name}}</span></div>
+        <div>Lammummaa Haadhaa    <span class="details-underline">{{birth.birthday}}</span></div>
+      
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Maqaa Guutuu Abbaa   <span class="details-underline">{{birth.father.first_name}} {{birth.father.middle_name}}</span></div>
+        <div>Lammummaa Abbaa    <span class="details-underline">{{birth.birthday}}</span></div>
+      
+      </div>
+      <div class="d-flex flex-row no-wrap gap-1">
+        <div>Dhalootichi kan galmeeffame Ji'a   <span class="details-underline">{{birth.created}}</span></div>
+        <div>Guyyaa   <span class="details-underline">______</span></div>
+        <div>Bara   <span class="details-underline">______</span></div>
+        <div>Guyyaa waraqaa ragaa kenname Ji'a    <span class="details-underline">_____</span></div>
+        <div>Guyyaa   <span class="details-underline">_______</span></div>
+        <div>Bara   <span class="details-underline">_________</span></div>
+      </div>
+      <div class="d-flex flex-row no-wrap gap-2">
+        <div>Maqaa Guutuu Qondaala Galmee Kabajaa   <span class="details-underline">______________</span></div>
+        <div>Mallattoo    <span class="details-underline">____________</span></div>
+      
+     
 
-
-
-
-
-
-
-
+    
 
 
   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
 </div>
 
 

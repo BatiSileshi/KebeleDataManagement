@@ -414,7 +414,6 @@ nav .profile-details i {
     width:65px !important;
     height: 40px;
 }
-.card
 
 .flag-img{
     object-fit: cover;
@@ -463,6 +462,27 @@ nav .profile-details i {
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.certificate-detail{
+    width: 100%;
+    border:7px solid rgb(64, 154, 234);
+    padding:15px 15px 15px 15px;
+    background-color: #a1ccc2 !important;
+}
+.certificate-detail div{
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.flag1{
+    width:100px !important;
+    height: 80px;
+}
+.flag-img1{
+    object-fit: cover;
+    width: 100%;
+ 
 }
 
 .register-card {

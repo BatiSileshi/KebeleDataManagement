@@ -1,145 +1,195 @@
-
 <head>
-                        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-crossorigin=""/>
-
-                        
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
- integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
- crossorigin=""></script>
-                      </head>
-                      
-                      {% extends 'main.html' %}
-                    {% load static %}
-                      
-                        {% block content %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 
 
-                        <br>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+</head>
+
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<br>
 
 <div class="home-content">
-  <div class="container">
-
-
-<form action="" method="POST" class="form-control">
- {% csrf_token %}
- <label>House Number</label>
-  <br>
-    <input type="text" name="hnum" required class="form-control">
-    
- <br>
-    <label>Door Number</label>
-    <br>
-    <input type="text" name="door_number" class="form-control" required>
-     <br>
-<label> Area</label><br>
-<input type="text" name="area" class="form-control" required>
- <br>
-<label for="cars">Who is Living in</label>
- <br>
-<select name="resident" id="resident" class="form-control">
-    <option value="">Leave it open</option>
-    {% for resident in residents %}
-  <option value="{{resident.id}}" >{{ resident.first_name }} {{ resident.middle_name }}</option>
- {% endfor %}
- 
-</select> 
-    <input type="hidden" name="lat" id="lat" required>
-    <input type="hidden" name="lng" id="lng" required>
-    <input style="display:none;" type="text" id="checking" required>
- <br>
-
- <section class="none" id="none">
     <div class="container">
-        <div class="section-title">
-          <h2 class=" displayer none-header">Select the house's location in the map </h2>
-        </div>
-
-        <div style="height:300px;" id="map"></div>
-
       
-    </section>
 
-    <br>
+        <form action="" method="POST" class="form-control">
+            {% csrf_token %}
+            <div class="row">
 
- <input type="submit" value="Save" class="btn btn-primary">
-</form>
+                <div class="col-lg-5">
+                    <label>House Number</label>
+                    <br>
+                    <input type="text" name="hnum" required class="form-control">
+    
+                    <br>
+                    <label>Door Number</label>
+                    <br>
+                    <input type="text" name="door_number" class="form-control" required>
+                    <br>
+                    <label> Area</label><br>
+                    <input type="text" name="area" class="form-control" required>
+                    <br>
+                    <label for="cars">Who is Living in</label>
+                    <br>
+                    <select name="resident" id="resident" class="form-control">
+                        <option value="">Leave it open</option>
+                        {% for resident in residents %}
+                        <option value="{{resident.id}}">{{ resident.first_name }} {{ resident.middle_name }}</option>
+                        {% endfor %}
+    
+                    </select>
+                    <input type="hidden" name="lat" id="lat" required>
+                    <input type="hidden" name="lng" id="lng" required>
+                    <input style="display:none;" type="text" id="checking" required>
+    
+                </div>
+                <div class="col-lg-7">
+                    <div class="">
+                        <h6 class=" displayer none-header">Select the house's location in the map </h2>
+                    </div>
+    
+                    <div style="height:350px; width:100%" id="map"></div>
+    
+                </div>
+            </div>
 
+
+
+
+
+
+
+<div class=" d-flex justify-content-center mt-3">
+<div>
+
+    <input type="submit" value="Save" class="btn btn-primary btn-lg">
 </div>
+</div>
+
+        </form>
+
+    </div>
 </div>
 
 <br>
 <br>
 
-                        
-            
-                                           
+
+
+
 
 
 <script type="text/javascript">
-window.onload = ()=>{
-    search();
-  }; 
+    window.onload = () => {
+        search();
+    };
 
-  function search(){
+    function search() {
 
-  var map = L.map('map').setView([7.673312617837222, 36.838995144155895],10);
+        var map = L.map('map').setView([7.667417, 36.832250], 18);
 
-  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3'],
-    attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
-}).addTo(map);
+        L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
+        }).addTo(map);
 
 
-var kebele = [{
-    "type": "Feature",
-    "properties": {"Name": "Mantina Kebele"},
-    "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-            [ 36.83539025395925, 7.669867573572341,],
-            [ 37.830326243420465,7.669867573572366],
-            [ 35.82912461380109 ,7.675821928238875],
-            [36.9377076825109,7.78373768998414 ],
-            [37.6379651745722,7.670888326006797],
-            [ 36.83539025395925, 6.969867573572341,],
-            [ 35.830326243420465,7.669867573572366],
-            [ 34.82912461380109 ,8.175821928238875],
-            [33.8377076825109,7.88373768998414 ],
-            [36.8379651745722,7.670888326006797]
-        ]]
-    }
-}];
+        var kebele = [{
+            "type": "Feature",
+            "properties": {
+                "Name": "Mantina Kebele"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [36.832250, 7.666792],
+                        [36.832083, 7.666781],
+                        [36.831907, 7.666767],
+                        [36.831792, 7.666760],
+                        [36.831650, 7.666750],
+                        [36.831510, 7.666750],
+                        [36.831347, 7.666767],
+                        [36.831142, 7.666783],
+                        [36.831142, 7.666893],
+                        [36.831050, 7.666917],
+                        [36.830917, 7.666942],
+                        [36.830817, 7.666958],
+                        [36.830733, 7.666975],
+                        [36.830617, 7.666992],
+                        [36.830617, 7.667150],
+                        [36.830633, 7.667317],
+                        [36.830633, 7.667467],
+                        [36.830617, 7.667525],
+                        [36.830517, 7.667575],
+                        [36.830333, 7.667625],
+                        [36.830250, 7.667667],
+                        [36.830233, 7.667750],
+                        [36.830333, 7.667950],
+                        [36.830550, 7.668150],
+                        [36.830817, 7.668367],
+                        [36.831100, 7.668600],
+                        [36.831392, 7.668817],
+                        [36.831683, 7.669058],
+                        [36.831933, 7.669258],
+                        [36.832083, 7.669350],
+                        [36.832083, 7.669317],
+                        [36.832092, 7.669200],
+                        [36.832083, 7.669058],
+                        [36.832058, 7.668850],
+                        [36.832042, 7.668617],
+                        [36.832025, 7.668375],
+                        [36.832025, 7.668217],
+                        [36.832010, 7.668058],
+                        [36.831990, 7.667975],
+                        [36.831968, 7.667833],
+                        [36.831958, 7.667725],
+                        [36.831933, 7.667600],
+                        [36.831917, 7.667517],
+                        [36.831917, 7.667417]
+                    ]
+                ]
+            }
+        }];
 
-L.geoJSON(kebele, {
-    style: function(feature) {
-        switch (feature.properties.Name) {
-            case 'Mantina Kebele':  return {color: "#0000ff", opacity: 0.9};
+
+        L.geoJSON(kebele, {
+            style: function (feature) {
+                switch (feature.properties.Name) {
+                    case 'Mantina Kebele':
+                        return {
+                            color: "#0000ff", opacity: 0.97
+                        };
+                }
+            }
+        }).addTo(map);
+        var popup = L.popup();
+
+
+
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("selected point for kebele house")
+                .openOn(map);
+            document.getElementById("checking").value = "done";
+            document.getElementById('lat').value = e.latlng.lat;
+            document.getElementById('lng').value = e.latlng.lng;
+
+
+
         }
+
+        map.on('click', onMapClick);
     }
-}).addTo(map);
-       var popup = L.popup(); 
-  
-     
-
-
-  function onMapClick(e) {
-           popup
-               .setLatLng(e.latlng)
-               .setContent("selected point for kebele house")
-               .openOn(map);
-               document.getElementById("checking").value = "done";
-          document.getElementById('lat').value = e.latlng.lat;
-          document.getElementById('lng').value = e.latlng.lng;
-
-        
-
-       } 
-  
-    map.on('click', onMapClick);
-}
-</script>     
+</script>
 {% endblock content %}
-                        
