@@ -12,7 +12,46 @@
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
     
-   {{form.as_p}}
+ {% if house.owner %}
+ <div>
+   <label for="id_resident">Owner</label>
+   <input required type="text" name="owner" list="resident-list" class="form-control" value="{{house.owner}}" >
+   <datalist id="resident-list">
+     <select name="owner" id="id_resident" >
+     {{form.owner}}
+   </datalist>
+ </div>
+ 
+ {% else %}
+ 
+ <div>
+  <label for="id_resident">Owner</label>
+  <input required type="text" name="owner" list="resident-list" class="form-control" >
+  <datalist id="resident-list">
+    <select name="owner" id="id_resident" >
+    {{form.owner}}
+  </datalist>
+</div>
+ 
+ {% endif %}
+
+
+ <div>
+  <label for="">House number</label>
+  {{form.hnum}}
+</div>
+
+<div>
+  <label for="">Door number</label>
+  {{form.door_number}}
+</div>
+
+<div>
+  <label for="">Area</label>
+  {{form.area}}
+</div>
+
+
 
  <input type="submit" value="Save" class="btn btn-primary">
 </form>

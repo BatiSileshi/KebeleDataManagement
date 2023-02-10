@@ -221,7 +221,7 @@ def update_house(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the house, please try again later!')
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'house':house}
     return render(request, 'kebele/house_form.html', context)
 
 
@@ -285,7 +285,7 @@ def update_family(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'family':family}
     return render(request, 'kebele/family_form.html', context)
 
 

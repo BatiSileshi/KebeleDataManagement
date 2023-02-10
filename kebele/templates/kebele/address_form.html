@@ -12,15 +12,14 @@
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
     
-
-
-
-
-
 {% if address.hnum %}
 <div>
-  <label for="">Lives in</label>
-  {{form.hnum}}
+  <label for="id_resident">Lives in</label>
+  <input required type="text" name="hnum" list="resident-list" class="form-control" value="{{address.hnum}}" >
+  <datalist id="resident-list">
+    <select name="hnum" id="id_resident" >
+    {{form.hnum}}
+  </datalist>
 </div>
 
 {% else %}

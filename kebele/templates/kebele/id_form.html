@@ -13,9 +13,15 @@
  {% csrf_token %}
 
    {% if card.resident %}
-  <div>
+
+   <div>
     <label for="">Resident</label>
-    {{form.resident}}
+
+    <input required type="text" name="resident" list="resident-list" class="form-control" value="{{card.resident}}">
+    <datalist id="resident-list">
+      <select name="resident" id="id_resident">
+      {{form.resident}}
+    </datalist>
   </div>
 
   {% else %}
