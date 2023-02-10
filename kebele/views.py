@@ -562,8 +562,9 @@ def add_kebele_house(request):
     residents = {}
     try:
       Employee.objects.get(employee=profile)
-      resident_ids = list(KebeleHouse.objects.all().values_list('resident',flat=True).distinct())
-      residents =  Resident.objects.all().exclude(id__in=resident_ids)
+    #   resident_ids = list(KebeleHouse.objects.all().values_list('resident',flat=True).distinct())
+      resident_ids = list(Address.objects.all().values_list('resident',flat=True).distinct())
+      residents =  Resident.objects.all().exclude(resident_id__in=resident_ids)
     except:
         return HttpResponse("handler404")
    

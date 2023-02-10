@@ -49,6 +49,8 @@ class Message(models.Model):
 def createProfile(sender, instance, created, **kwargs):
     if created:
         user=instance
+        user_id = user.id
+        
         profile = Profile.objects.create( 
             user=user,
             first_name = user.first_name,

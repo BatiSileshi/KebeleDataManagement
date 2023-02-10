@@ -20,14 +20,14 @@ crossorigin=""/>
                         <br>
                         <br>
                         <br>
-                        
-                        <section class="map" id="map">
+                        <div class="section-title">
+                          <h2 class=" displayer map-header"> Mantina Kebele House</h2>
+                        </div>
+                        <section class="map" id="map" >
                             <div class="container">
-                                <div class="section-title">
-                                  <h2 class=" displayer map-header"> Mantina Kebele House</h2>
-                                </div>
+                              
 
-                                <div style="height:600px;" id="map"></div>
+                                <div style="height:350px; width:90%;"  id="map"></div>
 
                               
                             </section>
@@ -58,7 +58,7 @@ window.onload = ()=>{
 // };
 
 //   var map = L.map('map').setView([8.13558142027241, 36.785265134017315], 4);
-  var map = L.map('map').setView([7.667417,36.832250],17);
+var map = L.map('map').setView([7.66749, 36.83229], 17);
 
   L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,

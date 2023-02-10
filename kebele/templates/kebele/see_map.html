@@ -20,19 +20,18 @@ crossorigin=""/>
                         <br>
                         <br>
                         <br>
-                        
-                        <section class="ourHotels" id="ourHotels">
-                            <div class="container">
-                                <div class="section-title">
-                                  <h2 class=" displayer map-header"> Mantina kebele houses</h2>
-                                </div>
-
-                                <div style="height:600px;" id="map"></div>
-
-                              
-                            </section>
-                                       
-
+                        <div class="section-title">
+                            <h2 class=" displayer map-header"> Mantina Kebele Houses</h2>
+                          </div>
+                          <section class="map" id="map" >
+                              <div class="container">
+                                
+  
+                                  <div style="height:350px; width:90%;"  id="map"></div>
+  
+                                
+                              </section>
+                                           
 
 <script type="text/javascript">
 window.onload = ()=>{
@@ -40,9 +39,7 @@ window.onload = ()=>{
   }; 
 
   function search(){
-
-  
-  var map = L.map('map').setView([7.667417, 36.832250],18);
+    var map = L.map('map').setView([7.66749, 36.83229], 17);
   L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],

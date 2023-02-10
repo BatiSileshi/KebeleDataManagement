@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.contrib.gis.db import models
+from django.db.models.signals import post_save, post_delete
 
 
 class Kebele(models.Model):
@@ -39,6 +40,7 @@ class Resident(models.Model):
         ('other', 'Other'),  
         ('none', 'None'),   
     )
+    resident_id = models.CharField(max_length=100, null=True, blank=True)
     kebele = models.ForeignKey(Kebele, on_delete=models.SET_NULL, null=True, blank=True )
     first_name=models.CharField(max_length=100, null=True, blank=True)
     middle_name=models.CharField(max_length=100, null=True, blank=True)
@@ -57,7 +59,7 @@ class Resident(models.Model):
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str((self.id, self.first_name, self.middle_name))
+        return str((self.resident_id ))
     class Meta:
         ordering = ['first_name']
     
@@ -81,7 +83,7 @@ class IDCard(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
     emergency = models.CharField(max_length=200, null=True, blank=True)
     emergency_contact= models.IntegerField(null=True, blank=True)
-    id_number = models.CharField(max_length=20, null=True, blank=True)
+    # id_number = models.CharField(max_length=20, null=True, blank=True)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
@@ -184,3 +186,13 @@ class BirthCertificate(models.Model):
         return str(self.child)
     
     
+    
+    
+def add_resident_id(sender, instance, created, **kwargs):
+    resident = instance
+    if created == True:
+        resident.resident_id  =  "G/H/M/J " + str(resident.id)
+        resident.save()
+        
+
+post_save.connect(add_resident_id, sender=Resident)

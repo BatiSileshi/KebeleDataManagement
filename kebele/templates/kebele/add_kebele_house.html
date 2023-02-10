@@ -39,7 +39,7 @@
                     <select name="resident" id="resident" class="form-control">
                         <option value="">Leave it open</option>
                         {% for resident in residents %}
-                        <option value="{{resident.id}}">{{ resident.first_name }} {{ resident.middle_name }}</option>
+                        <option value="{{resident.id}}">{{ resident.resident_id }}  {{ resident.middle_name }}</option>
                         {% endfor %}
     
                     </select>
@@ -91,7 +91,7 @@
 
     function search() {
 
-        var map = L.map('map').setView([7.667417, 36.832250], 18);
+        var map = L.map('map').setView([7.66749, 36.83229], 16.4);
 
         L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}', {
             maxZoom: 20,

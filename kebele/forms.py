@@ -5,7 +5,7 @@ from .models import Resident, LocalBusiness, Address, House, Family, IDCard, Bir
 class ResidentForm(ModelForm):
     class Meta:
         model= Resident
-        exclude=['kebele']
+        exclude=['kebele','resident_id']
         
         
     def __init__(self, *args, **kwargs):

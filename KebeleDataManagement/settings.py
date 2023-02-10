@@ -96,7 +96,16 @@ DATABASES = {
     }
 }
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'kdbms',
+        'USER': 'baty',
+        'PASSWORD': 'pgadminmtnv@03',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 
 
