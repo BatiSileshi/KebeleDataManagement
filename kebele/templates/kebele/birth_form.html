@@ -3,21 +3,109 @@
 {% block content%}
 
 
-<br>
 
-<div class="home-content"> 
   <div class="container">
 
 
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
-    
-   {{form.as_p}}
+     
+ <div>
+  <label for="">Child name</label>
+  {{form.child}}
+</div>
+
+
+<div>
+  <label for="">Birth registration number</label>
+  {{form.birth_registration_number}}
+</div>
+
+<div>
+  <label for="">Birth unique number</label>
+  {{form.birth_unique_number}}
+</div>
+
+
+ {% if certificate.father %}
+
+ <div>
+  <label for="father">Father</label>
+
+  <input required type="text" name="father" list="father-list" class="form-control" value="{{certificate.father}}">
+  <datalist id="father-list">
+    <select name="father" id="id_resident">
+    {{form.father}}
+  </datalist>
+</div>
+
+{% else %}
+
+<div>
+  <label for="father">Father</label>
+  <input required type="text" name="father" list="father-list" class="form-control" >
+  <datalist id="father-list">
+    <select name="father" id="id_resident">
+    {{form.father}}
+  </datalist>
+</div>
+
+{% endif %}
+
+
+{% if certificate.mother  %}
+
+<div>
+ <label for="mother">Mother</label>
+
+ <input required type="text" name="mother" list="mother-list" class="form-control" value="{{certificate.mother}}">
+ <datalist id="mother-list">
+   <select name="mother" id="id_resident">
+   {{form.mother}}
+ </datalist>
+</div>
+
+
+{% else %}
+
+<div>
+  <label for="mother">Mother</label>
+ 
+  <input required type="text" name="mother" list="mother-list" class="form-control" >
+  <datalist id="mother-list">
+    <select name="mother" id="id_resident">
+    {{form.mother}}
+  </datalist>
+ </div>
+
+{% endif %}
+
+
+<div>
+  <label for="">Sex</label>
+  {{form.sex}}
+</div>
+
+<div>
+  <label for="">Birthday</label>
+  {{form.birthday}}
+</div>
+
+
+<div>
+  <label for="">Birth place</label>
+  {{form.birth_place}}
+</div>
+
+<div>
+  <label for="">Nationality</label>
+  {{form.nationality}}
+</div>
 
  <input type="submit" value="Save" class="btn btn-primary">
 </form>
 
-</div>
+
 </div>
 
 <br>

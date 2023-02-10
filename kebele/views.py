@@ -695,7 +695,7 @@ def add_birth_certificate(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("handler404")
+        return HttpResponseRedirect("handler404")
     form = BirthCertificateForm()
     if request.method == 'POST':
         form = BirthCertificateForm(request.POST, request.FILES)
@@ -720,7 +720,7 @@ def update_birth_certificate(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         certificate = BirthCertificate.objects.get(pk=id)   
     except:
-        return HttpResponse("handler404")
+        return HttpResponseRedirect("handler404")
      
     form = BirthCertificateForm(instance=certificate)
     if request.method == "POST":
@@ -734,7 +734,7 @@ def update_birth_certificate(request, id):
              
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'certificate':certificate}
     return render(request, 'kebele/birth_form.html', context)
 
 
@@ -745,7 +745,7 @@ def view_birth_certificate(request, id):
         kebele_employee = Employee.objects.get(employee=profile)
         birth = BirthCertificate.objects.get(pk=id)   
     except:
-        return HttpResponse("handler404")
+        return HttpResponseRedirect("handler404")
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()

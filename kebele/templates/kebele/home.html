@@ -30,7 +30,7 @@
                 <div class="number">{{count_resident}}</div>
                 <div class="indicator">
                     <i class="bx bx-up-arrow-alt"></i>
-                    <span class="text">Up from last year</span>
+                    <span class="text">Total population</span>
                 </div>
             </div>
             <i class="bx bxs-group cart"></i>
@@ -41,7 +41,7 @@
                 <div class="number">{{count_employee}}</div>
                 <div class="indicator">
                     <i class="bx bx-up-arrow-alt"></i>
-                    <span class="text">Up from last year</span>
+                    <span class="text">Total employee</span>
                 </div>
             </div>
             <i class="bx bxs-user-detail cart two"></i>
@@ -52,7 +52,7 @@
                 <div class="number">{{count_lb}}</div>
                 <div class="indicator">
                     <i class="bx bx-up-arrow-alt"></i>
-                    <span class="text">Up from last year</span>
+                    <span class="text">Local businesses</span>
                 </div>
             </div>
             <i class="bx bx-money cart three"></i>
@@ -63,28 +63,15 @@
                 <div class="number">{{count_kh}}</div>
                 <div class="indicator">
                     <i class="bx bx-up-arrow-alt"></i>
-                    <span class="text">Up from last year</span>
+                    <span class="text">Kebele houses</span>
                 </div>
             </div>
             <i class="bx bxs-building-house cart four"></i>
         </div>
-        {% comment %}
-        {% for kebele in kebele %}
-        <div class="box mt-2">
-            <div class="right-side pt-2">
-                <div class="box-topic">Kebele: {{kebele.name}}</div>
-                <div class="box-topic">Woreda: {{kebele.woreda}}</div>
-                <div class="box-topic">Zone: {{kebele.zone}}</div>
-                <div class="box-topic">Region: {{kebele.region}}</div>
-            </div>
 
-
-            <!-- <i class="bx bxs-add-to-queue cart four"></i> -->
-        </div>
-        {% endfor%}
-        {% endcomment %}
     </div>
 </div>
 
-
+<br>
+<br>
 {% endblock content %}

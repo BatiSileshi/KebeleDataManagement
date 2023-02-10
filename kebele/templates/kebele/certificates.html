@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<div class="home-content">
-
-
     <div class="container">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Birth Certificates</h4>
-            <a href="{% url 'add-birth-certificate' %}">Give Certificate</a>
+
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-birth-certificate' %}"><button class="btn btn-outline-info">   Give certificate</button> </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 table-responsive">
-                    <table id="certificatetable" class="table dataTable table-bordered table-striped" style="width: 100%"
+                    <table id="certificate" class="table dataTable table-bordered table-striped" style="width: 100%"
                         aria-describedby="example_info">
                         <thead>
                             <tr>
@@ -88,85 +90,6 @@
 
     <br>
     <br>
-    <div class="container">
-        <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
-            <h4>Marriage Certificates</h4>
-            <!-- <a href="{% url 'add-birth-certificate' %}">Give Certificate</a>
-            <div class="row">
-                <div class="col-sm-12 table-responsive">
-                    <table id="certificatetable" class="table dataTable table-bordered table-striped" style="width: 100%"
-                        aria-describedby="example_info">
-                        <thead>
-                            <tr>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
-                                colspan="1" style="width: 61.5833px" aria-sort="ascending"
-                                aria-label="Name: activate to sort column descending">
-                                Child name
-                            </th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="example" rowspan="1"
-                                    colspan="1" style="width: 61.5833px" aria-sort="ascending"
-                                    aria-label="Name: activate to sort column descending">
-                                    Father name
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                    style="width: 82.8px" aria-label="Position: activate to sort column ascending">
-                                    Registration number
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                    style="width: 56.6833px" aria-label="Office: activate to sort column ascending">
-                                    Unique number
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
-                                    Sex
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                    style="width: 30.2167px" aria-label="Age: activate to sort column ascending">
-                                    Registered at
-                                </th>
-                                
-                                <th rowspan="1" colspan="1" style="width: 62px">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for certificate in certificates %}
-                            <tr class="odd">
-                                
-                                <td class="sorting_1">{{certificate.child}}</td>
-                                <td>{{certificate.father.first_name}} {{certificate.father.last_name}}</td>
-                                <td>{{certificate.birth_registration_number}}</td>
-                                <td>{{certificate.birth_unique_number}}</td>
-                               
-                                <td>{{certificate.sex}}</td>
-                               
 
-                                <td class="update-table">
-                                    <a href=""><button
-                                            class="btn btn-sm btn-warning">Edit</button></a>
-                                    <a href=""><button class="btn btn-sm btn-info">Show</button></a>
-                    
-                                </td>
-                            </tr>
-                            {%endfor%}
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">Child name</th>
-                                <th rowspan="1" colspan="1">Father</th>
-                                <th rowspan="1" colspan="1">Registration number</th>
-                                <th rowspan="1" colspan="1">Unique number</th>
-                                <th rowspan="1" colspan="1">Sex</th>
-                                <th rowspan="1" colspan="1">Registered at</th>
-                              
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div> -->
-        </div>
-
-
-    </div>
-    </div>
+  
 {% endblock content %}
