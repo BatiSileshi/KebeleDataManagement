@@ -24,15 +24,15 @@
                 <div class="col-lg-5">
                     <label>House Number</label>
                     <br>
-                    <input type="text" name="hnum" required class="form-control">
+                    <input type="text" name="hnum" required class="form-control" id="id_hnum">
     
                     <br>
                     <label>Door Number</label>
                     <br>
-                    <input type="text" name="door_number" class="form-control" required>
+                    <input type="number" min="1" name="door_number" class="form-control" id="id_door_number" required>
                     <br>
-                    <label> Area</label><br>
-                    <input type="text" name="area" class="form-control" required>
+                    <label> Area in square meter</label><br>
+                    <input type="text" name="area" class="form-control" id="id_area" required>
                     <br>
                     <label for="cars">Who is Living in</label>
                     <br>
@@ -190,7 +190,6 @@
         map.on('click', onMapClick);
     }
 </script>
-
 
 
 <script src="{% static 'vendors/house_validation.js' %}"></script>

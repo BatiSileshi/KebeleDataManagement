@@ -14,3 +14,12 @@ area.addEventListener('keypress',(event)=>{
       }
 }); 
 
+const dorn = document.getElementById("id_door_number");
+dorn.addEventListener('keypress',(event)=>{
+      let inputedValue = event.charCode;
+      if(!(inputedValue>=49&&inputedValue<=57)){
+        
+          event.preventDefault() 
+      }
+     
+}); 
