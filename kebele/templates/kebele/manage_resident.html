@@ -3,13 +3,18 @@
 {% block content %}
 
 <div class="home-content">
-
+ 
+  <div><a href="#address"> Resident address</a> |  <a href="#house">Resident House</a> | <a href="#family">Family</a> | <a href="#id">ID card</a></div> 
 
     <div class="container">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Resident Management</h4>
-           
-            <a href="{% url 'add-resident' %}"><button class="btn btn-sm btn-info">Register Resident</button></a>
+
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-resident' %}"><button class="btn btn-outline-info">   Add Resident</button> </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 table-responsive">
                     <table id="kebeletable" class="table dataTable table-bordered table-striped" style="width: 100%"
@@ -101,7 +106,7 @@
 
 
 
-    <div class="container">
+    <div class="container" id="address">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Resident Address</h4>
            
@@ -143,7 +148,7 @@
                                 <td>{{address.hnum}}</td>
                                 <td>{{address.gooxii}}</td>
                                 <td>{{address.garee}}</td>
-                                <td>{{resident.created}}</td>
+                                <td>{{address.created}}</td>
 
                                 <td class="update-table">
                                     <a href="{% url 'update-address' address.id %}"><button
@@ -179,11 +184,14 @@
 
 
 
-    <div class="container">
+    <div class="container" id="house">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Resident House</h4>
-            <a href="{% url 'add-house' %}">Add House</a>
-           
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-house' %}"><button class="btn btn-outline-info">   Add House</button> </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 table-responsive">
                     <table id="housetable" class="table dataTable table-bordered table-striped" style="width: 100%"
@@ -256,11 +264,15 @@
 
 
 
-    <div class="container">
+    <div class="container" id="family">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Families</h4>
-            <a href="{% url 'add-family' %}">Add family</a>
            
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-family' %}"><button class="btn btn-outline-info">   Add Family</button> </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-12 table-responsive">
                     <table id="familytable" class="table dataTable table-bordered table-striped" style="width: 100%"
@@ -331,10 +343,15 @@
     <hr>
     <br>
 
-    <div class="container">
+    <div class="container" id="id">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Resident ID</h4>
-            <a href="{% url 'add-idcard' %}">Add ID Card</a>
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-idcard' %}"><button class="btn btn-outline-info">   Add ID Card</button> </a>
+                </div>
+            </div>
+           
            
             <div class="row">
                 <div class="col-sm-12 table-responsive">

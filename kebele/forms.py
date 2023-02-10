@@ -5,7 +5,7 @@ from .models import Resident, LocalBusiness, Address, House, Family, IDCard, Bir
 class ResidentForm(ModelForm):
     class Meta:
         model= Resident
-        fields = '__all__' 
+        exclude=['kebele']
         
         
     def __init__(self, *args, **kwargs):
@@ -21,7 +21,7 @@ class AddressForm(ModelForm):
         exclude = ['resident'] 
         
         labels = {
-            'hnum': 'House number ',
+            'hnum': 'Lives in ',
             'gooxii': 'Local community',
             'garee': 'Group',
 
@@ -59,14 +59,12 @@ class FamilyForm(ModelForm):
 
         widgets = {
             'members': forms.CheckboxSelectMultiple(),
-            'house': forms.CheckboxSelectMultiple(),
         }
         
     def __init__(self, *args, **kwargs):
         super(FamilyForm, self).__init__(*args, **kwargs)
         self.fields['leader'].widget.attrs.update({'class': 'form-control'})
         self.fields['members'].widget.attrs.update({'id': 'form-check-input'})
-        self.fields['house'].widget.attrs.update({'id': 'form-check-input'})
         self.fields['family_number'].widget.attrs.update({'class': 'form-control'})
         self.fields['male_number'].widget.attrs.update({'class': 'form-control'})
         self.fields['female_number'].widget.attrs.update({'class': 'form-control'})

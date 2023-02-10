@@ -12,8 +12,46 @@
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
     
-   {{form.as_p}}
 
+
+
+
+
+{% if address.hnum %}
+<div>
+  <label for="">Lives in</label>
+  {{form.hnum}}
+</div>
+
+{% else %}
+
+<div>
+  <label for="id_resident">Lives in</label>
+  <input required type="text" name="hnum" list="resident-list" class="form-control" >
+  <datalist id="resident-list">
+    <select name="hnum" id="id_resident" >
+    {{form.hnum}}
+  </datalist>
+</div>
+
+{% endif %}
+
+
+<div>
+  <label for="">Zone</label>
+  {{form.zone}}
+</div>
+
+<div>
+  <label for="">Local Community</label>
+  {{form.gooxii}}
+</div>
+
+<div>
+  <label for="">Group</label>
+  {{form.garee }}
+</div>
+<br>
  <input type="submit" value="Save" class="btn btn-primary">
 </form>
 

@@ -19,6 +19,26 @@ class Resident(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),    
     )
+    
+    EDUCATION_LEVEL=(
+        ('elementary', 'Elementary'),
+        ('hight_school', 'High School'),    
+        ('diploma', 'Diploma'),    
+        ('degree', 'Degree'),    
+        ('masters', 'Masters'),    
+        ('phd', 'PHD'),    
+    )
+    
+    OCCUPATION=(
+        ('teacher', 'Teacher'),
+        ('merchant', 'Merchant'),    
+        ('office_worker', 'Office Worker'),    
+        ('nurse', 'Nurse'),    
+        ('doctor', 'Doctor'),    
+        ('student', 'Student'),   
+        ('other', 'Other'),  
+        ('none', 'None'),   
+    )
     kebele = models.ForeignKey(Kebele, on_delete=models.SET_NULL, null=True, blank=True )
     first_name=models.CharField(max_length=100, null=True, blank=True)
     middle_name=models.CharField(max_length=100, null=True, blank=True)
@@ -29,22 +49,22 @@ class Resident(models.Model):
     email = models.EmailField(null=True, blank=True)
     age = models.IntegerField(null=True)
     sex = models.CharField(max_length=20, null=True, blank=True, choices=SAALA)
-    edu_level = models.CharField(max_length=200, null=True, blank=True)
+    edu_level = models.CharField(max_length=200, null=True, blank=True, choices=EDUCATION_LEVEL)
     nationality = models.CharField(max_length=100, null=True, blank=True)
     religion = models.CharField(max_length=100, null=True, blank=True)
-    occupation = models.CharField(max_length=100, null=True, blank=True)
+    occupation = models.CharField(max_length=100, null=True, blank=True, choices=OCCUPATION)
     updated=models.DateTimeField(auto_now=True, null=True)
     created=models.DateField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return str((self.id, self.first_name, self.last_name))
+        return str((self.id, self.first_name, self.middle_name))
     class Meta:
         ordering = ['first_name']
     
     
 class Address(models.Model):
     resident = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
-    hnum = models.CharField(max_length=20, null=True, blank=True)
+    hnum = models.ForeignKey('House', on_delete=models.SET_NULL, null=True, blank=True)
     zone = models.CharField(max_length=100, null=True, blank=True)
     gooxii = models.CharField(max_length=100, null=True, blank=True)
     garee = models.CharField(max_length=100, null=True, blank=True)
@@ -84,7 +104,6 @@ class House(models.Model):
 class Family(models.Model):
     leader = models.ForeignKey(Resident, on_delete=models.CASCADE, null=True, blank=True)
     members = models.ManyToManyField(Resident, related_name="family_members")
-    house = models.ManyToManyField(House)
     family_number= models.IntegerField(null=True, blank=True)
     male_number= models.IntegerField(null=True, blank=True)
     female_number= models.IntegerField(null=True, blank=True)

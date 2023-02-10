@@ -58,14 +58,17 @@ def add_resident(request):
     profile = request.user.profile
     try:
         kebele_employee = Employee.objects.get(employee=profile)
+        kebele=Kebele.objects.get(id=1)
     except:
         return HttpResponse("handler404")
     form = ResidentForm()
     if request.method == 'POST':
         form = ResidentForm(request.POST, request.FILES)
         if form.is_valid():
+            res = form.save(commit=False)
+            res.kebele=kebele
 
-            form.save()
+            res.save()
             messages.success(request, 'You have successfully added resident')
             return redirect('manage-resident') 
         else:
@@ -170,7 +173,7 @@ def update_address(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the address, please try again later!')
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'address':address}
     return render(request, 'kebele/address_form.html', context)
 
 
@@ -297,8 +300,7 @@ def view_family(request, id):
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
     members = family.members.all()
-    family_houses = family.house.all()
-    context = {'family': family, 'members':members, 'family_houses':family_houses, 'unreadCount': unreadCount}
+    context = {'family': family, 'members':members, 'unreadCount': unreadCount}
     return render(request, 'kebele/view_family.html', context)
 
 
@@ -316,7 +318,10 @@ def add_id_card(request):
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
     form = IDCardForm()
+    residents = Resident.objects.all()
     if request.method == 'POST':
+        
+        # resident, created = Resident.objects.get_or_create(resident=resident_name)
         form = IDCardForm(request.POST)
         if form.is_valid():
             form.save()
@@ -324,7 +329,7 @@ def add_id_card(request):
             return redirect('manage-resident')
         else:
             messages.error(request, 'Error occurred') 
-    context={'form':form, 'unreadCount':unreadCount} 
+    context={'form':form, 'unreadCount':unreadCount, 'residents':residents} 
     return render(request, "kebele/id_form.html", context)
 
 
@@ -349,7 +354,7 @@ def update_id_card(request, id):
             return redirect('manage-resident')
         else:
              messages.warning(request, 'There was an error while updating the family, please try again later!')
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'card':card}
     return render(request, 'kebele/id_form.html', context)
 
 
@@ -708,31 +713,32 @@ def add_birth_certificate(request):
     return render(request, "kebele/birth_form.html", context)
     
 
-# @login_required(login_url='login')
-# def update_birth_certificate(request, id):
-#     profile = request.user.profile
-#     try:
-#         kebele_employee = Employee.objects.get(employee=profile)
-#         certificate = BirthCertificate.objects.get(pk=id)   
-#     except:
-#         return HttpResponse("handler404")
+@login_required(login_url='login')
+def update_birth_certificate(request, id):
+    profile = request.user.profile
+    try:
+        kebele_employee = Employee.objects.get(employee=profile)
+        certificate = BirthCertificate.objects.get(pk=id)   
+    except:
+        return HttpResponse("handler404")
      
-#     form = BirthCertificateForm(instance=certificate)
-#     if request.method == "POST":
-#         form = BirthCertificateForm(request.POST, instance=certificate)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'You have successfully updated the selected certificate')
-#             return redirect('certificates')
-#         else:
-#              messages.warning(request, 'There was an error while updating the certificate, please try again later!')
+    form = BirthCertificateForm(instance=certificate)
+    if request.method == "POST":
+        form = BirthCertificateForm(request.POST, instance=certificate)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'You have successfully updated the selected certificate')
+            return redirect('certificates')
+        else:
+             messages.warning(request, 'There was an error while updating the certificate, please try again later!')
              
-#     messageRequests = kebele_employee.messages.all()
-#     unreadCount = messageRequests.filter(is_read=False).count()
-#     context = {'form': form, 'unreadCount': unreadCount}
-#     return render(request, 'kebele/birth_form.html', context)
+    messageRequests = kebele_employee.messages.all()
+    unreadCount = messageRequests.filter(is_read=False).count()
+    context = {'form': form, 'unreadCount': unreadCount}
+    return render(request, 'kebele/birth_form.html', context)
 
 
+@login_required(login_url='login')
 def view_birth_certificate(request, id):
     profile = request.user.profile
     try:

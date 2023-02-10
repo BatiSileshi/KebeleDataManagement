@@ -11,8 +11,45 @@
 
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
-    
-   {{form.as_p}}
+
+   {% if card.resident %}
+  <div>
+    <label for="">Resident</label>
+    {{form.resident}}
+  </div>
+
+  {% else %}
+
+  <div>
+    <label for="">Resident</label>
+
+    <input required type="text" name="resident" list="resident-list" class="form-control" >
+    <datalist id="resident-list">
+      <select name="resident" id="id_resident">
+      {{form.resident}}
+    </datalist>
+  </div>
+
+  {% endif %}
+
+  <div>
+    <label for="">Emergency</label>
+    {{form.emergency}}
+  </div>
+   
+
+  <div>
+    <label for="">Emergency Contact</label>
+    {{form.emergency_contact}}
+  </div>
+
+  <div>
+    <label for="">ID number</label>
+    {{form.id_number}}
+  </div>
+
+
+
 
  <input type="submit" value="Save" class="btn btn-primary">
 </form>

@@ -8,11 +8,40 @@
 <div class="home-content"> 
   <div class="container">
 
-
+ 
 <form action="" method="POST" enctype="multipart/form-data">
  {% csrf_token %}
-    
-   {{form.as_p}}
+
+
+  <div>
+    <label for="id_resident">Leader</label>
+    <input required type="text" name="leader" list="resident-list" class="form-control" >
+    <datalist id="resident-list">
+      <select name="leader" id="">
+        {{form.leader}}
+    </datalist>
+  </div>
+
+
+  <div>
+    <label for="">Family Members</label>
+    {{form.members}}
+  </div>
+
+  <div>
+    <label for="">Family Number</label>
+    {{form.family_number}}
+  </div>
+
+  <div>
+    <label for="">Male Number</label>
+    {{form.male_number}}
+  </div>
+
+  <div>
+    <label for="">Female Number</label>
+    {{form.female_number}}
+  </div>
 
  <input type="submit" value="Save" class="btn btn-primary">
 </form>
