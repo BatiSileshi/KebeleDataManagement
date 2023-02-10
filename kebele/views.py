@@ -513,7 +513,7 @@ def update_local_business(request, id):
             return redirect('manage-local-business')
         else:
              messages.warning(request, 'There was an error while updating the local business, please try again later!')
-    context = {'form': form, 'unreadCount': unreadCount}
+    context = {'form': form, 'unreadCount': unreadCount, 'local_business': local_business}
     return render(request, 'kebele/lb_form.html', context)
 
 

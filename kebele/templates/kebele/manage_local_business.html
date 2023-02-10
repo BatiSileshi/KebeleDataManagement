@@ -7,7 +7,12 @@
     <div class="container">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Local Businesses in the Kebele</h4>
-            <a href="{% url 'add-local-business' %}">Reister Local Business</a>
+
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-local-business' %}"><button class="btn btn-outline-info">   Add Local Business</button> </a>
+                </div>
+            </div>
            
             <div class="row">
                 <div class="col-sm-12 table-responsive">
@@ -78,7 +83,12 @@
     <div class="container">
         <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <h4>Local Business owners in the kebele</h4>
-            <a href="{% url 'add-lb-owner' %}">Register owner</a>
+
+            <div class="d-flex justify-content-end mb-2">
+                <div>
+                    <a href="{% url 'add-lb-owner' %}"><button class="btn btn-outline-info">   Add Local Business Owner</button> </a>
+                </div>
+            </div>
            
             <div class="row">
                 <div class="col-sm-12 table-responsive">

@@ -8,9 +8,13 @@
 <div class="container">
     <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
         <h3>Employee Management</h3>
-         <a href="{% url 'create-message-all' %}"><button class="btn btn-sm btn-primary">Send Message</button></a> <br>
-     
-        <a href="{% url 'add-employee' %}">Add employee</a>
+         <a href="{% url 'create-message-all' %}"><button class="btn btn-outline-info">Send Message</button></a> <br>
+
+        <div class="d-flex justify-content-end mb-2">
+            <div>
+                <a href="{% url 'add-employee' %}"><button class="btn btn-outline-info">   Add Employee</button> </a>
+            </div>
+        </div>
        
         <div class="row">
             <div class="col-sm-12 table-responsive">
