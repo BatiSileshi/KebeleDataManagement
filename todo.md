@@ -35,8 +35,12 @@ Certificates
 
 
 
+
+
 hotel
 
 limiting users list, when adding a new hotel admin
 asking maximum people on booking
 Currency
+
+

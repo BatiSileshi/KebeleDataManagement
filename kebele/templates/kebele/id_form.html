@@ -8,7 +8,7 @@
 
 
 <form action="" method="POST" id="form" name="myform"  enctype="multipart/form-data">
- {% csrf_token %}
+ {% csrf_token %} 
 
    {% if card.resident %}
 
@@ -58,6 +58,6 @@
 <br>
 <br>
 
-<script src="{% static 'vendors/id_validation.js' %}"></script>
+<!-- <script src="{% static 'vendors/id_validation.js' %}"></script> -->
 
 {% endblock content%}

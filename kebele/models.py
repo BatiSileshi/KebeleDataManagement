@@ -92,7 +92,7 @@ class IDCard(models.Model):
         
 
 class House(models.Model):
-    owner = models.OneToOneField(Resident, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(Resident, on_delete=models.CASCADE, null=True, blank=True)
     hnum = models.CharField(max_length=100, null=True, blank=True)
     door_number= models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=100, null=True, blank=True)

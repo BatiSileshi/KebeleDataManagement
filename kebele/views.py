@@ -313,7 +313,7 @@ def add_id_card(request):
     try:
         kebele_employee = Employee.objects.get(employee=profile)
     except:
-        return HttpResponse("handler404") 
+        return HttpResponseRedirect("handler404") 
     
     messageRequests = kebele_employee.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
@@ -327,7 +327,7 @@ def add_id_card(request):
             form.save()
             messages.success(request, 'You have successfully added ID Card')
             return redirect('manage-resident')
-        else:
+        else: 
             messages.error(request, 'Error occurred') 
     context={'form':form, 'unreadCount':unreadCount, 'residents':residents} 
     return render(request, "kebele/id_form.html", context)
@@ -612,9 +612,14 @@ def update_kebele_house(request, id):
     residents = []
     try:
         kebele_employee = Employee.objects.get(employee=profile)
-        kebele_house = KebeleHouse.objects.get(pk=id) 
+        peoples = Address.objects.all()
+        id_list = []
+        for person in peoples:
+            id_list.append(person.resident.id)
+            
         resident_ids = list(KebeleHouse.objects.all().values_list('resident',flat=True).distinct())
-        residents =  Resident.objects.all().exclude(id__in=resident_ids)
+        all_users = id_list + resident_ids
+        residents =  Resident.objects.all().exclude(id__in=all_users)
     except:
         return HttpResponse("handler404")   
   
